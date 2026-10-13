@@ -322,7 +322,7 @@
     </div>
   </section>
 
-  <!-- 4. ВИДЕО И СОЦСЕТИ (НАСТОЯЩИЙ YOUTUBE АВТОПЛЕЙ ЧЕРЕЗ API) -->
+  <!-- 4. ВИДЕО И СОЦСЕТИ (ВОСПРОИЗВЕДЕНИЕ ТОЛЬКО ПРИ НАВЕДЕНИИ КУРСОРА МЫШКИ) -->
   <section id="media" class="py-16 sm:py-20 px-4 bg-brand-card/40 border-t border-white/5">
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12">
@@ -337,23 +337,23 @@
 
       <div class="grid md:grid-cols-2 gap-6 sm:gap-8">
         
-        <!-- КАРТОЧКА С АВТОВОСПРОИЗВОДИМЫМ YOUTUBE ПЛЕЕРОМ -->
+        <!-- КАРТОЧКА С УПРАВЛЕНИЕМ ПРИ НАВЕДЕНИИ МЫШИ -->
         <div id="video-card-container" class="relative group rounded-2xl overflow-hidden border border-brand-gold/30 bg-black aspect-video shadow-2xl cursor-pointer">
           
-          <!-- Контейнер официального YouTube IFrame -->
+          <!-- Плеер YouTube -->
           <div id="yt-player" class="absolute inset-0 w-full h-full pointer-events-none"></div>
 
-          <!-- Прозрачный слой клика для перехода на ролик -->
+          <!-- Клик для открытия полного ролика -->
           <div class="absolute inset-0 z-10" onclick="openVideoLink()"></div>
 
-          <!-- Нижняя информационная плашка -->
+          <!-- Нижняя плашка с подсказкой наведения -->
           <div class="absolute bottom-4 left-4 right-4 z-20 pointer-events-none flex justify-between items-end">
             <div>
-              <span class="inline-block px-2.5 py-0.5 rounded bg-red-600 text-white text-[10px] font-bold uppercase tracking-wider mb-1">YouTube Live</span>
+              <span class="inline-block px-2.5 py-0.5 rounded bg-red-600 text-white text-[10px] font-bold uppercase tracking-wider mb-1">YouTube Preview</span>
               <h4 class="text-sm sm:text-base font-bold text-white group-hover:text-brand-gold transition line-clamp-1">Творческая жизнь ЧИШ «ЮНОНА»</h4>
             </div>
-            <span class="text-[10px] bg-black/75 px-2.5 py-1 rounded-full text-slate-300 border border-white/10 flex items-center gap-1 backdrop-blur-sm">
-              <i data-lucide="volume-2" class="w-3 h-3 text-brand-gold"></i> Нажмите для звука
+            <span class="text-[10px] bg-black/75 px-2.5 py-1 rounded-full text-slate-300 border border-white/10 flex items-center gap-1.5 backdrop-blur-sm">
+              <i data-lucide="mouse-pointer" class="w-3 h-3 text-brand-gold"></i> Наведите для просмотра
             </span>
           </div>
         </div>
@@ -486,7 +486,7 @@
           </ul>
         </div>
 
-        <!-- Колонка 4 -->
+        <!-- Колонка 4 (СТАТИЧНЫЕ ДАННЫЕ ИЗ 2GIS + КНОПКА ВНИЗУ) -->
         <div>
           <h4 class="text-white font-semibold text-sm mb-4 uppercase tracking-wider">Адрес и контакты</h4>
           <ul class="space-y-3">
@@ -548,13 +548,13 @@
     lucide.createIcons();
 
     // ==========================================
-    // ОФИЦИАЛЬНЫЙ YOUTUBE IFRAME API С АВТОПЛЕЕМ
+    // УПРАВЛЕНИЕ ВИДЕО: ТОЛЬКО ПРИ НАВЕДЕНИИ МЫШИ
     // ==========================================
     let player = null;
     let isPlayerReady = false;
     const videoId = 'f4dKHRfvRDU';
+    const videoContainer = document.getElementById('video-card-container');
 
-    // Функция автоматически вызывается, когда загрузится API YouTube
     function onYouTubeIframeAPIReady() {
       player = new YT.Player('yt-player', {
         videoId: videoId,
@@ -578,34 +578,28 @@
 
     function onPlayerReady(event) {
       isPlayerReady = true;
-      event.target.mute(); // Всегда без звука для разрешения автоплея
+      event.target.mute(); // Без звука
 
-      // Наблюдатель за скроллом
-      const videoContainer = document.getElementById('video-card-container');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.3) {
-            if (isPlayerReady && player && typeof player.playVideo === 'function') {
-              player.playVideo();
-            }
-          } else {
-            if (isPlayerReady && player && typeof player.pauseVideo === 'function') {
-              player.pauseVideo();
-            }
-          }
-        });
-      }, {
-        threshold: [0.1, 0.3, 0.7]
+      // Запуск видео строго при наведении курсора
+      videoContainer.addEventListener('mouseenter', () => {
+        if (isPlayerReady && player && typeof player.playVideo === 'function') {
+          player.playVideo();
+        }
       });
 
-      observer.observe(videoContainer);
+      // Остановка видео при уходе курсора
+      videoContainer.addEventListener('mouseleave', () => {
+        if (isPlayerReady && player && typeof player.pauseVideo === 'function') {
+          player.pauseVideo();
+        }
+      });
     }
 
     function openVideoLink() {
       window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
     }
 
-    // Мобильное бургер-меню
+    // Мобильное меню
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     if (mobileMenuBtn && mobileMenu) {
@@ -645,7 +639,7 @@
       localStorage.setItem('accessibleMode', isAcc ? '1' : '0');
     });
 
-    // Перевод на 3 языка
+    // 3 Языка
     const translations = {
       ru: {
         bvi: "Версия для слабовидящих",
