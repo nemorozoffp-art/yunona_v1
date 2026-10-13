@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ЧИШ ЮНОНА | Частная Инновационная Школа и Детский Сад</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts & Lucide Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#080d16',
+              card: '#0f172a',
+              gold: '#D4AF37',
+              goldLight: '#F3E5AB',
+              goldDark: '#997A15'
+            }
+          },
+          fontFamily: {
+            title: ['Cinzel', 'serif'],
+            sans: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .gold-text-gradient {
+      background: linear-gradient(135deg, #FFF1B0 0%, #D4AF37 50%, #AA771C 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gold-glow {
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
+    }
+    /* Бесшовная интеграция логотипа без видимых срезов фона */
+    .logo-container {
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(8, 13, 22, 0) 70%);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+    }
+    .logo-image {
+      mix-blend-mode: screen;
+      filter: contrast(115%) brightness(105%);
+    }
+    /* Режим для слабовидящих */
+    body.accessible-mode {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+      font-size: 1.25rem !important;
+    }
+    body.accessible-mode * {
+      background-color: transparent !important;
+      color: #000000 !important;
+      border-color: #000000 !important;
+      box-shadow: none !important;
+      text-shadow: none !important;
+    }
+    body.accessible-mode .gold-text-gradient {
+      -webkit-text-fill-color: #000000 !important;
+    }
+    body.accessible-mode .accessible-invert {
+      filter: grayscale(100%) contrast(150%);
+    }
+  </style>
+</head>
+<body class="bg-brand-dark text-slate-100 font-sans antialiased selection:bg-brand-gold selection:text-black relative">
+
+  <!-- ВЕРХНЯЯ СЛУЖЕБНАЯ ПАНЕЛЬ -->
+  <div class="border-b border-white/10 bg-black/50 backdrop-blur-md py-2 px-3 sm:px-6 text-xs">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2 sm:gap-3">
+      
+      <!-- Версия для слабовидящих + Мобильные языки -->
+      <div class="w-full md:w-auto flex justify-between md:justify-start items-center">
+        <button id="toggle-accessible" class="flex items-center gap-2 px-3 py-1 rounded border border-brand-gold/40 text-brand-goldLight hover:bg-brand-gold/20 transition-all font-medium text-[11px] sm:text-xs">
+          <i data-lucide="eye" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+          <span id="txt-bvi">Версия для слабовидящих</span>
+        </button>
+
+        <div class="flex md:hidden items-center bg-white/5 rounded-full p-0.5 border border-white/10 text-[11px] font-semibold">
+          <button onclick="setLang('ru')" class="lang-btn active px-2 py-0.5 rounded-full bg-brand-gold text-black font-bold">RU</button>
+          <button onclick="setLang('kz')" class="lang-btn px-2 py-0.5 rounded-full hover:text-brand-gold">KZ</button>
+          <button onclick="setLang('en')" class="lang-btn px-2 py-0.5 rounded-full hover:text-brand-gold">EN</button>
+        </div>
+      </div>
+
+      <!-- Мы в соцсетях + Десктоп языки -->
+      <div class="w-full md:w-auto flex flex-wrap justify-center md:justify-end items-center gap-3 sm:gap-5 text-slate-300">
+        <div class="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs flex-wrap justify-center">
+          <span class="text-brand-gold font-semibold flex items-center gap-1" data-key="top_socials">
+            <i data-lucide="share-2" class="w-3 h-3 text-brand-gold"></i> Мы в соцсетях:
+          </span>
+          <a href="https://www.instagram.com/yunona_kz/" target="_blank" class="hover:text-brand-gold flex items-center gap-1 transition">
+            <i data-lucide="instagram" class="w-3.5 h-3.5 text-brand-gold"></i> Школа
+          </a>
+          <span class="text-slate-600">|</span>
+          <a href="https://www.instagram.com/yunona_kids/" target="_blank" class="hover:text-pink-400 flex items-center gap-1 transition">
+            <i data-lucide="instagram" class="w-3.5 h-3.5 text-pink-400"></i> Садик
+          </a>
+          <span class="text-slate-600">|</span>
+          <a href="https://www.tiktok.com/@yunona_kz" target="_blank" class="hover:text-cyan-400 flex items-center gap-1 transition">
+            <svg class="w-3 h-3 fill-current text-cyan-400" viewBox="0 0 24 24">
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1 2.89-2.89c.35 0 .69.07 1 .19V9.52a6.34 6.34 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.78a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.08a8.16 8.16 0 0 0 4.91 1.63v-3.5a4.86 4.86 0 0 1-1-.52z"/>
+            </svg> TikTok
+          </a>
+          <span class="text-slate-600">|</span>
+          <a href="https://www.youtube.com/@%D0%A7%D0%98%D0%A8%D0%AE%D0%9D%D0%9E%D0%9D%D0%90/videos" target="_blank" class="hover:text-red-400 flex items-center gap-1 transition">
+            <i data-lucide="youtube" class="w-3.5 h-3.5 text-red-500"></i> YouTube
+          </a>
+        </div>
+
+        <div class="hidden md:flex items-center bg-white/5 rounded-full p-0.5 border border-white/10 text-xs font-semibold">
+          <button onclick="setLang('ru')" class="lang-btn active px-2.5 py-0.5 rounded-full bg-brand-gold text-black font-bold">RU</button>
+          <button onclick="setLang('kz')" class="lang-btn px-2.5 py-0.5 rounded-full hover:text-brand-gold">KZ</button>
+          <button onclick="setLang('en')" class="lang-btn px-2.5 py-0.5 rounded-full hover:text-brand-gold">EN</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ШАПКА САЙТА (ОБНОВЛЕННЫЙ БЕСШОВНЫЙ ЛОГОТИП) -->
+  <header class="sticky top-0 z-40 bg-brand-dark/95 backdrop-blur-xl border-b border-brand-gold/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
+      
+      <!-- Логотип с мягким золотым сиянием без срезов фона -->
+      <a href="#" class="flex items-center gap-3.5 group">
+        <div class="logo-container relative w-12 h-12 sm:w-14 sm:h-14 rounded-full border border-brand-gold/40 flex items-center justify-center overflow-hidden group-hover:border-brand-gold transition duration-300">
+          <img src="logo.jpg" alt="ЧИШ ЮНОНА" class="logo-image w-full h-full object-cover scale-125 transform group-hover:scale-130 transition duration-300">
+        </div>
+        <div>
+          <span class="block font-title text-xl sm:text-2xl tracking-[0.2em] font-extrabold gold-text-gradient">ЮНОНА</span>
+          <span class="block text-[9px] sm:text-[10px] tracking-wider uppercase text-slate-400 font-medium" data-key="sublogo">Частная инновационная школа &amp; сад</span>
+        </div>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-7 text-sm font-medium">
+        <a href="#about" class="hover:text-brand-gold transition" data-key="nav_about">О школе</a>
+        <a href="#branches" class="hover:text-brand-gold transition" data-key="nav_branches">Школа и Сад</a>
+        <a href="#director" class="hover:text-brand-gold transition" data-key="nav_director">Руководство</a>
+        <a href="#media" class="hover:text-brand-gold transition" data-key="nav_media">Медиа &amp; Жизнь</a>
+        <a href="#contacts" class="hover:text-brand-gold transition" data-key="nav_contacts">Контакты</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="#lead-form" class="hidden sm:inline-flex items-center justify-center px-5 py-2 sm:px-6 sm:py-2.5 text-xs sm:text-sm font-semibold rounded-full bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-gold text-black hover:opacity-95 shadow-md shadow-brand-gold/20 transition-all" data-key="btn_tour">
+          Записаться на экскурсию
+        </a>
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg bg-white/5 border border-white/10 text-brand-gold hover:bg-white/10" aria-label="Меню">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Мобильное выпадающее меню -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-brand-dark/98 border-b border-brand-gold/30 px-6 py-6 space-y-4">
+      <nav class="flex flex-col space-y-3 text-base font-medium">
+        <a href="#about" onclick="closeMobileMenu()" class="hover:text-brand-gold py-1 border-b border-white/5" data-key="nav_about">О школе</a>
+        <a href="#branches" onclick="closeMobileMenu()" class="hover:text-brand-gold py-1 border-b border-white/5" data-key="nav_branches">Школа и Сад</a>
+        <a href="#director" onclick="closeMobileMenu()" class="hover:text-brand-gold py-1 border-b border-white/5" data-key="nav_director">Руководство</a>
+        <a href="#media" onclick="closeMobileMenu()" class="hover:text-brand-gold py-1 border-b border-white/5" data-key="nav_media">Медиа &amp; Жизнь</a>
+        <a href="#contacts" onclick="closeMobileMenu()" class="hover:text-brand-gold py-1 border-b border-white/5" data-key="nav_contacts">Контакты</a>
+      </nav>
+      <a href="#lead-form" onclick="closeMobileMenu()" class="block text-center w-full py-3 rounded-xl font-bold bg-gradient-to-r from-brand-gold to-brand-goldLight text-black text-sm" data-key="btn_tour">
+        Записаться на экскурсию
+      </a>
+    </div>
+  </header>
+
+  <!-- 1. HERO SECTION -->
+  <section class="relative min-h-[80vh] sm:min-h-[85vh] flex items-center justify-center overflow-hidden px-4 py-16 sm:py-24">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.12)_0%,transparent_65%)] pointer-events-none"></div>
+    <div class="absolute -top-40 -right-40 w-72 sm:w-96 h-72 sm:h-96 bg-brand-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-5xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-goldLight text-xs sm:text-sm font-medium mb-6 sm:mb-8 max-w-[95%]">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-brand-gold shrink-0"></i>
+        <span class="truncate" data-key="hero_badge">Двуязычное обучение: Русский и Казахский классы</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight mb-6">
+        <span class="block text-white" data-key="hero_title1">Пространство, где раскрывается</span>
+        <span class="gold-text-gradient font-title" data-key="hero_title2">Потенциал Каждого Ребёнка</span>
+      </h1>
+
+      <p class="max-w-2xl mx-auto text-sm sm:text-lg md:text-xl text-slate-300 font-light mb-8 sm:mb-10 leading-relaxed" data-key="hero_desc">
+        Частная инновационная школа полного дня и детский сад «ЮНОНА». Фундаментальные знания, развитие soft-skills, творчество и заботливая среда.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-md sm:max-w-none mx-auto">
+        <a href="#lead-form" class="w-full sm:w-auto px-7 py-3.5 sm:px-8 sm:py-4 rounded-xl font-bold bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-gold text-black shadow-xl shadow-brand-gold/25 hover:scale-105 transition-all text-center text-sm sm:text-base" data-key="hero_cta1">
+          Подать заявку на поступление
+        </a>
+        <a href="#media" class="w-full sm:w-auto px-7 py-3.5 sm:px-8 sm:py-4 rounded-xl font-semibold border border-white/20 bg-white/5 hover:bg-white/10 hover:border-brand-gold/50 transition-all flex items-center justify-center gap-2 text-sm sm:text-base" data-key="hero_cta2">
+          <i data-lucide="play-circle" class="w-5 h-5 text-brand-gold"></i> Видео о нас
+        </a>
+      </div>
+
+      <!-- Счетчики преимуществ -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-12 sm:mt-16 pt-8 sm:pt-10 border-t border-white/10 text-left">
+        <div class="p-3.5 sm:p-4 rounded-xl bg-white/[0.02] border border-white/5">
+          <div class="text-2xl sm:text-3xl font-extrabold gold-text-gradient font-title">1–11</div>
+          <div class="text-[11px] sm:text-xs text-slate-400 mt-1" data-key="stat_1">Классы школы полного дня</div>
+        </div>
+        <div class="p-3.5 sm:p-4 rounded-xl bg-white/[0.02] border border-white/5">
+          <div class="text-2xl sm:text-3xl font-extrabold gold-text-gradient font-title">2–6</div>
+          <div class="text-[11px] sm:text-xs text-slate-400 mt-1" data-key="stat_2">Лет — группы детского сада</div>
+        </div>
+        <div class="p-3.5 sm:p-4 rounded-xl bg-white/[0.02] border border-white/5">
+          <div class="text-2xl sm:text-3xl font-extrabold gold-text-gradient font-title">2 Языка</div>
+          <div class="text-[11px] sm:text-xs text-slate-400 mt-1" data-key="stat_3">Казахские и русские классы</div>
+        </div>
+        <div class="p-3.5 sm:p-4 rounded-xl bg-white/[0.02] border border-white/5">
+          <div class="text-2xl sm:text-3xl font-extrabold gold-text-gradient font-title">20+</div>
+          <div class="text-[11px] sm:text-xs text-slate-400 mt-1" data-key="stat_4">Кружков, студий и секций</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. СЕКЦИЯ: ШКОЛА И САДИК -->
+  <section id="branches" class="py-16 sm:py-20 px-4 bg-brand-card/40 border-y border-white/5">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+        <h2 class="text-2xl sm:text-4xl font-extrabold mb-3 font-title gold-text-gradient" data-key="branches_title">Единый Образовательный Комплекс</h2>
+        <p class="text-xs sm:text-base text-slate-400" data-key="branches_sub">Плавный переход от раннего развития в садике к уверенным победам на школьных олимпиадах и экзаменах.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 sm:gap-8">
+        <!-- ШКОЛА -->
+        <div class="p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-white/[0.06] to-transparent border border-white/10 hover:border-brand-gold/60 transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-5">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-brand-gold/20 text-brand-gold border border-brand-gold/40">1 – 11 классы</span>
+              <a href="https://www.instagram.com/yunona_kz/" target="_blank" class="text-slate-400 hover:text-brand-gold text-xs flex items-center gap-1">
+                @yunona_kz <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-bold mb-3 text-white">ЧИШ ЮНОНА (Школа)</h3>
+            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6">
+              Инновационная академическая программа, малая наполняемость классов, углубленное изучение языков, домашние задания выполняются в школе.
+            </p>
+            <ul class="space-y-2.5 text-xs sm:text-sm text-slate-300 mb-6">
+              <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-brand-gold shrink-0"></i> Казахское и русское отделения</li>
+              <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-brand-gold shrink-0"></i> Робототехника, IT и научные лаборатории</li>
+              <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-brand-gold shrink-0"></i> Сбалансированное 3-разовое горячее питание</li>
+            </ul>
+          </div>
+          <a href="#lead-form" class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-brand-gold hover:text-brand-goldLight transition pt-2">
+            Узнать о приеме в школу <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+
+        <!-- САДИК -->
+        <div class="p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-white/[0.06] to-transparent border border-white/10 hover:border-pink-500/50 transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-5">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-pink-500/20 text-pink-300 border border-pink-500/40">От 2 до 6 лет</span>
+              <a href="https://www.instagram.com/yunona_kids/" target="_blank" class="text-slate-400 hover:text-pink-400 text-xs flex items-center gap-1">
+                @yunona_kids <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-bold mb-3 text-white">Детский Сад YUNONA KIDS</h3>
+            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6">
+              Бережная социализация, развивающие методики, подготовка к 1 классу в игровой форме, логопед и психолог.
+            </p>
+            <ul class="space-y-2.5 text-xs sm:text-sm text-slate-300 mb-6">
+              <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-pink-400 shrink-0"></i> Английский язык и казахский в игровой среде</li>
+              <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-pink-400 shrink-0"></i> Развитие моторики, хореография, музыка</li>
+              <li class="flex items-center gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-pink-400 shrink-0"></i> Собственная огороженная охраняемая площадка</li>
+            </ul>
+          </div>
+          <a href="#lead-form" class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-pink-400 hover:text-pink-300 transition pt-2">
+            Узнать о группах садика <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. БЛОК ДИРЕКТОРА -->
+  <section id="director" class="py-16 sm:py-20 px-4">
+    <div class="max-w-6xl mx-auto bg-gradient-to-r from-brand-card via-black/40 to-brand-card border border-brand-gold/30 rounded-3xl p-6 sm:p-12 shadow-2xl relative overflow-hidden">
+      <div class="grid md:grid-cols-12 gap-8 items-center">
+        <div class="md:col-span-5 flex justify-center">
+          <div class="relative group max-w-xs sm:max-w-sm w-full">
+            <div class="absolute -inset-1.5 bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-goldDark rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+            <img src="Директор.jpg" alt="Директор ЧИШ ЮНОНА" class="relative rounded-2xl w-full object-cover shadow-2xl" onerror="this.onerror=null; this.src='director.jpg';">
+          </div>
+        </div>
+
+        <div class="md:col-span-7">
+          <div class="inline-block px-3 py-1 rounded bg-brand-gold/10 text-brand-gold text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-2">
+            Слово руководителя
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">Борисова Елена Геннадьевна</h2>
+          <p class="text-brand-gold text-xs sm:text-sm font-medium mb-5">Директор ЧИШ «ЮНОНА», лауреат международных наград в сфере образования</p>
+
+          <blockquote class="text-slate-300 text-xs sm:text-base italic leading-relaxed mb-6 border-l-2 border-brand-gold pl-4">
+            «Каждый ребенок приходит в этот мир со своей уникальной искрой таланта. Наша миссия — не просто дать школьную программу, а создать атмосферу доверия, в которой ученик не боится ошибаться, учится мыслить самостоятельно и верит в свои силы.»
+          </blockquote>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-white/10 text-xs text-slate-300">
+            <div class="flex items-center gap-2">
+              <i data-lucide="award" class="w-4 h-4 text-brand-gold shrink-0"></i>
+              <span>Опыт и международное признание</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="shield-check" class="w-4 h-4 text-brand-gold shrink-0"></i>
+              <span>Лицензированное качественное образование</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. ВИДЕО И СОЦСЕТИ -->
+  <section id="media" class="py-16 sm:py-20 px-4 bg-brand-card/40 border-t border-white/5">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12">
+        <div>
+          <span class="text-brand-gold text-xs uppercase tracking-wider font-semibold">Жизнь школы в динамике</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white font-title mt-1">Видео с нашего YouTube-канала</h2>
+        </div>
+        <a href="https://www.youtube.com/@%D0%A7%D0%98%D0%A8%D0%AE%D0%9D%D0%9E%D0%9D%D0%90/videos" target="_blank" class="mt-4 md:mt-0 inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full border border-red-500/40 text-red-400 hover:bg-red-500/10 text-xs sm:text-sm font-medium transition self-start md:self-auto">
+          <i data-lucide="youtube" class="w-4 h-4"></i> Смотреть все видео на YouTube
+        </a>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 sm:gap-8">
+        
+        <!-- КАРТОЧКА ВИДЕО -->
+        <div id="video-preview-card" class="relative group rounded-2xl overflow-hidden border border-brand-gold/30 bg-black aspect-video shadow-2xl flex items-center justify-center cursor-pointer transition-all duration-300" onclick="openVideoLink()">
+          <img src="https://img.youtube.com/vi/f4dKHRfvRDU/maxresdefault.jpg" alt="ЧИШ ЮНОНА Видео" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-80 group-hover:opacity-100 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-transparent pointer-events-none"></div>
+
+          <div id="video-play-btn" class="relative z-10 w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-brand-gold text-black flex items-center justify-center shadow-2xl group-hover:scale-110 transition duration-300 pointer-events-none">
+            <i data-lucide="play" class="w-7 h-7 sm:w-9 sm:h-9 fill-current ml-1"></i>
+          </div>
+
+          <div class="absolute bottom-4 left-4 right-4 z-10 text-left pointer-events-none flex justify-between items-end">
+            <div>
+              <span class="inline-block px-2.5 py-0.5 rounded bg-red-600 text-white text-[10px] font-bold uppercase tracking-wider mb-1">YouTube</span>
+              <h4 class="text-sm sm:text-base font-bold text-white group-hover:text-brand-gold transition line-clamp-1">Отчетный концерт и жизнь ЧИШ «ЮНОНА»</h4>
+            </div>
+            <span class="text-[10px] bg-black/75 px-2.5 py-1 rounded-full text-slate-300 border border-white/10 flex items-center gap-1 backdrop-blur-sm">
+              <i data-lucide="external-link" class="w-3 h-3 text-brand-gold"></i> Открыть ролик
+            </span>
+          </div>
+        </div>
+
+        <!-- СОЦСЕТИ -->
+        <div class="rounded-2xl p-6 bg-white/[0.02] border border-white/10 flex flex-col justify-between">
+          <div>
+            <h3 class="text-lg sm:text-xl font-bold mb-3 text-white">Подписывайтесь на наши социальные сети</h3>
+            <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-6">
+              Мы регулярно публикуем живые видеоотчеты с уроков, олимпиад, праздников, а также короткие ролики в TikTok и Reels.
+            </p>
+            <div class="space-y-3">
+              <a href="https://www.instagram.com/yunona_kz/" target="_blank" class="p-3 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between hover:border-brand-gold/40 transition">
+                <span class="text-xs sm:text-sm font-medium flex items-center gap-2">
+                  <i data-lucide="instagram" class="w-4 h-4 text-brand-gold"></i> Instagram Школы: @yunona_kz
+                </span>
+                <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
+              </a>
+
+              <a href="https://www.instagram.com/yunona_kids/" target="_blank" class="p-3 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between hover:border-pink-500/40 transition">
+                <span class="text-xs sm:text-sm font-medium flex items-center gap-2">
+                  <i data-lucide="instagram" class="w-4 h-4 text-pink-400"></i> Instagram Садика: @yunona_kids
+                </span>
+                <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
+              </a>
+
+              <a href="https://www.tiktok.com/@yunona_kz" target="_blank" class="p-3 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between hover:border-cyan-400/50 transition">
+                <span class="text-xs sm:text-sm font-medium flex items-center gap-2">
+                  <svg class="w-4 h-4 fill-current text-cyan-400" viewBox="0 0 24 24">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.35 0 .69.07 1 .19V9.52a6.34 6.34 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.78a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.08a8.16 8.16 0 0 0 4.91 1.63v-3.5a4.86 4.86 0 0 1-1-.52z"/>
+                  </svg>
+                  TikTok: @yunona_kz
+                </span>
+                <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
+              </a>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-white/5 text-[11px] text-slate-400">
+            Официальные медиаресурсы частной инновационной школы «ЮНОНА»
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. ФОРМА ЗАЯВКИ -->
+  <section id="lead-form" class="py-16 sm:py-20 px-4 relative">
+    <div class="max-w-3xl mx-auto bg-gradient-to-b from-brand-card to-brand-dark border border-brand-gold/40 rounded-3xl p-6 sm:p-12 shadow-2xl">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white font-title gold-text-gradient mb-2">Запишитесь на Экскурсию</h2>
+        <p class="text-slate-300 text-xs sm:text-sm">Познакомьтесь с педагогами, оцените классы и атмосферу школы и детского сада</p>
+      </div>
+
+      <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+        <div class="grid sm:grid-cols-2 gap-3 sm:gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Имя родителя</label>
+            <input type="text" required placeholder="Ваше имя" class="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white focus:outline-none focus:border-brand-gold transition text-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Номер телефона</label>
+            <input type="tel" required placeholder="+7 (___) ___-__-__" class="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white focus:outline-none focus:border-brand-gold transition text-sm">
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-3 sm:gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Направление</label>
+            <select class="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white focus:outline-none focus:border-brand-gold transition text-sm">
+              <option value="school">Школа (1–11 классы)</option>
+              <option value="kindergarten">Детский сад YUNONA KIDS</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Язык обучения</label>
+            <select class="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white focus:outline-none focus:border-brand-gold transition text-sm">
+              <option value="ru">Русский язык обучения</option>
+              <option value="kz">Қазақ тілінде оқыту</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-3.5 sm:py-4 mt-2 sm:mt-4 rounded-xl font-bold bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-gold text-black shadow-lg shadow-brand-gold/30 hover:opacity-95 transition-all text-sm sm:text-base">
+          Отправить заявку в WhatsApp / CRM
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ПОДВАЛ (С АДРЕСОМ, ТЕЛЕФОНОМ И КНОПКОЙ 2GIS ВНИЗУ) -->
+  <footer id="contacts" class="border-t border-brand-gold/20 bg-black pt-12 sm:pt-16 pb-12 px-4 text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 pb-12 border-b border-white/10">
+        <!-- Колонка 1: логотип также с бесшовной интеграцией -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="logo-container relative w-10 h-10 rounded-full border border-brand-gold/40 flex items-center justify-center overflow-hidden">
+              <img src="logo.jpg" alt="ЮНОНА" class="logo-image w-full h-full object-cover scale-125">
+            </div>
+            <div>
+              <span class="font-title text-xl font-bold gold-text-gradient block">ЮНОНА</span>
+              <span class="text-[10px] text-slate-500 uppercase tracking-wider block">Школа &amp; Детский Сад</span>
+            </div>
+          </div>
+          <p class="text-slate-400 text-xs leading-relaxed">
+            Частное инновационное образовательное учреждение полного дня с углубленным изучением языков и современных дисциплин.
+          </p>
+        </div>
+
+        <!-- Колонка 2 -->
+        <div>
+          <h4 class="text-white font-semibold text-sm mb-4 uppercase tracking-wider">Навигация</h4>
+          <ul class="space-y-2">
+            <li><a href="#about" class="hover:text-brand-gold transition">О школе и миссии</a></li>
+            <li><a href="#branches" class="hover:text-brand-gold transition">Школьные программы (1–11 классы)</a></li>
+            <li><a href="#branches" class="hover:text-brand-gold transition">Детский сад YUNONA KIDS</a></li>
+            <li><a href="#director" class="hover:text-brand-gold transition">Педагогический состав</a></li>
+            <li><a href="#media" class="hover:text-brand-gold transition">Медиагалерея и события</a></li>
+          </ul>
+        </div>
+
+        <!-- Колонка 3 -->
+        <div>
+          <h4 class="text-white font-semibold text-sm mb-4 uppercase tracking-wider">Документы и стандарты</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-brand-gold transition">Государственная лицензия</a></li>
+            <li><a href="#" class="hover:text-brand-gold transition">Политика конфиденциальности</a></li>
+            <li><a href="#" class="hover:text-brand-gold transition">Пользовательское соглашение</a></li>
+            <li><a href="#" class="hover:text-brand-gold transition">Правила приема и устав</a></li>
+          </ul>
+        </div>
+
+        <!-- Колонка 4 (СТАТИЧНЫЕ ДАННЫЕ ИЗ 2GIS + КНОПКА ВНИЗУ) -->
+        <div>
+          <h4 class="text-white font-semibold text-sm mb-4 uppercase tracking-wider">Адрес и контакты</h4>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-2.5">
+              <i data-lucide="map-pin" class="w-4 h-4 text-brand-gold shrink-0 mt-0.5"></i>
+              <div class="leading-relaxed">
+                <span class="block text-slate-200 font-medium">ул. Терешковой, 1а</span>
+                <span class="block text-[11px] text-slate-400">пос. Боралдай, Илийский район, Алматинская область, 040708</span>
+              </div>
+            </li>
+            
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="phone" class="w-4 h-4 text-brand-gold shrink-0"></i>
+              <a href="tel:+77076457828" class="text-slate-200 hover:text-brand-gold font-semibold transition tracking-wide text-[13px]">
+                +7 707 645 78 28
+              </a>
+            </li>
+
+            <li class="flex items-center gap-2.5">
+              <i data-lucide="mail" class="w-4 h-4 text-brand-gold shrink-0"></i>
+              <span class="text-slate-300">info@yunona.kz</span>
+            </li>
+
+            <li class="pt-2">
+              <a href="https://go.2gis.com/KCkvs" target="_blank" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 hover:border-emerald-500/50 transition font-medium text-xs shadow-sm">
+                <span>Открыть в 2GIS</span>
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Нижняя строка: Юридические надписи + IT Live -->
+      <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left text-slate-500">
+        <div>
+          <p>© 2026 ЧИШ «ЮНОНА». Все права защищены.</p>
+          <p class="text-[11px] text-slate-600 mt-0.5">Любое копирование и использование материалов допускается только с письменного разрешения администрации учреждения.</p>
+        </div>
+
+        <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.03] border border-white/5 hover:border-brand-gold/40 transition">
+          <span class="text-slate-400">Разработано:</span>
+          <span class="font-bold text-white tracking-wider flex items-center gap-1 group">
+            <span class="gold-text-gradient font-title text-sm">IT Live</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-brand-gold inline-block animate-pulse"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ПРИПОДНЯТАЯ КНОПКА «НАВЕРХ» -->
+  <button id="back-to-top" aria-label="Подняться вверх" class="fixed bottom-20 sm:bottom-24 right-5 sm:right-6 z-50 p-3 sm:p-3.5 rounded-full bg-brand-card/90 text-brand-gold border border-brand-gold/50 shadow-2xl shadow-black hover:bg-brand-gold hover:text-black transition-all duration-300 transform opacity-0 translate-y-10 pointer-events-none group hover:scale-110">
+    <i data-lucide="chevron-up" class="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]"></i>
+  </button>
+
+  <!-- СКРИПТЫ -->
+  <script>
+    lucide.createIcons();
+
+    function openVideoLink() {
+      window.open('https://www.youtube.com/watch?v=f4dKHRfvRDU', '_blank');
+    }
+
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+
+    function closeMobileMenu() {
+      if (mobileMenu) mobileMenu.classList.add('hidden');
+    }
+
+    const backToTopBtn = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+        backToTopBtn.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+      } else {
+        backToTopBtn.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
+        backToTopBtn.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+      }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    const bviBtn = document.getElementById('toggle-accessible');
+    bviBtn.addEventListener('click', () => {
+      document.body.classList.toggle('accessible-mode');
+      const isAcc = document.body.classList.contains('accessible-mode');
+      localStorage.setItem('accessibleMode', isAcc ? '1' : '0');
+    });
+
+    const translations = {
+      ru: {
+        bvi: "Версия для слабовидящих",
+        top_socials: "Мы в соцсетях:",
+        sublogo: "Частная инновационная школа & сад",
+        nav_about: "О школе",
+        nav_branches: "Школа и Сад",
+        nav_director: "Руководство",
+        nav_media: "Медиа & Жизнь",
+        nav_contacts: "Контакты",
+        btn_tour: "Записаться на экскурсию",
+        hero_badge: "Двуязычное обучение: Русский и Казахский классы",
+        hero_title1: "Пространство, где раскрывается",
+        hero_title2: "Потенциал Каждого Ребёнка",
+        hero_desc: "Частная инновационная школа полного дня и детский сад «ЮНОНА». Фундаментальные знания, развитие soft-skills, творчество и заботливая среда.",
+        hero_cta1: "Подать заявку на поступление",
+        hero_cta2: "Видео о нас",
+        stat_1: "Классы школы полного дня",
+        stat_2: "Лет — группы детского сада",
+        stat_3: "Казахские и русские классы",
+        stat_4: "Кружков, студий и секций",
+        branches_title: "Единый Образовательный Комплекс",
+        branches_sub: "Плавный переход от раннего развития в садике к уверенным победам на школьных олимпиадах."
+      },
+      kz: {
+        bvi: "Нашар көретіндерге арналған нұсқа",
+        top_socials: "Біз әлеуметтік желілерде:",
+        sublogo: "Жеке инновациялық мектеп & балабақша",
+        nav_about: "Мектеп туралы",
+        nav_branches: "Мектеп және Бақша",
+        nav_director: "Басшылық",
+        nav_media: "Медиа & Тыныс-тіршілік",
+        nav_contacts: "Байланыс",
+        btn_tour: "Экскурсияға жазылу",
+        hero_badge: "Қос тілде оқыту: Қазақ және Орыс сыныптары",
+        hero_title1: "Әр баланың қабілеті ашылатын",
+        hero_title2: "Шабыт пен Білім Кеңістігі",
+        hero_desc: "«ЮНОНА» толық күн жеке инновациялық мектебі және балабақшасы. Сапалы білім, soft-skills дамыту, шығармашылық пен қамқор орта.",
+        hero_cta1: "Қабылдауға өтінім беру",
+        hero_cta2: "Біз туралы бейне",
+        stat_1: "Толық күн мектеп сыныптары",
+        stat_2: "Жас — балабақша топтары",
+        stat_3: "Қазақ және орыс сыныптары",
+        stat_4: "Үйірмелер мен спорт секциялары",
+        branches_title: "Бірыңғай Білім Беру Кешені",
+        branches_sub: "Балабақшадағы ерте дамудан бастап мектеп олимпиадаларындағы жеңістерге дейін."
+      },
+      en: {
+        bvi: "Accessibility Mode",
+        top_socials: "Follow us:",
+        sublogo: "Private Innovative School & Kindergarten",
+        nav_about: "About Us",
+        nav_branches: "School & Kindergarten",
+        nav_director: "Leadership",
+        nav_media: "Media & Life",
+        nav_contacts: "Contacts",
+        btn_tour: "Book a Tour",
+        hero_badge: "Bilingual Education: Kazakh & Russian streams",
+        hero_title1: "The Space Where Every Child's",
+        hero_title2: "True Potential Unfolds",
+        hero_desc: "Full-day private innovative school and kindergarten 'YUNONA'. Fundamental knowledge, soft-skills development, and an inspiring environment.",
+        hero_cta1: "Apply for Admission",
+        hero_cta2: "Watch Video",
+        stat_1: "Grades in full-day school",
+        stat_2: "Years old — kindergarten",
+        stat_3: "Kazakh and Russian classes",
+        stat_4: "Clubs, studios and sports",
+        branches_title: "Integrated Educational Complex",
+        branches_sub: "Smooth transition from early childhood education to academic success."
+      }
+    };
+
+    function setLang(lang) {
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('bg-brand-gold', 'text-black', 'font-bold');
+      });
+      document.querySelectorAll(`.lang-btn`).forEach(btn => {
+        if (btn.textContent.trim() === lang.toUpperCase()) {
+          btn.classList.add('bg-brand-gold', 'text-black', 'font-bold');
+        }
+      });
+
+      document.querySelectorAll('[data-key]').forEach(elem => {
+        const key = elem.getAttribute('data-key');
+        if (translations[lang] && translations[lang][key]) {
+          elem.textContent = translations[lang][key];
+        }
+      });
+      document.getElementById('txt-bvi').textContent = translations[lang].bvi;
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      alert('Рахмет! Өтінішіңіз қабылданды. / Спасибо! Ваша заявка принята.');
+    }
+  </script>
+</body>
+</html>
