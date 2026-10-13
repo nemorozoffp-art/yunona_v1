@@ -203,7 +203,7 @@
         </a>
       </div>
 
-      <!-- Счетчики -->
+      <!-- Счетчики преимуществ -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-12 sm:mt-16 pt-8 sm:pt-10 border-t border-white/10 text-left">
         <div class="p-3.5 sm:p-4 rounded-xl bg-white/[0.02] border border-white/5">
           <div class="text-2xl sm:text-3xl font-extrabold gold-text-gradient font-title">1–11</div>
@@ -322,7 +322,7 @@
     </div>
   </section>
 
-  <!-- 4. ВИДЕО И СОЦСЕТИ (ВОСПРОИЗВЕДЕНИЕ ТОЛЬКО ПРИ НАВЕДЕНИИ КУРСОРА МЫШКИ) -->
+  <!-- 4. ВИДЕО И СОЦСЕТИ (ВОСПРОИЗВЕДЕНИЕ ПРИ НАВЕДЕНИИ МЫШИ) -->
   <section id="media" class="py-16 sm:py-20 px-4 bg-brand-card/40 border-t border-white/5">
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12">
@@ -336,17 +336,11 @@
       </div>
 
       <div class="grid md:grid-cols-2 gap-6 sm:gap-8">
-        
         <!-- КАРТОЧКА С УПРАВЛЕНИЕМ ПРИ НАВЕДЕНИИ МЫШИ -->
         <div id="video-card-container" class="relative group rounded-2xl overflow-hidden border border-brand-gold/30 bg-black aspect-video shadow-2xl cursor-pointer">
-          
-          <!-- Плеер YouTube -->
           <div id="yt-player" class="absolute inset-0 w-full h-full pointer-events-none"></div>
-
-          <!-- Клик для открытия полного ролика -->
           <div class="absolute inset-0 z-10" onclick="openVideoLink()"></div>
 
-          <!-- Нижняя плашка с подсказкой наведения -->
           <div class="absolute bottom-4 left-4 right-4 z-20 pointer-events-none flex justify-between items-end">
             <div>
               <span class="inline-block px-2.5 py-0.5 rounded bg-red-600 text-white text-[10px] font-bold uppercase tracking-wider mb-1">YouTube Preview</span>
@@ -443,8 +437,8 @@
     </div>
   </section>
 
-  <!-- ПОДВАЛ (С АДРЕСОМ, ТЕЛЕФОНОМ И КНОПКОЙ 2GIS ВНИЗУ) -->
-  <footer id="contacts" class="border-t border-brand-gold/20 bg-black pt-12 sm:pt-16 pb-12 px-4 text-xs text-slate-400">
+  <!-- ПОДВАЛ (С АДРЕСОМ, ТЕЛЕФОНОМ И ОБНОВЛЕННОЙ СВЯЗКОЙ IT LIFE + PAVLIKNEMOROZOFF) -->
+  <footer id="footer-section" class="border-t border-brand-gold/20 bg-black pt-12 sm:pt-16 pb-28 sm:pb-36 px-4 text-xs text-slate-400">
     <div class="max-w-7xl mx-auto">
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 pb-12 border-b border-white/10">
         <!-- Колонка 1 -->
@@ -511,7 +505,7 @@
             </li>
 
             <li class="pt-2">
-              <a href="https://go.2gis.com/KCkvs" target="_blank" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 hover:border-emerald-500/50 transition font-medium text-xs shadow-sm">
+              <a href="https://go.2gis.com/KCkvs" target="_blank" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 transition font-medium text-xs shadow-sm">
                 <span>Открыть в 2GIS</span>
                 <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
               </a>
@@ -520,26 +514,32 @@
         </div>
       </div>
 
-      <!-- Нижняя строка -->
+      <!-- Нижняя строка: Юридические надписи + ОБНОВЛЕННЫЙ БРЕНДИНГ РАЗРАБОТЧИКА -->
       <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left text-slate-500">
         <div>
           <p>© 2026 ЧИШ «ЮНОНА». Все права защищены.</p>
           <p class="text-[11px] text-slate-600 mt-0.5">Любое копирование и использование материалов допускается только с письменного разрешения администрации учреждения.</p>
         </div>
 
-        <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.03] border border-white/5 hover:border-brand-gold/40 transition">
-          <span class="text-slate-400">Разработано:</span>
-          <span class="font-bold text-white tracking-wider flex items-center gap-1 group">
-            <span class="gold-text-gradient font-title text-sm">IT Live</span>
-            <span class="w-1.5 h-1.5 rounded-full bg-brand-gold inline-block animate-pulse"></span>
-          </span>
+        <!-- ЭТАЛОННАЯ ПЛАШКА: IT LIFE & PAVLIKNEMOROZOFF -->
+        <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.03] border border-brand-gold/30 hover:border-brand-gold/60 transition group">
+          <div class="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></div>
+          <div class="text-left leading-snug">
+            <div class="text-slate-400 text-[11px] font-medium tracking-wide">
+              Разработано <span class="text-white font-bold tracking-wider">IT Life</span>
+            </div>
+            <div class="text-[10px] font-mono tracking-widest text-slate-500 uppercase">
+              a <span class="gold-text-gradient font-semibold">PAVLIKneMOROZOFF</span> company
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
   </footer>
 
-  <!-- ПРИПОДНЯТАЯ КНОПКА «НАВЕРХ» -->
-  <button id="back-to-top" aria-label="Подняться вверх" class="fixed bottom-20 sm:bottom-24 right-5 sm:right-6 z-50 p-3 sm:p-3.5 rounded-full bg-brand-card/90 text-brand-gold border border-brand-gold/50 shadow-2xl shadow-black hover:bg-brand-gold hover:text-black transition-all duration-300 transform opacity-0 translate-y-10 pointer-events-none group hover:scale-110">
+  <!-- ПРИПОДНЯТАЯ КНОПКА «НАВЕРХ» С ДИНАМИЧЕСКИМ ОТСТУПОМ -->
+  <button id="back-to-top" aria-label="Подняться вверх" class="fixed bottom-36 sm:bottom-44 right-5 sm:right-6 z-50 p-3 sm:p-3.5 rounded-full bg-brand-card/95 text-brand-gold border border-brand-gold/50 shadow-2xl shadow-black hover:bg-brand-gold hover:text-black transition-all duration-300 transform opacity-0 translate-y-10 pointer-events-none group hover:scale-110">
     <i data-lucide="chevron-up" class="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]"></i>
   </button>
 
@@ -547,9 +547,7 @@
   <script>
     lucide.createIcons();
 
-    // ==========================================
-    // УПРАВЛЕНИЕ ВИДЕО: ТОЛЬКО ПРИ НАВЕДЕНИИ МЫШИ
-    // ==========================================
+    // 1. Управление видео: запуск при наведении мыши
     let player = null;
     let isPlayerReady = false;
     const videoId = 'f4dKHRfvRDU';
@@ -578,28 +576,28 @@
 
     function onPlayerReady(event) {
       isPlayerReady = true;
-      event.target.mute(); // Без звука
+      event.target.mute();
 
-      // Запуск видео строго при наведении курсора
-      videoContainer.addEventListener('mouseenter', () => {
-        if (isPlayerReady && player && typeof player.playVideo === 'function') {
-          player.playVideo();
-        }
-      });
+      if (videoContainer) {
+        videoContainer.addEventListener('mouseenter', () => {
+          if (isPlayerReady && player && typeof player.playVideo === 'function') {
+            player.playVideo();
+          }
+        });
 
-      // Остановка видео при уходе курсора
-      videoContainer.addEventListener('mouseleave', () => {
-        if (isPlayerReady && player && typeof player.pauseVideo === 'function') {
-          player.pauseVideo();
-        }
-      });
+        videoContainer.addEventListener('mouseleave', () => {
+          if (isPlayerReady && player && typeof player.pauseVideo === 'function') {
+            player.pauseVideo();
+          }
+        });
+      }
     }
 
     function openVideoLink() {
       window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
     }
 
-    // Мобильное меню
+    // 2. Мобильное бургер-меню
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     if (mobileMenuBtn && mobileMenu) {
@@ -612,8 +610,10 @@
       if (mobileMenu) mobileMenu.classList.add('hidden');
     }
 
-    // Кнопка «Наверх»
+    // 3. Умная кнопка «Наверх»: плавный подъем над футером
     const backToTopBtn = document.getElementById('back-to-top');
+    const footerSection = document.getElementById('footer-section');
+
     window.addEventListener('scroll', () => {
       if (window.scrollY > 300) {
         backToTopBtn.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
@@ -621,6 +621,16 @@
       } else {
         backToTopBtn.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
         backToTopBtn.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+      }
+
+      if (footerSection) {
+        const footerRect = footerSection.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        if (footerRect.top < windowHeight) {
+          backToTopBtn.style.bottom = `${(windowHeight - footerRect.top) + 20}px`;
+        } else {
+          backToTopBtn.style.bottom = '';
+        }
       }
     });
 
@@ -631,7 +641,7 @@
       });
     });
 
-    // Режим для слабовидящих
+    // 4. Режим для слабовидящих
     const bviBtn = document.getElementById('toggle-accessible');
     bviBtn.addEventListener('click', () => {
       document.body.classList.toggle('accessible-mode');
@@ -639,7 +649,7 @@
       localStorage.setItem('accessibleMode', isAcc ? '1' : '0');
     });
 
-    // 3 Языка
+    // 5. Перевод на 3 языка (RU / KZ / EN)
     const translations = {
       ru: {
         bvi: "Версия для слабовидящих",
@@ -731,6 +741,7 @@
       document.getElementById('txt-bvi').textContent = translations[lang].bvi;
     }
 
+    // 6. Обработка формы заявки
     function handleFormSubmit(e) {
       e.preventDefault();
       alert('Рахмет! Өтінішіңіз қабылданды. / Спасибо! Ваша заявка принята.');
