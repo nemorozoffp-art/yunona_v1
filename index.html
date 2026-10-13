@@ -11,6 +11,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- YouTube IFrame API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
 
   <script>
     tailwind.config = {
@@ -44,7 +46,6 @@
     .gold-glow {
       box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
     }
-    /* Бесшовная интеграция логотипа без видимых срезов фона */
     .logo-container {
       background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(8, 13, 22, 0) 70%);
       box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
@@ -53,7 +54,6 @@
       mix-blend-mode: screen;
       filter: contrast(115%) brightness(105%);
     }
-    /* Режим для слабовидящих */
     body.accessible-mode {
       background-color: #ffffff !important;
       color: #000000 !important;
@@ -110,7 +110,7 @@
           <span class="text-slate-600">|</span>
           <a href="https://www.tiktok.com/@yunona_kz" target="_blank" class="hover:text-cyan-400 flex items-center gap-1 transition">
             <svg class="w-3 h-3 fill-current text-cyan-400" viewBox="0 0 24 24">
-              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1 2.89-2.89c.35 0 .69.07 1 .19V9.52a6.34 6.34 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.78a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.08a8.16 8.16 0 0 0 4.91 1.63v-3.5a4.86 4.86 0 0 1-1-.52z"/>
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89c.35 0 .69.07 1 .19V9.52a6.34 6.34 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.78a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.08a8.16 8.16 0 0 0 4.91 1.63v-3.5a4.86 4.86 0 0 1-1-.52z"/>
             </svg> TikTok
           </a>
           <span class="text-slate-600">|</span>
@@ -128,11 +128,9 @@
     </div>
   </div>
 
-  <!-- ШАПКА САЙТА (ОБНОВЛЕННЫЙ БЕСШОВНЫЙ ЛОГОТИП) -->
+  <!-- ШАПКА САЙТА -->
   <header class="sticky top-0 z-40 bg-brand-dark/95 backdrop-blur-xl border-b border-brand-gold/20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
-      
-      <!-- Логотип с мягким золотым сиянием без срезов фона -->
       <a href="#" class="flex items-center gap-3.5 group">
         <div class="logo-container relative w-12 h-12 sm:w-14 sm:h-14 rounded-full border border-brand-gold/40 flex items-center justify-center overflow-hidden group-hover:border-brand-gold transition duration-300">
           <img src="logo.jpg" alt="ЧИШ ЮНОНА" class="logo-image w-full h-full object-cover scale-125 transform group-hover:scale-130 transition duration-300">
@@ -161,7 +159,7 @@
       </div>
     </div>
 
-    <!-- Мобильное выпадающее меню -->
+    <!-- Мобильное меню -->
     <div id="mobile-menu" class="hidden lg:hidden bg-brand-dark/98 border-b border-brand-gold/30 px-6 py-6 space-y-4">
       <nav class="flex flex-col space-y-3 text-base font-medium">
         <a href="#about" onclick="closeMobileMenu()" class="hover:text-brand-gold py-1 border-b border-white/5" data-key="nav_about">О школе</a>
@@ -205,7 +203,7 @@
         </a>
       </div>
 
-      <!-- Счетчики преимуществ -->
+      <!-- Счетчики -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-12 sm:mt-16 pt-8 sm:pt-10 border-t border-white/10 text-left">
         <div class="p-3.5 sm:p-4 rounded-xl bg-white/[0.02] border border-white/5">
           <div class="text-2xl sm:text-3xl font-extrabold gold-text-gradient font-title">1–11</div>
@@ -324,7 +322,7 @@
     </div>
   </section>
 
-  <!-- 4. ВИДЕО И СОЦСЕТИ -->
+  <!-- 4. ВИДЕО И СОЦСЕТИ (НАСТОЯЩИЙ YOUTUBE АВТОПЛЕЙ ЧЕРЕЗ API) -->
   <section id="media" class="py-16 sm:py-20 px-4 bg-brand-card/40 border-t border-white/5">
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12">
@@ -339,22 +337,23 @@
 
       <div class="grid md:grid-cols-2 gap-6 sm:gap-8">
         
-        <!-- КАРТОЧКА ВИДЕО -->
-        <div id="video-preview-card" class="relative group rounded-2xl overflow-hidden border border-brand-gold/30 bg-black aspect-video shadow-2xl flex items-center justify-center cursor-pointer transition-all duration-300" onclick="openVideoLink()">
-          <img src="https://img.youtube.com/vi/f4dKHRfvRDU/maxresdefault.jpg" alt="ЧИШ ЮНОНА Видео" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-80 group-hover:opacity-100 group-hover:scale-105">
-          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-transparent pointer-events-none"></div>
+        <!-- КАРТОЧКА С АВТОВОСПРОИЗВОДИМЫМ YOUTUBE ПЛЕЕРОМ -->
+        <div id="video-card-container" class="relative group rounded-2xl overflow-hidden border border-brand-gold/30 bg-black aspect-video shadow-2xl cursor-pointer">
+          
+          <!-- Контейнер официального YouTube IFrame -->
+          <div id="yt-player" class="absolute inset-0 w-full h-full pointer-events-none"></div>
 
-          <div id="video-play-btn" class="relative z-10 w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-brand-gold text-black flex items-center justify-center shadow-2xl group-hover:scale-110 transition duration-300 pointer-events-none">
-            <i data-lucide="play" class="w-7 h-7 sm:w-9 sm:h-9 fill-current ml-1"></i>
-          </div>
+          <!-- Прозрачный слой клика для перехода на ролик -->
+          <div class="absolute inset-0 z-10" onclick="openVideoLink()"></div>
 
-          <div class="absolute bottom-4 left-4 right-4 z-10 text-left pointer-events-none flex justify-between items-end">
+          <!-- Нижняя информационная плашка -->
+          <div class="absolute bottom-4 left-4 right-4 z-20 pointer-events-none flex justify-between items-end">
             <div>
-              <span class="inline-block px-2.5 py-0.5 rounded bg-red-600 text-white text-[10px] font-bold uppercase tracking-wider mb-1">YouTube</span>
-              <h4 class="text-sm sm:text-base font-bold text-white group-hover:text-brand-gold transition line-clamp-1">Отчетный концерт и жизнь ЧИШ «ЮНОНА»</h4>
+              <span class="inline-block px-2.5 py-0.5 rounded bg-red-600 text-white text-[10px] font-bold uppercase tracking-wider mb-1">YouTube Live</span>
+              <h4 class="text-sm sm:text-base font-bold text-white group-hover:text-brand-gold transition line-clamp-1">Творческая жизнь ЧИШ «ЮНОНА»</h4>
             </div>
             <span class="text-[10px] bg-black/75 px-2.5 py-1 rounded-full text-slate-300 border border-white/10 flex items-center gap-1 backdrop-blur-sm">
-              <i data-lucide="external-link" class="w-3 h-3 text-brand-gold"></i> Открыть ролик
+              <i data-lucide="volume-2" class="w-3 h-3 text-brand-gold"></i> Нажмите для звука
             </span>
           </div>
         </div>
@@ -384,7 +383,7 @@
               <a href="https://www.tiktok.com/@yunona_kz" target="_blank" class="p-3 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between hover:border-cyan-400/50 transition">
                 <span class="text-xs sm:text-sm font-medium flex items-center gap-2">
                   <svg class="w-4 h-4 fill-current text-cyan-400" viewBox="0 0 24 24">
-                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.35 0 .69.07 1 .19V9.52a6.34 6.34 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.78a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.08a8.16 8.16 0 0 0 4.91 1.63v-3.5a4.86 4.86 0 0 1-1-.52z"/>
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89c.35 0 .69.07 1 .19V9.52a6.34 6.34 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.78a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.08a8.16 8.16 0 0 0 4.91 1.63v-3.5a4.86 4.86 0 0 1-1-.52z"/>
                   </svg>
                   TikTok: @yunona_kz
                 </span>
@@ -448,7 +447,7 @@
   <footer id="contacts" class="border-t border-brand-gold/20 bg-black pt-12 sm:pt-16 pb-12 px-4 text-xs text-slate-400">
     <div class="max-w-7xl mx-auto">
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 pb-12 border-b border-white/10">
-        <!-- Колонка 1: логотип также с бесшовной интеграцией -->
+        <!-- Колонка 1 -->
         <div class="space-y-4">
           <div class="flex items-center gap-3">
             <div class="logo-container relative w-10 h-10 rounded-full border border-brand-gold/40 flex items-center justify-center overflow-hidden">
@@ -487,7 +486,7 @@
           </ul>
         </div>
 
-        <!-- Колонка 4 (СТАТИЧНЫЕ ДАННЫЕ ИЗ 2GIS + КНОПКА ВНИЗУ) -->
+        <!-- Колонка 4 -->
         <div>
           <h4 class="text-white font-semibold text-sm mb-4 uppercase tracking-wider">Адрес и контакты</h4>
           <ul class="space-y-3">
@@ -521,7 +520,7 @@
         </div>
       </div>
 
-      <!-- Нижняя строка: Юридические надписи + IT Live -->
+      <!-- Нижняя строка -->
       <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left text-slate-500">
         <div>
           <p>© 2026 ЧИШ «ЮНОНА». Все права защищены.</p>
@@ -548,10 +547,65 @@
   <script>
     lucide.createIcons();
 
-    function openVideoLink() {
-      window.open('https://www.youtube.com/watch?v=f4dKHRfvRDU', '_blank');
+    // ==========================================
+    // ОФИЦИАЛЬНЫЙ YOUTUBE IFRAME API С АВТОПЛЕЕМ
+    // ==========================================
+    let player = null;
+    let isPlayerReady = false;
+    const videoId = 'f4dKHRfvRDU';
+
+    // Функция автоматически вызывается, когда загрузится API YouTube
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('yt-player', {
+        videoId: videoId,
+        playerVars: {
+          'autoplay': 0,
+          'controls': 0,
+          'disablekb': 1,
+          'fs': 0,
+          'loop': 1,
+          'modestbranding': 1,
+          'mute': 1,
+          'playlist': videoId,
+          'playsinline': 1,
+          'rel': 0
+        },
+        events: {
+          'onReady': onPlayerReady
+        }
+      });
     }
 
+    function onPlayerReady(event) {
+      isPlayerReady = true;
+      event.target.mute(); // Всегда без звука для разрешения автоплея
+
+      // Наблюдатель за скроллом
+      const videoContainer = document.getElementById('video-card-container');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.3) {
+            if (isPlayerReady && player && typeof player.playVideo === 'function') {
+              player.playVideo();
+            }
+          } else {
+            if (isPlayerReady && player && typeof player.pauseVideo === 'function') {
+              player.pauseVideo();
+            }
+          }
+        });
+      }, {
+        threshold: [0.1, 0.3, 0.7]
+      });
+
+      observer.observe(videoContainer);
+    }
+
+    function openVideoLink() {
+      window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+    }
+
+    // Мобильное бургер-меню
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     if (mobileMenuBtn && mobileMenu) {
@@ -564,6 +618,7 @@
       if (mobileMenu) mobileMenu.classList.add('hidden');
     }
 
+    // Кнопка «Наверх»
     const backToTopBtn = document.getElementById('back-to-top');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 300) {
@@ -582,6 +637,7 @@
       });
     });
 
+    // Режим для слабовидящих
     const bviBtn = document.getElementById('toggle-accessible');
     bviBtn.addEventListener('click', () => {
       document.body.classList.toggle('accessible-mode');
@@ -589,6 +645,7 @@
       localStorage.setItem('accessibleMode', isAcc ? '1' : '0');
     });
 
+    // Перевод на 3 языка
     const translations = {
       ru: {
         bvi: "Версия для слабовидящих",
