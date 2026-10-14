@@ -66,6 +66,9 @@
       box-shadow: none !important;
       text-shadow: none !important;
     }
+    body.accessible-mode #stars-canvas {
+      display: none !important;
+    }
     body.accessible-mode .gold-text-gradient {
       -webkit-text-fill-color: #000000 !important;
     }
@@ -74,10 +77,13 @@
     }
   </style>
 </head>
-<body class="bg-brand-dark text-slate-100 font-sans antialiased selection:bg-brand-gold selection:text-black relative">
+<body class="bg-brand-dark text-slate-100 font-sans antialiased selection:bg-brand-gold selection:text-black relative overflow-x-hidden">
+
+  <!-- ЖИВОЙ ХОЛСТ С МЕРЦАЮЩИМИ ЗОЛОТЫМИ ЗВЁЗДАМИ -->
+  <canvas id="stars-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
 
   <!-- ВЕРХНЯЯ СЛУЖЕБНАЯ ПАНЕЛЬ -->
-  <div class="border-b border-white/10 bg-black/50 backdrop-blur-md py-2 px-3 sm:px-6 text-xs">
+  <div class="relative z-40 border-b border-white/10 bg-black/60 backdrop-blur-md py-2 px-3 sm:px-6 text-xs">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2 sm:gap-3">
       
       <!-- Версия для слабовидящих + Мобильные языки -->
@@ -110,7 +116,7 @@
           <span class="text-slate-600">|</span>
           <a href="https://www.tiktok.com/@yunona_kz" target="_blank" class="hover:text-cyan-400 flex items-center gap-1 transition">
             <svg class="w-3 h-3 fill-current text-cyan-400" viewBox="0 0 24 24">
-              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89c.35 0 .69.07 1 .19V9.52a6.34 6.34 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.78a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.08a8.16 8.16 0 0 0 4.91 1.63v-3.5a4.86 4.86 0 0 1-1-.52z"/>
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.35 0 .69.07 1 .19V9.52a6.34 6.34 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.78a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.08a8.16 8.16 0 0 0 4.91 1.63v-3.5a4.86 4.86 0 0 1-1-.52z"/>
             </svg> TikTok
           </a>
           <span class="text-slate-600">|</span>
@@ -175,7 +181,7 @@
   </header>
 
   <!-- 1. HERO SECTION -->
-  <section class="relative min-h-[80vh] sm:min-h-[85vh] flex items-center justify-center overflow-hidden px-4 py-16 sm:py-24">
+  <section class="relative min-h-[80vh] sm:min-h-[85vh] flex items-center justify-center overflow-hidden px-4 py-16 sm:py-24 z-10">
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.12)_0%,transparent_65%)] pointer-events-none"></div>
     <div class="absolute -top-40 -right-40 w-72 sm:w-96 h-72 sm:h-96 bg-brand-gold/10 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -205,19 +211,19 @@
 
       <!-- Счетчики преимуществ -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-12 sm:mt-16 pt-8 sm:pt-10 border-t border-white/10 text-left">
-        <div class="p-3.5 sm:p-4 rounded-xl bg-white/[0.02] border border-white/5">
+        <div class="p-3.5 sm:p-4 rounded-xl bg-white/[0.04] backdrop-blur-sm border border-white/5">
           <div class="text-2xl sm:text-3xl font-extrabold gold-text-gradient font-title">1–11</div>
           <div class="text-[11px] sm:text-xs text-slate-400 mt-1" data-key="stat_1">Классы школы полного дня</div>
         </div>
-        <div class="p-3.5 sm:p-4 rounded-xl bg-white/[0.02] border border-white/5">
+        <div class="p-3.5 sm:p-4 rounded-xl bg-white/[0.04] backdrop-blur-sm border border-white/5">
           <div class="text-2xl sm:text-3xl font-extrabold gold-text-gradient font-title">2–6</div>
           <div class="text-[11px] sm:text-xs text-slate-400 mt-1" data-key="stat_2">Лет — группы детского сада</div>
         </div>
-        <div class="p-3.5 sm:p-4 rounded-xl bg-white/[0.02] border border-white/5">
+        <div class="p-3.5 sm:p-4 rounded-xl bg-white/[0.04] backdrop-blur-sm border border-white/5">
           <div class="text-2xl sm:text-3xl font-extrabold gold-text-gradient font-title">2 Языка</div>
           <div class="text-[11px] sm:text-xs text-slate-400 mt-1" data-key="stat_3">Казахские и русские классы</div>
         </div>
-        <div class="p-3.5 sm:p-4 rounded-xl bg-white/[0.02] border border-white/5">
+        <div class="p-3.5 sm:p-4 rounded-xl bg-white/[0.04] backdrop-blur-sm border border-white/5">
           <div class="text-2xl sm:text-3xl font-extrabold gold-text-gradient font-title">20+</div>
           <div class="text-[11px] sm:text-xs text-slate-400 mt-1" data-key="stat_4">Кружков, студий и секций</div>
         </div>
@@ -226,7 +232,7 @@
   </section>
 
   <!-- 2. СЕКЦИЯ: ШКОЛА И САДИК -->
-  <section id="branches" class="py-16 sm:py-20 px-4 bg-brand-card/40 border-y border-white/5">
+  <section id="branches" class="relative z-10 py-16 sm:py-20 px-4 bg-brand-card/50 backdrop-blur-md border-y border-white/5">
     <div class="max-w-7xl mx-auto">
       <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
         <h2 class="text-2xl sm:text-4xl font-extrabold mb-3 font-title gold-text-gradient" data-key="branches_title">Единый Образовательный Комплекс</h2>
@@ -235,7 +241,7 @@
 
       <div class="grid md:grid-cols-2 gap-6 sm:gap-8">
         <!-- ШКОЛА -->
-        <div class="p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-white/[0.06] to-transparent border border-white/10 hover:border-brand-gold/60 transition-all duration-300 flex flex-col justify-between">
+        <div class="p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-white/[0.06] to-transparent border border-white/10 hover:border-brand-gold/60 transition-all duration-300 flex flex-col justify-between backdrop-blur-sm">
           <div>
             <div class="flex items-center justify-between mb-5">
               <span class="px-3 py-1 rounded-full text-xs font-semibold bg-brand-gold/20 text-brand-gold border border-brand-gold/40">1 – 11 классы</span>
@@ -259,7 +265,7 @@
         </div>
 
         <!-- САДИК -->
-        <div class="p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-white/[0.06] to-transparent border border-white/10 hover:border-pink-500/50 transition-all duration-300 flex flex-col justify-between">
+        <div class="p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-white/[0.06] to-transparent border border-white/10 hover:border-pink-500/50 transition-all duration-300 flex flex-col justify-between backdrop-blur-sm">
           <div>
             <div class="flex items-center justify-between mb-5">
               <span class="px-3 py-1 rounded-full text-xs font-semibold bg-pink-500/20 text-pink-300 border border-pink-500/40">От 2 до 6 лет</span>
@@ -286,8 +292,8 @@
   </section>
 
   <!-- 3. БЛОК ДИРЕКТОРА -->
-  <section id="director" class="py-16 sm:py-20 px-4">
-    <div class="max-w-6xl mx-auto bg-gradient-to-r from-brand-card via-black/40 to-brand-card border border-brand-gold/30 rounded-3xl p-6 sm:p-12 shadow-2xl relative overflow-hidden">
+  <section id="director" class="relative z-10 py-16 sm:py-20 px-4">
+    <div class="max-w-6xl mx-auto bg-gradient-to-r from-brand-card via-black/60 to-brand-card border border-brand-gold/30 rounded-3xl p-6 sm:p-12 shadow-2xl relative overflow-hidden backdrop-blur-md">
       <div class="grid md:grid-cols-12 gap-8 items-center">
         <div class="md:col-span-5 flex justify-center">
           <div class="relative group max-w-xs sm:max-w-sm w-full">
@@ -323,7 +329,7 @@
   </section>
 
   <!-- 4. ВИДЕО И СОЦСЕТИ (ВОСПРОИЗВЕДЕНИЕ ПРИ НАВЕДЕНИИ МЫШИ) -->
-  <section id="media" class="py-16 sm:py-20 px-4 bg-brand-card/40 border-t border-white/5">
+  <section id="media" class="relative z-10 py-16 sm:py-20 px-4 bg-brand-card/50 backdrop-blur-md border-t border-white/5">
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12">
         <div>
@@ -353,7 +359,7 @@
         </div>
 
         <!-- СОЦСЕТИ -->
-        <div class="rounded-2xl p-6 bg-white/[0.02] border border-white/10 flex flex-col justify-between">
+        <div class="rounded-2xl p-6 bg-white/[0.03] backdrop-blur-sm border border-white/10 flex flex-col justify-between">
           <div>
             <h3 class="text-lg sm:text-xl font-bold mb-3 text-white">Подписывайтесь на наши социальные сети</h3>
             <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-6">
@@ -377,7 +383,7 @@
               <a href="https://www.tiktok.com/@yunona_kz" target="_blank" class="p-3 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between hover:border-cyan-400/50 transition">
                 <span class="text-xs sm:text-sm font-medium flex items-center gap-2">
                   <svg class="w-4 h-4 fill-current text-cyan-400" viewBox="0 0 24 24">
-                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89c.35 0 .69.07 1 .19V9.52a6.34 6.34 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.78a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.08a8.16 8.16 0 0 0 4.91 1.63v-3.5a4.86 4.86 0 0 1-1-.52z"/>
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.35 0 .69.07 1 .19V9.52a6.34 6.34 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.78a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.08a8.16 8.16 0 0 0 4.91 1.63v-3.5a4.86 4.86 0 0 1-1-.52z"/>
                   </svg>
                   TikTok: @yunona_kz
                 </span>
@@ -394,8 +400,8 @@
   </section>
 
   <!-- 5. ФОРМА ЗАЯВКИ -->
-  <section id="lead-form" class="py-16 sm:py-20 px-4 relative">
-    <div class="max-w-3xl mx-auto bg-gradient-to-b from-brand-card to-brand-dark border border-brand-gold/40 rounded-3xl p-6 sm:p-12 shadow-2xl">
+  <section id="lead-form" class="relative z-10 py-16 sm:py-20 px-4">
+    <div class="max-w-3xl mx-auto bg-gradient-to-b from-brand-card to-brand-dark/95 border border-brand-gold/40 rounded-3xl p-6 sm:p-12 shadow-2xl backdrop-blur-md">
       <div class="text-center mb-8">
         <h2 class="text-2xl sm:text-3xl font-extrabold text-white font-title gold-text-gradient mb-2">Запишитесь на Экскурсию</h2>
         <p class="text-slate-300 text-xs sm:text-sm">Познакомьтесь с педагогами, оцените классы и атмосферу школы и детского сада</p>
@@ -405,25 +411,25 @@
         <div class="grid sm:grid-cols-2 gap-3 sm:gap-4">
           <div>
             <label class="block text-xs font-semibold text-slate-300 mb-1">Имя родителя</label>
-            <input type="text" required placeholder="Ваше имя" class="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white focus:outline-none focus:border-brand-gold transition text-sm">
+            <input type="text" required placeholder="Ваше имя" class="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-white focus:outline-none focus:border-brand-gold transition text-sm">
           </div>
           <div>
             <label class="block text-xs font-semibold text-slate-300 mb-1">Номер телефона</label>
-            <input type="tel" required placeholder="+7 (___) ___-__-__" class="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white focus:outline-none focus:border-brand-gold transition text-sm">
+            <input type="tel" required placeholder="+7 (___) ___-__-__" class="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-white focus:outline-none focus:border-brand-gold transition text-sm">
           </div>
         </div>
 
         <div class="grid sm:grid-cols-2 gap-3 sm:gap-4">
           <div>
             <label class="block text-xs font-semibold text-slate-300 mb-1">Направление</label>
-            <select class="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white focus:outline-none focus:border-brand-gold transition text-sm">
+            <select class="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-white focus:outline-none focus:border-brand-gold transition text-sm">
               <option value="school">Школа (1–11 классы)</option>
               <option value="kindergarten">Детский сад YUNONA KIDS</option>
             </select>
           </div>
           <div>
             <label class="block text-xs font-semibold text-slate-300 mb-1">Язык обучения</label>
-            <select class="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white focus:outline-none focus:border-brand-gold transition text-sm">
+            <select class="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/10 text-white focus:outline-none focus:border-brand-gold transition text-sm">
               <option value="ru">Русский язык обучения</option>
               <option value="kz">Қазақ тілінде оқыту</option>
             </select>
@@ -437,8 +443,8 @@
     </div>
   </section>
 
-  <!-- ПОДВАЛ (С АДРЕСОМ, ТЕЛЕФОНОМ И ОБНОВЛЕННОЙ СВЯЗКОЙ IT LIFE + PAVLIKNEMOROZOFF) -->
-  <footer id="footer-section" class="border-t border-brand-gold/20 bg-black pt-12 sm:pt-16 pb-28 sm:pb-36 px-4 text-xs text-slate-400">
+  <!-- ПОДВАЛ (С АДРЕСОМ, ТЕЛЕФОНОМ И ПОДПИСЬЮ IT LIFE) -->
+  <footer id="footer-section" class="relative z-10 border-t border-brand-gold/20 bg-black/90 pt-12 sm:pt-16 pb-28 sm:pb-36 px-4 text-xs text-slate-400">
     <div class="max-w-7xl mx-auto">
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 pb-12 border-b border-white/10">
         <!-- Колонка 1 -->
@@ -547,7 +553,81 @@
   <script>
     lucide.createIcons();
 
-    // 1. Управление видео: запуск при наведении мыши
+    // ==========================================
+    // ДИНАМИЧЕСКИЙ ХОЛСТ С МЕРЦАЮЩИМИ ЗВЁЗДАМИ
+    // ==========================================
+    const canvas = document.getElementById('stars-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const stars = [];
+    // Количество звезд адаптируется под ширину экрана
+    const starCount = Math.min(Math.floor(window.innerWidth / 12), 120);
+
+    const starColors = ['#FFFFFF', '#FFF1B0', '#D4AF37', '#F3E5AB'];
+
+    for (let i = 0; i < starCount; i++) {
+      stars.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 1.4 + 0.6,
+        alpha: Math.random(),
+        delta: (Math.random() * 0.02 + 0.008) * (Math.random() > 0.5 ? 1 : -1),
+        color: starColors[Math.floor(Math.random() * starColors.length)],
+        vx: (Math.random() - 0.5) * 0.15,
+        vy: (Math.random() - 0.5) * 0.15
+      });
+    }
+
+    function renderStars() {
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = 0; i < stars.length; i++) {
+        const s = stars[i];
+
+        // Мерцание: плавное изменение прозрачности
+        s.alpha += s.delta;
+        if (s.alpha >= 1 || s.alpha <= 0.15) {
+          s.delta *= -1;
+        }
+
+        // Микро-движение
+        s.x += s.vx;
+        s.y += s.vy;
+        if (s.x < 0) s.x = width;
+        if (s.x > width) s.x = 0;
+        if (s.y < 0) s.y = height;
+        if (s.y > height) s.y = 0;
+
+        ctx.save();
+        ctx.globalAlpha = Math.max(0.1, Math.min(1, s.alpha));
+        ctx.fillStyle = s.color;
+
+        // Небольшой золотой ореол у крупных звезд
+        if (s.radius > 1.2) {
+          ctx.shadowBlur = 6;
+          ctx.shadowColor = '#D4AF37';
+        }
+
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      requestAnimationFrame(renderStars);
+    }
+    renderStars();
+
+    // ==========================================
+    // YOUTUBE ПЛЕЕР (НАВЕДЕНИЕ МЫШИ)
+    // ==========================================
     let player = null;
     let isPlayerReady = false;
     const videoId = 'f4dKHRfvRDU';
@@ -597,7 +677,7 @@
       window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
     }
 
-    // 2. Мобильное бургер-меню
+    // Мобильное меню
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     if (mobileMenuBtn && mobileMenu) {
@@ -610,7 +690,7 @@
       if (mobileMenu) mobileMenu.classList.add('hidden');
     }
 
-    // 3. Умная кнопка «Наверх»: плавный подъем над футером
+    // Кнопка «Наверх»
     const backToTopBtn = document.getElementById('back-to-top');
     const footerSection = document.getElementById('footer-section');
 
@@ -641,7 +721,7 @@
       });
     });
 
-    // 4. Режим для слабовидящих
+    // Режим для слабовидящих
     const bviBtn = document.getElementById('toggle-accessible');
     bviBtn.addEventListener('click', () => {
       document.body.classList.toggle('accessible-mode');
@@ -649,7 +729,7 @@
       localStorage.setItem('accessibleMode', isAcc ? '1' : '0');
     });
 
-    // 5. Перевод на 3 языка (RU / KZ / EN)
+    // Перевод (3 языка)
     const translations = {
       ru: {
         bvi: "Версия для слабовидящих",
@@ -741,7 +821,6 @@
       document.getElementById('txt-bvi').textContent = translations[lang].bvi;
     }
 
-    // 6. Обработка формы заявки
     function handleFormSubmit(e) {
       e.preventDefault();
       alert('Рахмет! Өтінішіңіз қабылданды. / Спасибо! Ваша заявка принята.');
