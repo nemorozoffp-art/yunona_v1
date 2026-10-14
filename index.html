@@ -96,7 +96,7 @@
 </head>
 <body class="bg-brand-dark text-slate-100 font-sans antialiased selection:bg-brand-gold selection:text-black relative overflow-x-hidden">
 
-  <!-- ЖИВОЙ КОСМИЧЕСКИЙ CANVAS (СВЕРХНОВАЯ + МЕТЕОРЫ + 4-ЛУЧЕВЫЕ ЗВЁЗДОЧКИ) -->
+  <!-- ЖИВОЙ КОСМИЧЕСКИЙ ХОЛСТ: ЭЛЕГАНТНОЕ НОЧНОЕ НЕБО -->
   <canvas id="cosmos-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
 
   <!-- ВЕРХНЯЯ СЛУЖЕБНАЯ ПАНЕЛЬ -->
@@ -131,7 +131,7 @@
           <span class="text-slate-600">|</span>
           <a href="https://www.tiktok.com/@yunona_kz" target="_blank" class="hover:text-cyan-400 flex items-center gap-1 transition">
             <svg class="w-3 h-3 fill-current text-cyan-400" viewBox="0 0 24 24">
-              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.35 0 .69.07 1 .19V9.52a6.34 6.34 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.78a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.08a8.16 8.16 0 0 0 4.91 1.63v-3.5a4.86 4.86 0 0 1-1-.52z"/>
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89c.35 0 .69.07 1 .19V9.52a6.34 6.34 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.78a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.08a8.16 8.16 0 0 0 4.91 1.63v-3.5a4.86 4.86 0 0 1-1-.52z"/>
             </svg> TikTok
           </a>
           <span class="text-slate-600">|</span>
@@ -149,26 +149,25 @@
     </div>
   </aside>
 
-  <!-- ШАПКА САЙТА (ИСПРАВЛЕНА: БЕЗ НАЛОЖЕНИЯ МЕНЮ И С ПРАВИЛЬНЫМ ПЕРЕНОСОМ ПОДПИСИ ЛОГОТИПА) -->
+  <!-- ШАПКА САЙТА: АККУРАТНЫЙ РАЗМЕР КНОПКИ И ЗАЩИТА ОТ ВЫПАДЕНИЯ -->
   <header class="sticky top-0 z-40 bg-brand-dark/95 backdrop-blur-xl border-b border-brand-gold/20">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex items-center justify-between gap-2 lg:gap-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-2">
       
-      <!-- ЛОГОТИП С АККУРАТНЫМ ПЕРЕНОСОМ СТРОКИ -->
-      <a href="#" class="flex items-center gap-2.5 sm:gap-3 group shrink-0">
-        <div class="logo-container relative w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-brand-gold/40 flex items-center justify-center overflow-hidden group-hover:border-brand-gold transition duration-300 shrink-0">
+      <!-- ЛОГОТИП -->
+      <a href="#" class="flex items-center gap-2 sm:gap-3 group shrink-0">
+        <div class="logo-container relative w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-brand-gold/40 flex items-center justify-center overflow-hidden group-hover:border-brand-gold transition duration-300 shrink-0">
           <img src="logo.jpg" alt="ЧИШ ЮНОНА" class="logo-image w-full h-full object-cover scale-125 transform group-hover:scale-130 transition duration-300">
         </div>
         <div class="leading-tight">
-          <span class="block font-title text-lg sm:text-xl tracking-[0.18em] font-extrabold gold-text-gradient">ЮНОНА</span>
-          <!-- Компактная подпись с мягким переносом строки без наползания на меню -->
-          <span class="block text-[8px] sm:text-[9px] tracking-wider uppercase text-slate-400 font-medium max-w-[130px] sm:max-w-none leading-snug" data-key="sublogo">
-            Частная инновационная<br class="block sm:hidden"> школа &amp; сад
+          <span class="block font-title text-base sm:text-lg tracking-[0.18em] font-extrabold gold-text-gradient">ЮНОНА</span>
+          <span class="block text-[8px] sm:text-[9px] tracking-wider uppercase text-slate-400 font-medium leading-tight" data-key="sublogo">
+            Частная школа &amp; сад
           </span>
         </div>
       </a>
 
-      <!-- МЕНЮ С КОМПАКТНЫМИ ИНТЕРВАЛАМИ И ЗАЩИТОЙ ОТ ПЕРЕКРЫТИЯ -->
-      <nav class="hidden lg:flex items-center gap-3 xl:gap-5 text-[13px] xl:text-sm font-medium shrink-0">
+      <!-- МЕНЮ: КОМПАКТНЫЕ ПАДДИНГИ И ШРИФТЫ ДЛЯ 100% ВМЕСТИМОСТИ -->
+      <nav class="hidden xl:flex items-center gap-3.5 2xl:gap-5 text-xs 2xl:text-sm font-medium shrink">
         <a href="#about" class="hover:text-brand-gold transition whitespace-nowrap">О школе</a>
         <a href="#day-schedule" class="hover:text-brand-gold transition whitespace-nowrap">День ученика</a>
         <a href="#branches" class="hover:text-brand-gold transition whitespace-nowrap">Школа и Сад</a>
@@ -178,19 +177,20 @@
         <a href="#contacts" class="hover:text-brand-gold transition whitespace-nowrap">Контакты</a>
       </nav>
 
-      <!-- КНОПКА ЗАПИСИ (АККУРАТНЫЙ РАЗМЕР БЕЗ НАПОЛЗАНИЯ НА СЛОВО «КОНТАКТЫ») -->
+      <!-- АККУРАТНАЯ КНОПКА ЗАПИСИ (НЕ ВЫХОДИТ ЗА ГРАНИЦЫ ЭКРАНА) -->
       <div class="flex items-center gap-2 shrink-0">
-        <a href="#lead-form" class="hidden sm:inline-flex items-center justify-center px-4 py-2 xl:px-5 xl:py-2.5 text-xs xl:text-sm font-semibold rounded-full bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-gold text-black hover:opacity-95 shadow-md shadow-brand-gold/20 transition-all whitespace-nowrap">
-          Записаться на экскурсию
+        <a href="#lead-form" class="hidden sm:inline-flex items-center justify-center px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs font-semibold rounded-full bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-gold text-black hover:opacity-95 shadow-md shadow-brand-gold/20 transition-all whitespace-nowrap">
+          <span class="hidden 2xl:inline">Записаться на экскурсию</span>
+          <span class="inline 2xl:hidden">Экскурсия</span>
         </a>
-        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg bg-white/5 border border-white/10 text-brand-gold hover:bg-white/10" aria-label="Меню">
-          <i data-lucide="menu" class="w-6 h-6"></i>
+        <button id="mobile-menu-btn" class="xl:hidden p-2 rounded-lg bg-white/5 border border-white/10 text-brand-gold hover:bg-white/10" aria-label="Меню">
+          <i data-lucide="menu" class="w-5 h-5"></i>
         </button>
       </div>
     </div>
 
     <!-- Мобильное меню -->
-    <div id="mobile-menu" class="hidden lg:hidden bg-brand-dark/98 border-b border-brand-gold/30 px-6 py-6 space-y-3 font-medium">
+    <div id="mobile-menu" class="hidden xl:hidden bg-brand-dark/98 border-b border-brand-gold/30 px-6 py-6 space-y-3 font-medium">
       <a href="#about" onclick="closeMobileMenu()" class="block hover:text-brand-gold py-1 border-b border-white/5">О школе</a>
       <a href="#day-schedule" onclick="closeMobileMenu()" class="block hover:text-brand-gold py-1 border-b border-white/5">День ученика</a>
       <a href="#branches" onclick="closeMobileMenu()" class="block hover:text-brand-gold py-1 border-b border-white/5">Школа и Сад</a>
@@ -198,7 +198,7 @@
       <a href="#virtual-tour" onclick="closeMobileMenu()" class="block hover:text-brand-gold py-1 border-b border-white/5">Территория</a>
       <a href="#calculator" onclick="closeMobileMenu()" class="block hover:text-brand-gold py-1 border-b border-white/5">Калькулятор</a>
       <a href="#contacts" onclick="closeMobileMenu()" class="block hover:text-brand-gold py-1 border-b border-white/5">Контакты</a>
-      <a href="#lead-form" onclick="closeMobileMenu()" class="block text-center w-full py-3 rounded-xl font-bold bg-gradient-to-r from-brand-gold to-brand-goldLight text-black text-sm mt-3">
+      <a href="#lead-form" onclick="closeMobileMenu()" class="block text-center w-full py-2.5 rounded-xl font-bold bg-gradient-to-r from-brand-gold to-brand-goldLight text-black text-xs mt-3">
         Записаться на экскурсию
       </a>
     </div>
@@ -206,7 +206,7 @@
 
   <!-- 1. HERO SECTION -->
   <section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden px-4 py-16 sm:py-24 z-10">
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.12)_0%,transparent_65%)] pointer-events-none"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.08)_0%,transparent_65%)] pointer-events-none"></div>
 
     <div class="relative z-10 max-w-5xl mx-auto text-center">
       <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-goldLight text-xs sm:text-sm font-medium mb-6 sm:mb-8">
@@ -263,7 +263,6 @@
         <p class="text-xs sm:text-base text-slate-400 mt-2">Никаких домашних заданий по вечерам и поездок по репетиторам — всё продумано до мелочей.</p>
       </div>
 
-      <!-- Кнопки-часы таймлайна -->
       <div class="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-4 mb-8 font-mono text-xs">
         <button onclick="setDayTime(0)" class="time-step-btn active px-4 py-2.5 rounded-xl bg-brand-gold text-black font-bold whitespace-nowrap transition">08:30 Встреча</button>
         <button onclick="setDayTime(1)" class="time-step-btn px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:border-brand-gold whitespace-nowrap transition">09:00 Академический блок</button>
@@ -273,7 +272,6 @@
         <button onclick="setDayTime(5)" class="time-step-btn px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:border-brand-gold whitespace-nowrap transition">17:30 Итоги &amp; Домой</button>
       </div>
 
-      <!-- Карточка выбранного времени -->
       <div id="day-card" class="glass-box p-6 sm:p-10 rounded-3xl border border-brand-gold/40 flex flex-col md:flex-row items-center gap-8">
         <div class="w-full md:w-1/3 text-center md:text-left">
           <span id="day-time-badge" class="px-3.5 py-1 rounded-full text-xs font-mono font-bold bg-brand-gold/20 text-brand-gold border border-brand-gold/40">08:30 – 09:00</span>
@@ -305,7 +303,6 @@
       </div>
 
       <div class="grid md:grid-cols-2 gap-6 sm:gap-8">
-        <!-- ШКОЛА -->
         <div class="glass-box p-6 sm:p-8 rounded-2xl flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-5">
@@ -329,7 +326,6 @@
           </a>
         </div>
 
-        <!-- САДИК -->
         <div class="glass-box p-6 sm:p-8 rounded-2xl flex flex-col justify-between hover:border-pink-500/50">
           <div>
             <div class="flex items-center justify-between mb-5">
@@ -356,7 +352,7 @@
     </div>
   </section>
 
-  <!-- БЛОК ДИРЕКТОРА С ЖИВЫМ ГОЛОСОВЫМ ПРИВЕТСТВИЕМ -->
+  <!-- БЛОК ДИРЕКТОРА С ГОЛОСОВЫМ ПРИВЕТСТВИЕМ -->
   <section id="director" class="relative z-10 py-16 sm:py-20 px-4">
     <div class="max-w-6xl mx-auto glass-box rounded-3xl p-6 sm:p-12 relative overflow-hidden">
       <div class="grid md:grid-cols-12 gap-8 items-center">
@@ -379,7 +375,6 @@
             «Каждый ребенок приходит в этот мир со своей уникальной искрой таланта. Наша миссия — не просто дать школьную программу, а создать атмосферу доверия, в которой ученик не боится ошибаться, учится мыслить самостоятельно и верит в свои силы.»
           </blockquote>
 
-          <!-- АУДИОПЛЕЕР С ГОЛОСОМ ДИРЕКТОРА -->
           <div class="p-4 rounded-2xl bg-black/60 border border-brand-gold/40 flex items-center justify-between gap-4 mb-6">
             <div class="flex items-center gap-3">
               <button id="audio-play-btn" onclick="toggleDirectorAudio()" class="w-11 h-11 rounded-full bg-brand-gold text-black flex items-center justify-center hover:scale-105 transition shadow-lg shadow-brand-gold/30 shrink-0">
@@ -391,7 +386,6 @@
               </div>
             </div>
 
-            <!-- Анимированные полоски звука -->
             <div id="sound-bars" class="flex items-center gap-1 h-6 opacity-40 transition-opacity">
               <span class="w-1 bg-brand-gold rounded-full wave-bar h-2"></span>
               <span class="w-1 bg-brand-goldLight rounded-full wave-bar h-5" style="animation-delay: 0.2s;"></span>
@@ -400,7 +394,6 @@
               <span class="w-1 bg-brand-gold rounded-full wave-bar h-4" style="animation-delay: 0.3s;"></span>
             </div>
           </div>
-          <!-- Аудиотег -->
           <audio id="director-audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="metadata"></audio>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs text-slate-300">
@@ -435,7 +428,6 @@
       </div>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Проект 1 -->
         <div class="proj-card glass-box rounded-2xl p-5" data-cat="stem">
           <div class="aspect-video rounded-xl bg-slate-900 border border-white/10 overflow-hidden mb-4 relative">
             <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=500" class="w-full h-full object-cover">
@@ -448,7 +440,6 @@
           </div>
         </div>
 
-        <!-- Проект 2 -->
         <div class="proj-card glass-box rounded-2xl p-5" data-cat="stem">
           <div class="aspect-video rounded-xl bg-slate-900 border border-white/10 overflow-hidden mb-4 relative">
             <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=500" class="w-full h-full object-cover">
@@ -461,7 +452,6 @@
           </div>
         </div>
 
-        <!-- Проект 3 -->
         <div class="proj-card glass-box rounded-2xl p-5" data-cat="art">
           <div class="aspect-video rounded-xl bg-slate-900 border border-white/10 overflow-hidden mb-4 relative">
             <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500" class="w-full h-full object-cover">
@@ -486,7 +476,6 @@
         <p class="text-xs sm:text-sm text-slate-400 mt-2">Нажимайте на зоны школы, чтобы посмотреть оснащение и атмосферу</p>
       </div>
 
-      <!-- Переключатель зон -->
       <div class="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-3 mb-6 font-mono text-xs">
         <button onclick="setTourZone(0)" class="tour-btn active px-3.5 py-2 rounded-xl bg-brand-gold text-black font-bold whitespace-nowrap">IT &amp; Робототехника</button>
         <button onclick="setTourZone(1)" class="tour-btn px-3.5 py-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:border-brand-gold whitespace-nowrap">Школьная Эко-столовая</button>
@@ -494,7 +483,6 @@
         <button onclick="setTourZone(3)" class="tour-btn px-3.5 py-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:border-brand-gold whitespace-nowrap">Детская Площадка Сада</button>
       </div>
 
-      <!-- Интерактивная витрина локации -->
       <div class="grid md:grid-cols-12 gap-6 items-center">
         <div class="md:col-span-7 rounded-2xl overflow-hidden border border-white/10 aspect-video relative group">
           <img id="tour-img" src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
@@ -628,7 +616,6 @@
       </div>
 
       <div class="grid md:grid-cols-2 gap-6 sm:gap-8">
-        <!-- КАРТОЧКА ВИДЕО -->
         <div id="video-card-container" class="relative group rounded-2xl overflow-hidden border border-brand-gold/30 bg-black aspect-video shadow-2xl cursor-pointer">
           <div id="yt-player" class="absolute inset-0 w-full h-full pointer-events-none"></div>
           <div class="absolute inset-0 z-10" onclick="openVideoLink()"></div>
@@ -644,7 +631,6 @@
           </div>
         </div>
 
-        <!-- СОЦСЕТИ -->
         <div class="rounded-2xl p-6 bg-white/[0.03] backdrop-blur-sm border border-white/10 flex flex-col justify-between">
           <div>
             <h3 class="text-lg sm:text-xl font-bold mb-3 text-white">Подписывайтесь на наши социальные сети</h3>
@@ -729,8 +715,8 @@
     </div>
   </section>
 
-  <!-- КОМПАКТНЫЙ ПОДВАЛ С ЗАПАСОМ ПОД КНОПКУ НАВЕРХ -->
-  <footer id="footer-section" class="relative z-10 border-t border-brand-gold/20 bg-black/95 pt-10 pb-28 sm:pb-36 px-4 text-xs text-slate-400">
+  <!-- КОМПАКТНЫЙ СТАБИЛЬНЫЙ ПОДВАЛ -->
+  <footer id="footer-section" class="relative z-10 border-t border-brand-gold/20 bg-black/95 pt-10 pb-12 px-4 text-xs text-slate-400">
     <div class="max-w-7xl mx-auto">
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 pb-8 border-b border-white/10">
         <!-- Колонка 1 -->
@@ -806,14 +792,14 @@
         </div>
       </div>
 
-      <!-- Нижняя строка: Юридические надписи + IT Life -->
+      <!-- Нижняя строка -->
       <div class="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left text-slate-500">
         <div>
           <p>© 2026 ЧИШ «ЮНОНА». Все права защищены.</p>
           <p class="text-[11px] text-slate-600 mt-0.5">Любое копирование материалов допускается только с разрешения администрации.</p>
         </div>
 
-        <!-- ЭТАЛОННАЯ ПЛАШКА: IT LIFE & PAVLIKNEMOROZOFF -->
+        <!-- ПЛАШКА: IT LIFE & PAVLIKNEMOROZOFF -->
         <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.03] border border-brand-gold/30 hover:border-brand-gold/60 transition group">
           <div class="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></div>
           <div class="text-left leading-snug">
@@ -825,17 +811,16 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </footer>
 
-  <!-- КНОПКА «НАВЕРХ»: ПРИПОДНЯТА РОВНО НАД ПЛАШКОЙ РАЗРАБОТЧИКА (ПО ВАШЕМУ КРАСНОМУ КРУЖКУ) -->
-  <button id="back-to-top" aria-label="Подняться вверх" class="fixed bottom-28 sm:bottom-32 right-6 z-50 p-3 sm:p-3.5 rounded-full bg-brand-card/95 text-brand-gold border border-brand-gold/50 shadow-2xl shadow-black hover:bg-brand-gold hover:text-black transition-all duration-300 transform opacity-0 translate-y-10 pointer-events-none group hover:scale-110">
+  <!-- КНОПКА «НАВЕРХ»: СТРОГО НАД ПЛАШКОЙ РАЗРАБОТЧИКА (БЕЗ НАЕЗДА) -->
+  <button id="back-to-top" aria-label="Подняться вверх" class="fixed bottom-36 sm:bottom-40 right-6 z-40 p-3 sm:p-3.5 rounded-full bg-brand-card/95 text-brand-gold border border-brand-gold/50 shadow-2xl shadow-black hover:bg-brand-gold hover:text-black transition-all duration-300 transform opacity-0 translate-y-10 pointer-events-none group hover:scale-110">
     <i data-lucide="chevron-up" class="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]"></i>
   </button>
 
-  <!-- ВСЕ СКРИПТЫ -->
+  <!-- СКРИПТЫ -->
   <script>
     lucide.createIcons();
 
@@ -1020,7 +1005,7 @@
     hoursSlider.addEventListener('input', updateSavings);
     updateSavings();
 
-    // 6. КВИЗ ДЛЯ РОДИТЕЛЕЙ
+    // 6. КВИЗ
     let quizState = {
       age: "2–6 лет (Сад)",
       focus: "IT & Роботы",
@@ -1056,7 +1041,9 @@
       }
     }
 
-    // 7. КОСМИЧЕСКИЙ CANVAS (СВЕРХНОВАЯ + МЕТЕОРЫ + 4-ЛУЧЕВЫЕ ЗВЁЗДОЧКИ)
+    // =========================================================================
+    // 7. ЭЛЕГАНТНОЕ КОСМИЧЕСКОЕ НЕБО: ТОНКИЙ ГРАДИЕНТ, МЯГКИЕ ЗВЕЗДЫ И МЕТЕОРЫ
+    // =========================================================================
     const canvas = document.getElementById('cosmos-canvas');
     const ctx = canvas.getContext('2d');
     let width = canvas.width = window.innerWidth;
@@ -1067,128 +1054,141 @@
       height = canvas.height = window.innerHeight;
     });
 
+    // Массив изящных звездочек
     const stars = [];
-    const starCount = Math.min(Math.floor(window.innerWidth / 14), 85);
-    const starColors = ['#FFFFFF', '#E0F2FE', '#FFF4CC', '#FDE047', '#D4AF37'];
+    const starCount = Math.min(Math.floor(window.innerWidth / 18), 75);
+    const starColors = ['#FFFFFF', '#E0F2FE', '#FFF8DB', '#FDE047'];
 
     for (let i = 0; i < starCount; i++) {
       stars.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        size: Math.random() * 5 + 3,
+        size: Math.random() * 2.8 + 1.2,
         alpha: Math.random() * 0.7 + 0.3,
-        delta: (Math.random() * 0.025 + 0.008) * (Math.random() > 0.5 ? 1 : -1),
+        delta: (Math.random() * 0.02 + 0.006) * (Math.random() > 0.5 ? 1 : -1),
         color: starColors[Math.floor(Math.random() * starColors.length)],
-        vx: (Math.random() - 0.5) * 0.1,
-        vy: (Math.random() - 0.5) * 0.1,
-        isSpike: Math.random() > 0.35
+        vx: (Math.random() - 0.5) * 0.08,
+        vy: (Math.random() - 0.5) * 0.08,
+        hasRays: Math.random() > 0.7
       });
     }
 
+    // Мягкая звезда-сверхновая (без резких палок)
     const supernova = {
-      xRatio: 0.75,
-      y: 190,
-      baseRadius: 18,
+      xRatio: 0.82,
+      y: 160,
       pulse: 0,
-      pulseSpeed: 0.03
+      pulseSpeed: 0.025
     };
 
+    // Метеоры
     const shootingStars = [];
     function spawnShootingStar() {
       shootingStars.push({
-        x: Math.random() * width * 0.8,
-        y: Math.random() * (height * 0.4),
-        length: Math.random() * 120 + 80,
-        speed: Math.random() * 8 + 12,
-        angle: Math.PI / 7,
-        opacity: 1,
-        fadeSpeed: 0.02
+        x: Math.random() * width * 0.7,
+        y: Math.random() * (height * 0.35),
+        length: Math.random() * 90 + 60,
+        speed: Math.random() * 7 + 10,
+        angle: Math.PI / 6.5,
+        opacity: 0.85,
+        fadeSpeed: 0.022
       });
     }
     setInterval(() => {
-      if (Math.random() > 0.3) spawnShootingStar();
-    }, 4500);
+      if (Math.random() > 0.4) spawnShootingStar();
+    }, 5500);
 
-    function drawSpikeStar(x, y, radius, color, alpha) {
+    // Функция отрисовки деликатных лучей звезды
+    function drawSoftStar(x, y, size, color, alpha, hasRays) {
       ctx.save();
       ctx.globalAlpha = alpha;
-      ctx.fillStyle = color;
-      ctx.strokeStyle = color;
-
+      
+      // Ядро
       ctx.beginPath();
-      ctx.moveTo(x - radius * 2.2, y);
-      ctx.quadraticCurveTo(x, y, x, y - radius * 2.2);
-      ctx.quadraticCurveTo(x, y, x + radius * 2.2, y);
-      ctx.quadraticCurveTo(x, y, x, y + radius * 2.2);
-      ctx.quadraticCurveTo(x, y, x - radius * 2.2, y);
-      ctx.fill();
-
-      ctx.beginPath();
-      ctx.arc(x, y, radius * 0.5, 0, Math.PI * 2);
+      ctx.arc(x, y, size * 0.6, 0, Math.PI * 2);
       ctx.fillStyle = '#FFFFFF';
       ctx.fill();
+
+      // Нежные полупрозрачные лучи для избранных звезд
+      if (hasRays) {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 0.8;
+        const rayLen = size * 2.8;
+        ctx.beginPath();
+        ctx.moveTo(x - rayLen, y); ctx.lineTo(x + rayLen, y);
+        ctx.moveTo(x, y - rayLen); ctx.lineTo(x, y + rayLen);
+        ctx.stroke();
+      }
       ctx.restore();
     }
 
     function renderCosmos() {
       ctx.clearRect(0, 0, width, height);
 
-      // Дуга горизонта
+      // 1. Нежнейшая дуга горизонта
       const supernovaX = width * supernova.xRatio;
       ctx.save();
       ctx.beginPath();
-      ctx.ellipse(width * 0.55, 300, width * 0.65, 140, -Math.PI / 25, 0, Math.PI * 2);
-      const arcGrad = ctx.createLinearGradient(0, 200, width, 300);
-      arcGrad.addColorStop(0, 'rgba(0, 240, 255, 0)');
-      arcGrad.addColorStop(0.5, 'rgba(56, 189, 248, 0.45)');
-      arcGrad.addColorStop(0.75, 'rgba(212, 175, 55, 0.35)');
+      ctx.ellipse(width * 0.6, 260, width * 0.6, 120, -Math.PI / 28, 0, Math.PI * 2);
+      const arcGrad = ctx.createLinearGradient(0, 180, width, 260);
+      arcGrad.addColorStop(0, 'rgba(56, 189, 248, 0)');
+      arcGrad.addColorStop(0.55, 'rgba(56, 189, 248, 0.22)');
+      arcGrad.addColorStop(0.8, 'rgba(212, 175, 55, 0.18)');
       arcGrad.addColorStop(1, 'rgba(16, 185, 129, 0)');
       ctx.strokeStyle = arcGrad;
-      ctx.lineWidth = 3.5;
-      ctx.shadowBlur = 18;
-      ctx.shadowColor = '#38BDF8';
+      ctx.lineWidth = 2;
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = 'rgba(56, 189, 248, 0.5)';
       ctx.stroke();
       ctx.restore();
 
-      // Сверхновая звезда с лучами
+      // 2. Кинематографичная Сверхновая (мягкое сияние)
       supernova.pulse += supernova.pulseSpeed;
-      const currentRadius = supernova.baseRadius + Math.sin(supernova.pulse) * 4;
+      const glowScale = Math.sin(supernova.pulse) * 5;
       
       ctx.save();
-      const glowGrad = ctx.createRadialGradient(supernovaX, supernova.y, 2, supernovaX, supernova.y, 110);
-      glowGrad.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
-      glowGrad.addColorStop(0.15, 'rgba(56, 189, 248, 0.7)');
-      glowGrad.addColorStop(0.5, 'rgba(37, 99, 235, 0.25)');
+      // Глубокий рассеянный ореол
+      const glowGrad = ctx.createRadialGradient(supernovaX, supernova.y, 1, supernovaX, supernova.y, 75 + glowScale);
+      glowGrad.addColorStop(0, 'rgba(255, 255, 255, 0.85)');
+      glowGrad.addColorStop(0.2, 'rgba(56, 189, 248, 0.4)');
+      glowGrad.addColorStop(0.6, 'rgba(37, 99, 235, 0.1)');
       glowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
       ctx.fillStyle = glowGrad;
       ctx.beginPath();
-      ctx.arc(supernovaX, supernova.y, 110, 0, Math.PI * 2);
+      ctx.arc(supernovaX, supernova.y, 75 + glowScale, 0, Math.PI * 2);
       ctx.fill();
 
-      ctx.strokeStyle = '#FFFFFF';
-      ctx.shadowBlur = 15;
-      ctx.shadowColor = '#38BDF8';
-      const rayLen = 95 + Math.sin(supernova.pulse) * 15;
-
-      ctx.lineWidth = 2.2;
-      ctx.beginPath();
-      ctx.moveTo(supernovaX - rayLen * 1.3, supernova.y); ctx.lineTo(supernovaX + rayLen * 1.3, supernova.y);
-      ctx.moveTo(supernovaX, supernova.y - rayLen * 1.3); ctx.lineTo(supernovaX, supernova.y + rayLen * 1.3);
-      ctx.stroke();
-
+      // Тонкие прозрачные оптические дифракционные иглы
+      const rayLen = 55 + glowScale * 1.5;
+      const rayGradH = ctx.createLinearGradient(supernovaX - rayLen, supernova.y, supernovaX + rayLen, supernova.y);
+      rayGradH.addColorStop(0, 'rgba(255, 255, 255, 0)');
+      rayGradH.addColorStop(0.5, 'rgba(255, 255, 255, 0.85)');
+      rayGradH.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      ctx.strokeStyle = rayGradH;
       ctx.lineWidth = 1.2;
       ctx.beginPath();
-      ctx.moveTo(supernovaX - rayLen * 0.75, supernova.y - rayLen * 0.75); ctx.lineTo(supernovaX + rayLen * 0.75, supernova.y + rayLen * 0.75);
-      ctx.moveTo(supernovaX - rayLen * 0.75, supernova.y + rayLen * 0.75); ctx.lineTo(supernovaX + rayLen * 0.75, supernova.y - rayLen * 0.75);
+      ctx.moveTo(supernovaX - rayLen, supernova.y);
+      ctx.lineTo(supernovaX + rayLen, supernova.y);
       ctx.stroke();
 
+      const rayGradV = ctx.createLinearGradient(supernovaX, supernova.y - rayLen, supernovaX, supernova.y + rayLen);
+      rayGradV.addColorStop(0, 'rgba(255, 255, 255, 0)');
+      rayGradV.addColorStop(0.5, 'rgba(255, 255, 255, 0.85)');
+      rayGradV.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      ctx.strokeStyle = rayGradV;
       ctx.beginPath();
-      ctx.arc(supernovaX, supernova.y, currentRadius * 0.6, 0, Math.PI * 2);
+      ctx.moveTo(supernovaX, supernova.y - rayLen);
+      ctx.lineTo(supernovaX, supernova.y + rayLen);
+      ctx.stroke();
+
+      // Точечное ядро
+      ctx.beginPath();
+      ctx.arc(supernovaX, supernova.y, 3.5, 0, Math.PI * 2);
       ctx.fillStyle = '#FFFFFF';
       ctx.fill();
       ctx.restore();
 
-      // Метеоры
+      // 3. Метеоры (падающие звезды)
       for (let i = shootingStars.length - 1; i >= 0; i--) {
         const ms = shootingStars[i];
         const tailX = ms.x - Math.cos(ms.angle) * ms.length;
@@ -1197,14 +1197,14 @@
         ctx.save();
         ctx.globalAlpha = ms.opacity;
         const sGrad = ctx.createLinearGradient(tailX, tailY, ms.x, ms.y);
-        sGrad.addColorStop(0, 'rgba(0, 240, 255, 0)');
-        sGrad.addColorStop(0.7, 'rgba(56, 189, 248, 0.6)');
+        sGrad.addColorStop(0, 'rgba(56, 189, 248, 0)');
+        sGrad.addColorStop(0.7, 'rgba(255, 255, 255, 0.6)');
         sGrad.addColorStop(1, '#FFFFFF');
 
         ctx.strokeStyle = sGrad;
-        ctx.lineWidth = 2.5;
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = '#00F0FF';
+        ctx.lineWidth = 1.8;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = '#38BDF8';
 
         ctx.beginPath();
         ctx.moveTo(tailX, tailY);
@@ -1219,7 +1219,7 @@
         if (ms.opacity <= 0) shootingStars.splice(i, 1);
       }
 
-      // Звёздочки
+      // 4. Звездочки
       for (let i = 0; i < stars.length; i++) {
         const s = stars[i];
         s.alpha += s.delta;
@@ -1229,17 +1229,7 @@
         if (s.x < 0) s.x = width; if (s.x > width) s.x = 0;
         if (s.y < 0) s.y = height; if (s.y > height) s.y = 0;
 
-        if (s.isSpike) {
-          drawSpikeStar(s.x, s.y, s.size, s.color, Math.max(0.2, Math.min(1, s.alpha)));
-        } else {
-          ctx.save();
-          ctx.globalAlpha = Math.max(0.15, Math.min(1, s.alpha));
-          ctx.fillStyle = s.color;
-          ctx.beginPath();
-          ctx.arc(s.x, s.y, s.size * 0.45, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.restore();
-        }
+        drawSoftStar(s.x, s.y, s.size, s.color, Math.max(0.15, Math.min(1, s.alpha)), s.hasRays);
       }
 
       requestAnimationFrame(renderCosmos);
@@ -1298,7 +1288,7 @@
       if (mobileMenu) mobileMenu.classList.add('hidden');
     }
 
-    // 9. СТАБИЛЬНАЯ КНОПКА «НАВЕРХ»
+    // Кнопка «Наверх»
     const backToTopBtn = document.getElementById('back-to-top');
 
     window.addEventListener('scroll', () => {
@@ -1326,22 +1316,22 @@
       localStorage.setItem('accessibleMode', isAcc ? '1' : '0');
     });
 
-    // 10. Перевод (3 языка)
+    // Перевод (3 языка)
     const translations = {
       ru: {
         bvi: "Версия для слабовидящих",
         top_socials: "Мы в соцсетях:",
-        sublogo: "Частная инновационная школа & сад"
+        sublogo: "Частная школа & сад"
       },
       kz: {
         bvi: "Нашар көретіндерге арналған нұсқа",
         top_socials: "Біз әлеуметтік желілерде:",
-        sublogo: "Жеке инновациялық мектеп & балабақша"
+        sublogo: "Жеке мектеп & бақша"
       },
       en: {
         bvi: "Accessibility Mode",
         top_socials: "Follow us:",
-        sublogo: "Private Innovative School & Kindergarten"
+        sublogo: "Private School & Kindergarten"
       }
     };
 
