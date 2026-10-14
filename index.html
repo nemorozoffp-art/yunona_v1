@@ -66,7 +66,7 @@
       box-shadow: none !important;
       text-shadow: none !important;
     }
-    body.accessible-mode #stars-canvas {
+    body.accessible-mode #cosmos-canvas {
       display: none !important;
     }
     body.accessible-mode .gold-text-gradient {
@@ -79,8 +79,8 @@
 </head>
 <body class="bg-brand-dark text-slate-100 font-sans antialiased selection:bg-brand-gold selection:text-black relative overflow-x-hidden">
 
-  <!-- ЖИВОЙ ХОЛСТ: КРИСТАЛЬНО-БЕЛЫЕ И ЗОЛОТЫЕ ЗВЁЗДЫ -->
-  <canvas id="stars-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+  <!-- ЖИВОЙ КОСМИЧЕСКИЙ CANVAS: СВЕРХНОВАЯ, ПАДАЮЩИЕ ЗВЕЗДЫ И 4-ЛУЧЕВЫЕ ЗВЁЗДОЧКИ -->
+  <canvas id="cosmos-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
 
   <!-- ВЕРХНЯЯ СЛУЖЕБНАЯ ПАНЕЛЬ -->
   <div class="relative z-40 border-b border-white/10 bg-black/60 backdrop-blur-md py-2 px-3 sm:px-6 text-xs">
@@ -116,7 +116,7 @@
           <span class="text-slate-600">|</span>
           <a href="https://www.tiktok.com/@yunona_kz" target="_blank" class="hover:text-cyan-400 flex items-center gap-1 transition">
             <svg class="w-3 h-3 fill-current text-cyan-400" viewBox="0 0 24 24">
-              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.35 0 .69.07 1 .19V9.52a6.34 6.34 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.78a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.08a8.16 8.16 0 0 0 4.91 1.63v-3.5a4.86 4.86 0 0 1-1-.52z"/>
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.35 0 .69.07 1 .19V9.52a6.34 6.34 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.78a6.34 6.34 0 0 0 6.34 6.34 6.34 0 0 0 6.34-6.34V9.08a8.16 8.16 0 0 0 4.91 1.63v-3.5a4.86 4.86 0 0 1-1-.52z"/>
             </svg> TikTok
           </a>
           <span class="text-slate-600">|</span>
@@ -183,7 +183,6 @@
   <!-- 1. HERO SECTION -->
   <section class="relative min-h-[80vh] sm:min-h-[85vh] flex items-center justify-center overflow-hidden px-4 py-16 sm:py-24 z-10">
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.12)_0%,transparent_65%)] pointer-events-none"></div>
-    <div class="absolute -top-40 -right-40 w-72 sm:w-96 h-72 sm:h-96 bg-brand-gold/10 rounded-full blur-3xl pointer-events-none"></div>
 
     <div class="relative z-10 max-w-5xl mx-auto text-center">
       <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-goldLight text-xs sm:text-sm font-medium mb-6 sm:mb-8 max-w-[95%]">
@@ -383,7 +382,7 @@
               <a href="https://www.tiktok.com/@yunona_kz" target="_blank" class="p-3 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between hover:border-cyan-400/50 transition">
                 <span class="text-xs sm:text-sm font-medium flex items-center gap-2">
                   <svg class="w-4 h-4 fill-current text-cyan-400" viewBox="0 0 24 24">
-                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89c.35 0 .69.07 1 .19V9.52a6.34 6.34 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.78a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.08a8.16 8.16 0 0 0 4.91 1.63v-3.5a4.86 4.86 0 0 1-1-.52z"/>
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.35 0 .69.07 1 .19V9.52a6.34 6.34 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.78a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.08a8.16 8.16 0 0 0 4.91 1.63v-3.5a4.86 4.86 0 0 1-1-.52z"/>
                   </svg>
                   TikTok: @yunona_kz
                 </span>
@@ -443,7 +442,7 @@
     </div>
   </section>
 
-  <!-- АККУРАТНЫЙ И КОМПАКТНЫЙ ПОДВАЛ -->
+  <!-- КОМПАКТНЫЙ ПОДВАЛ -->
   <footer id="footer-section" class="relative z-10 border-t border-brand-gold/20 bg-black/95 pt-10 pb-10 px-4 text-xs text-slate-400">
     <div class="max-w-7xl mx-auto">
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 pb-8 border-b border-white/10">
@@ -520,7 +519,7 @@
         </div>
       </div>
 
-      <!-- Нижняя строка -->
+      <!-- Нижняя строка: Юридические надписи + IT Life -->
       <div class="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left text-slate-500">
         <div>
           <p>© 2026 ЧИШ «ЮНОНА». Все права защищены.</p>
@@ -544,8 +543,8 @@
     </div>
   </footer>
 
-  <!-- СТАБИЛЬНАЯ ПРИПОДНЯТАЯ КНОПКА «НАВЕРХ» -->
-  <button id="back-to-top" aria-label="Подняться вверх" class="fixed bottom-8 right-6 z-50 p-3 sm:p-3.5 rounded-full bg-brand-card/95 text-brand-gold border border-brand-gold/50 shadow-2xl shadow-black hover:bg-brand-gold hover:text-black transition-all duration-300 transform opacity-0 translate-y-10 pointer-events-none group hover:scale-110">
+  <!-- КНОПКА «НАВЕРХ» ВЫНЕСЕНА НАЛЕВО: 100% ГАРАНТИЯ ОТСУТСТВИЯ НАЛОЖЕНИЯ -->
+  <button id="back-to-top" aria-label="Подняться вверх" class="fixed bottom-8 left-6 z-50 p-3 sm:p-3.5 rounded-full bg-brand-card/95 text-brand-gold border border-brand-gold/50 shadow-2xl shadow-black hover:bg-brand-gold hover:text-black transition-all duration-300 transform opacity-0 translate-y-10 pointer-events-none group hover:scale-110">
     <i data-lucide="chevron-up" class="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]"></i>
   </button>
 
@@ -553,10 +552,10 @@
   <script>
     lucide.createIcons();
 
-    // ==========================================
-    // КРИСТАЛЬНО-БЕЛЫЕ И ЗОЛОТЫЕ ЗВЁЗДЫ (КРУПНЫЕ И МЕРЦАЮЩИЕ)
-    // ==========================================
-    const canvas = document.getElementById('stars-canvas');
+    // =========================================================================
+    // ЖИВОЙ КОСМИЧЕСКИЙ CANVAS: СВЕРХНОВАЯ + МЕТЕОРЫ + 4-ЛУЧЕВЫЕ ЗВЁЗДОЧКИ
+    // =========================================================================
+    const canvas = document.getElementById('cosmos-canvas');
     const ctx = canvas.getContext('2d');
     let width = canvas.width = window.innerWidth;
     let height = canvas.height = window.innerHeight;
@@ -566,44 +565,183 @@
       height = canvas.height = window.innerHeight;
     });
 
+    // 1. Создание массива настоящих мерцающих звёздочек
     const stars = [];
-    const starCount = Math.min(Math.floor(window.innerWidth / 10), 140);
-
-    // Палитра: доминируют кристально-белые и золотые искры
-    const starColors = [
-      '#FFFFFF', '#FFFFFF', '#FFFFFF', // Кристально-белые
-      '#E0F2FE',                       // Алмазно-голубоватый
-      '#FFF3C4', '#FDE047',            // Яркое золото
-      '#D4AF37'                        // Классическое золото Юноны
-    ];
+    const starCount = Math.min(Math.floor(window.innerWidth / 14), 85);
+    const starColors = ['#FFFFFF', '#E0F2FE', '#FFF4CC', '#FDE047', '#D4AF37'];
 
     for (let i = 0; i < starCount; i++) {
       stars.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        radius: Math.random() * 1.6 + 1.2, // Увеличенный заметный размер
+        size: Math.random() * 5 + 3,       // размер лучей
         alpha: Math.random() * 0.7 + 0.3,
-        delta: (Math.random() * 0.025 + 0.01) * (Math.random() > 0.5 ? 1 : -1),
+        delta: (Math.random() * 0.025 + 0.008) * (Math.random() > 0.5 ? 1 : -1),
         color: starColors[Math.floor(Math.random() * starColors.length)],
-        vx: (Math.random() - 0.5) * 0.12,
-        vy: (Math.random() - 0.5) * 0.12,
-        isBright: Math.random() > 0.65 // Часть звезд имеют алмазный ореол
+        vx: (Math.random() - 0.5) * 0.1,
+        vy: (Math.random() - 0.5) * 0.1,
+        isSpike: Math.random() > 0.35      // 4-лучевая звезда или яркая искра
       });
     }
 
-    function renderStars() {
+    // 2. Большая звезда-сверхновая (Supernova Star) как на картинке
+    const supernova = {
+      xRatio: 0.75, // правее от центра в шапке
+      y: 190,
+      baseRadius: 18,
+      pulse: 0,
+      pulseSpeed: 0.03
+    };
+
+    // 3. Падающие звёзды (Shooting Stars / Метеоры)
+    const shootingStars = [];
+    function spawnShootingStar() {
+      shootingStars.push({
+        x: Math.random() * width * 0.8,
+        y: Math.random() * (height * 0.4),
+        length: Math.random() * 120 + 80,
+        speed: Math.random() * 8 + 12,
+        angle: Math.PI / 7, // пологий наклон как на референсе
+        opacity: 1,
+        fadeSpeed: 0.02
+      });
+    }
+    // Рождение метеора каждые 4-7 секунд
+    setInterval(() => {
+      if (Math.random() > 0.3) spawnShootingStar();
+    }, 4500);
+
+    // Функция рисования 4-лучевой мерцающей звёздочки
+    function drawSpikeStar(x, y, radius, color, alpha) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = color;
+      ctx.strokeStyle = color;
+
+      // Горизонтальный и вертикальный вытянутые лучи
+      ctx.beginPath();
+      ctx.moveTo(x - radius * 2.2, y);
+      ctx.quadraticCurveTo(x, y, x, y - radius * 2.2);
+      ctx.quadraticCurveTo(x, y, x + radius * 2.2, y);
+      ctx.quadraticCurveTo(x, y, x, y + radius * 2.2);
+      ctx.quadraticCurveTo(x, y, x - radius * 2.2, y);
+      ctx.fill();
+
+      // Центральное сверкающее ядро
+      ctx.beginPath();
+      ctx.arc(x, y, radius * 0.5, 0, Math.PI * 2);
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    function renderCosmos() {
       ctx.clearRect(0, 0, width, height);
 
+      // --- А. СВЕТЯЩАЯСЯ ДУГА ГОРИЗОНТА (КАК НА РЕФЕРЕНСЕ) ---
+      const supernovaX = width * supernova.xRatio;
+      ctx.save();
+      ctx.beginPath();
+      ctx.ellipse(width * 0.55, 300, width * 0.65, 140, -Math.PI / 25, 0, Math.PI * 2);
+      const arcGrad = ctx.createLinearGradient(0, 200, width, 300);
+      arcGrad.addColorStop(0, 'rgba(0, 240, 255, 0)');
+      arcGrad.addColorStop(0.5, 'rgba(56, 189, 248, 0.45)');
+      arcGrad.addColorStop(0.75, 'rgba(212, 175, 55, 0.35)');
+      arcGrad.addColorStop(1, 'rgba(16, 185, 129, 0)');
+      ctx.strokeStyle = arcGrad;
+      ctx.lineWidth = 3.5;
+      ctx.shadowBlur = 18;
+      ctx.shadowColor = '#38BDF8';
+      ctx.stroke();
+      ctx.restore();
+
+      // --- Б. БОЛЬШАЯ СВЕРХНОВАЯ ЗВЕЗДА С ЛУЧАМИ (SUPERNOVA) ---
+      supernova.pulse += supernova.pulseSpeed;
+      const currentRadius = supernova.baseRadius + Math.sin(supernova.pulse) * 4;
+      
+      ctx.save();
+      // Мягкий рассеянный ореол
+      const glowGrad = ctx.createRadialGradient(supernovaX, supernova.y, 2, supernovaX, supernova.y, 110);
+      glowGrad.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
+      glowGrad.addColorStop(0.15, 'rgba(56, 189, 248, 0.7)');
+      glowGrad.addColorStop(0.5, 'rgba(37, 99, 235, 0.25)');
+      glowGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = glowGrad;
+      ctx.beginPath();
+      ctx.arc(supernovaX, supernova.y, 110, 0, Math.PI * 2);
+      ctx.fill();
+
+      // 8 длинных острых дифракционных лучей
+      ctx.strokeStyle = '#FFFFFF';
+      ctx.shadowBlur = 15;
+      ctx.shadowColor = '#38BDF8';
+      const rayLen = 95 + Math.sin(supernova.pulse) * 15;
+
+      // Главные 4 луча (крест)
+      ctx.lineWidth = 2.2;
+      ctx.beginPath();
+      ctx.moveTo(supernovaX - rayLen * 1.3, supernova.y); ctx.lineTo(supernovaX + rayLen * 1.3, supernova.y);
+      ctx.moveTo(supernovaX, supernova.y - rayLen * 1.3); ctx.lineTo(supernovaX, supernova.y + rayLen * 1.3);
+      ctx.stroke();
+
+      // Диагональные лучи
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.moveTo(supernovaX - rayLen * 0.75, supernova.y - rayLen * 0.75); ctx.lineTo(supernovaX + rayLen * 0.75, supernova.y + rayLen * 0.75);
+      ctx.moveTo(supernovaX - rayLen * 0.75, supernova.y + rayLen * 0.75); ctx.lineTo(supernovaX + rayLen * 0.75, supernova.y - rayLen * 0.75);
+      ctx.stroke();
+
+      // Алмазное центральное ядро
+      ctx.beginPath();
+      ctx.arc(supernovaX, supernova.y, currentRadius * 0.6, 0, Math.PI * 2);
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fill();
+      ctx.restore();
+
+      // --- В. ПАДАЮЩИЕ ЗВЁЗДЫ (МЕТЕОРЫ) ---
+      for (let i = shootingStars.length - 1; i >= 0; i--) {
+        const ms = shootingStars[i];
+        const tailX = ms.x - Math.cos(ms.angle) * ms.length;
+        const tailY = ms.y - Math.sin(ms.angle) * ms.length;
+
+        ctx.save();
+        ctx.globalAlpha = ms.opacity;
+        const sGrad = ctx.createLinearGradient(tailX, tailY, ms.x, ms.y);
+        sGrad.addColorStop(0, 'rgba(0, 240, 255, 0)');
+        sGrad.addColorStop(0.7, 'rgba(56, 189, 248, 0.6)');
+        sGrad.addColorStop(1, '#FFFFFF');
+
+        ctx.strokeStyle = sGrad;
+        ctx.lineWidth = 2.5;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = '#00F0FF';
+
+        ctx.beginPath();
+        ctx.moveTo(tailX, tailY);
+        ctx.lineTo(ms.x, ms.y);
+        ctx.stroke();
+        ctx.restore();
+
+        // Перемещение метеора
+        ms.x += Math.cos(ms.angle) * ms.speed;
+        ms.y += Math.sin(ms.angle) * ms.speed;
+        ms.opacity -= ms.fadeSpeed;
+
+        if (ms.opacity <= 0) {
+          shootingStars.splice(i, 1);
+        }
+      }
+
+      // --- Г. РОССЫПЬ 4-ЛУЧЕВЫХ МЕРЦАЮЩИХ ЗВЁЗДОЧЕК ---
       for (let i = 0; i < stars.length; i++) {
         const s = stars[i];
 
-        // Пульсация яркости
         s.alpha += s.delta;
         if (s.alpha >= 1 || s.alpha <= 0.2) {
           s.delta *= -1;
         }
 
-        // Плавное медленное движение
         s.x += s.vx;
         s.y += s.vy;
         if (s.x < 0) s.x = width;
@@ -611,25 +749,22 @@
         if (s.y < 0) s.y = height;
         if (s.y > height) s.y = 0;
 
-        ctx.save();
-        ctx.globalAlpha = Math.max(0.15, Math.min(1, s.alpha));
-        ctx.fillStyle = s.color;
-
-        // Неоновый ореол для сияния
-        if (s.isBright) {
-          ctx.shadowBlur = s.radius > 2 ? 10 : 6;
-          ctx.shadowColor = s.color === '#FFFFFF' ? '#E0F2FE' : '#FDE047';
+        if (s.isSpike) {
+          drawSpikeStar(s.x, s.y, s.size, s.color, Math.max(0.2, Math.min(1, s.alpha)));
+        } else {
+          ctx.save();
+          ctx.globalAlpha = Math.max(0.15, Math.min(1, s.alpha));
+          ctx.fillStyle = s.color;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.size * 0.45, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
         }
-
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
       }
 
-      requestAnimationFrame(renderStars);
+      requestAnimationFrame(renderCosmos);
     }
-    renderStars();
+    renderCosmos();
 
     // ==========================================
     // YOUTUBE ПЛЕЕР (НАВЕДЕНИЕ МЫШИ)
@@ -697,7 +832,7 @@
     }
 
     // ==========================================
-    // СТАБИЛЬНАЯ КНОПКА «НАВЕРХ» (БЕЗ ВЫЛЕТОВ ВВЕРХ)
+    // КНОПКА «НАВЕРХ» (ВЫНЕСЕНА ВЛЕВО ДЛЯ ИСКЛЮЧЕНИЯ НАЛОЖЕНИЯ)
     // ==========================================
     const backToTopBtn = document.getElementById('back-to-top');
 
