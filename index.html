@@ -4,11 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ЧИШ ЮНОНА | Частная Инновационная Школа и Детский Сад</title>
-
-  <!-- Иконка во вкладке браузера (Favicon ЮНОНА) -->
-<link rel="icon" type="image/jpeg" href="logo.jpg">
-<link rel="apple-touch-icon" href="logo.jpg">
   
+  <!-- Иконка во вкладке браузера (Favicon) -->
+  <link rel="icon" type="image/jpeg" href="logo.jpg">
+  <link rel="shortcut icon" type="image/jpeg" href="logo.jpg">
+  <link rel="apple-touch-icon" href="logo.jpg">
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts & Lucide Icons -->
@@ -100,7 +101,7 @@
 </head>
 <body class="bg-brand-dark text-slate-100 font-sans antialiased selection:bg-brand-gold selection:text-black relative overflow-x-hidden">
 
-  <!-- ЖИВОЙ КОСМИЧЕСКИЙ ХОЛСТ: ЭЛЕГАНТНОЕ НОЧНОЕ НЕБО -->
+  <!-- ЖИВОЙ КОСМИЧЕСКИЙ ХОЛСТ: ЭЛЕГАНТНОЕ НЕБО -->
   <canvas id="cosmos-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
 
   <!-- ВЕРХНЯЯ СЛУЖЕБНАЯ ПАНЕЛЬ -->
@@ -122,7 +123,7 @@
 
       <div class="w-full md:w-auto flex flex-wrap justify-center md:justify-end items-center gap-3 sm:gap-5 text-slate-300">
         <div class="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs flex-wrap justify-center">
-          <span class="text-brand-gold font-semibold flex items-center gap-1" data-key="top_socials">
+          <span class="text-brand-gold font-semibold flex items-center gap-1">
             <i data-lucide="share-2" class="w-3 h-3 text-brand-gold"></i> Мы в соцсетях:
           </span>
           <a href="https://www.instagram.com/yunona_kz/" target="_blank" class="hover:text-brand-gold flex items-center gap-1 transition">
@@ -135,7 +136,7 @@
           <span class="text-slate-600">|</span>
           <a href="https://www.tiktok.com/@yunona_kz" target="_blank" class="hover:text-cyan-400 flex items-center gap-1 transition">
             <svg class="w-3 h-3 fill-current text-cyan-400" viewBox="0 0 24 24">
-              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89c.35 0 .69.07 1 .19V9.52a6.34 6.34 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.78a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.08a8.16 8.16 0 0 0 4.91 1.63v-3.5a4.86 4.86 0 0 1-1-.52z"/>
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.89 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.35 0 .69.07 1 .19V9.52a6.34 6.34 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.78a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.08a8.16 8.16 0 0 0 4.91 1.63v-3.5a4.86 4.86 0 0 1-1-.52z"/>
             </svg> TikTok
           </a>
           <span class="text-slate-600">|</span>
@@ -153,35 +154,33 @@
     </div>
   </aside>
 
-  <!-- ШАПКА САЙТА: АККУРАТНЫЙ РАЗМЕР КНОПКИ И ЗАЩИТА ОТ ВЫПАДЕНИЯ -->
+  <!-- ШАПКА САЙТА -->
   <header class="sticky top-0 z-40 bg-brand-dark/95 backdrop-blur-xl border-b border-brand-gold/20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-2">
       
-      <!-- ЛОГОТИП -->
       <a href="#" class="flex items-center gap-2 sm:gap-3 group shrink-0">
         <div class="logo-container relative w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-brand-gold/40 flex items-center justify-center overflow-hidden group-hover:border-brand-gold transition duration-300 shrink-0">
           <img src="logo.jpg" alt="ЧИШ ЮНОНА" class="logo-image w-full h-full object-cover scale-125 transform group-hover:scale-130 transition duration-300">
         </div>
         <div class="leading-tight">
           <span class="block font-title text-base sm:text-lg tracking-[0.18em] font-extrabold gold-text-gradient">ЮНОНА</span>
-          <span class="block text-[8px] sm:text-[9px] tracking-wider uppercase text-slate-400 font-medium leading-tight" data-key="sublogo">
+          <span class="block text-[8px] sm:text-[9px] tracking-wider uppercase text-slate-400 font-medium leading-tight">
             Частная школа &amp; сад
           </span>
         </div>
       </a>
 
-      <!-- МЕНЮ: КОМПАКТНЫЕ ПАДДИНГИ И ШРИФТЫ ДЛЯ 100% ВМЕСТИМОСТИ -->
       <nav class="hidden xl:flex items-center gap-3.5 2xl:gap-5 text-xs 2xl:text-sm font-medium shrink">
         <a href="#about" class="hover:text-brand-gold transition whitespace-nowrap">О школе</a>
         <a href="#day-schedule" class="hover:text-brand-gold transition whitespace-nowrap">День ученика</a>
         <a href="#branches" class="hover:text-brand-gold transition whitespace-nowrap">Школа и Сад</a>
+        <a href="#menu-section" class="hover:text-brand-gold transition whitespace-nowrap">Питание</a>
+        <a href="#safety" class="hover:text-brand-gold transition whitespace-nowrap">Безопасность</a>
         <a href="#projects" class="hover:text-brand-gold transition whitespace-nowrap">Проекты детей</a>
         <a href="#virtual-tour" class="hover:text-brand-gold transition whitespace-nowrap">Территория</a>
-        <a href="#calculator" class="hover:text-brand-gold transition whitespace-nowrap">Калькулятор</a>
         <a href="#contacts" class="hover:text-brand-gold transition whitespace-nowrap">Контакты</a>
       </nav>
 
-      <!-- АККУРАТНАЯ КНОПКА ЗАПИСИ (НЕ ВЫХОДИТ ЗА ГРАНИЦЫ ЭКРАНА) -->
       <div class="flex items-center gap-2 shrink-0">
         <a href="#lead-form" class="hidden sm:inline-flex items-center justify-center px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs font-semibold rounded-full bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-gold text-black hover:opacity-95 shadow-md shadow-brand-gold/20 transition-all whitespace-nowrap">
           <span class="hidden 2xl:inline">Записаться на экскурсию</span>
@@ -198,6 +197,8 @@
       <a href="#about" onclick="closeMobileMenu()" class="block hover:text-brand-gold py-1 border-b border-white/5">О школе</a>
       <a href="#day-schedule" onclick="closeMobileMenu()" class="block hover:text-brand-gold py-1 border-b border-white/5">День ученика</a>
       <a href="#branches" onclick="closeMobileMenu()" class="block hover:text-brand-gold py-1 border-b border-white/5">Школа и Сад</a>
+      <a href="#menu-section" onclick="closeMobileMenu()" class="block hover:text-brand-gold py-1 border-b border-white/5">Питание шеф-повара</a>
+      <a href="#safety" onclick="closeMobileMenu()" class="block hover:text-brand-gold py-1 border-b border-white/5">Безопасность</a>
       <a href="#projects" onclick="closeMobileMenu()" class="block hover:text-brand-gold py-1 border-b border-white/5">Проекты детей</a>
       <a href="#virtual-tour" onclick="closeMobileMenu()" class="block hover:text-brand-gold py-1 border-b border-white/5">Территория</a>
       <a href="#calculator" onclick="closeMobileMenu()" class="block hover:text-brand-gold py-1 border-b border-white/5">Калькулятор</a>
@@ -356,6 +357,47 @@
     </div>
   </section>
 
+  <!-- НОВЫЙ БЛОК: ИНТЕРАКТИВНОЕ МЕНЮ ШЕФ-ПОВАРА -->
+  <section id="menu-section" class="relative z-10 py-16 sm:py-20 px-4 bg-brand-card/50 backdrop-blur-md border-y border-white/5">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <span class="text-brand-gold text-xs font-mono uppercase tracking-widest font-semibold">Здоровое питание</span>
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-white font-title mt-2">Эко-меню от нашего шеф-повара</h2>
+        <p class="text-xs sm:text-base text-slate-400 mt-2">3-разовое горячее питание из натуральных продуктов. Индивидуальный рацион при аллергиях.</p>
+      </div>
+
+      <!-- Кнопки дней недели -->
+      <div class="flex justify-center gap-2 overflow-x-auto pb-4 mb-8 font-mono text-xs">
+        <button onclick="setMenuDay(0)" class="menu-day-btn active px-4 py-2 rounded-xl bg-brand-gold text-black font-bold whitespace-nowrap">Понедельник</button>
+        <button onclick="setMenuDay(1)" class="menu-day-btn px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:border-brand-gold whitespace-nowrap">Вторник</button>
+        <button onclick="setMenuDay(2)" class="menu-day-btn px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:border-brand-gold whitespace-nowrap">Среда</button>
+        <button onclick="setMenuDay(3)" class="menu-day-btn px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:border-brand-gold whitespace-nowrap">Четверг</button>
+        <button onclick="setMenuDay(4)" class="menu-day-btn px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:border-brand-gold whitespace-nowrap">Пятница</button>
+      </div>
+
+      <!-- Карточка рациона на день -->
+      <div class="glass-box p-6 sm:p-8 rounded-3xl border border-brand-gold/30 grid sm:grid-cols-3 gap-6 text-xs sm:text-sm">
+        <div class="p-4 rounded-2xl bg-black/40 border border-white/5">
+          <span class="px-2.5 py-0.5 rounded bg-brand-gold/20 text-brand-gold font-mono font-bold text-[10px] uppercase block w-max mb-2">08:45 • Завтрак</span>
+          <h4 id="menu-breakfast-title" class="font-bold text-white text-base mb-1">Сырники из фермерского творога</h4>
+          <p id="menu-breakfast-desc" class="text-slate-400 text-xs">С ягодным натуральным кули, чай с алматинскими травами и свежее яблоко.</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-black/40 border border-brand-gold/30">
+          <span class="px-2.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-mono font-bold text-[10px] uppercase block w-max mb-2">13:30 • Обед</span>
+          <h4 id="menu-lunch-title" class="font-bold text-white text-base mb-1">Суп-пюре из брокколи &amp; Индейка</h4>
+          <p id="menu-lunch-desc" class="text-slate-400 text-xs">Нежное су-вид филе индейки с киноа и овощами на пару, домашний компот без сахара.</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-black/40 border border-white/5">
+          <span class="px-2.5 py-0.5 rounded bg-pink-500/20 text-pink-300 font-mono font-bold text-[10px] uppercase block w-max mb-2">17:30 • Полдник</span>
+          <h4 id="menu-snack-title" class="font-bold text-white text-base mb-1">Домашний пирог с тыквой</h4>
+          <p id="menu-snack-desc" class="text-slate-400 text-xs">Свежая бездрожжевая выпечка из школьной пекарни, теплое какао или молоко.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- БЛОК ДИРЕКТОРА С ГОЛОСОВЫМ ПРИВЕТСТВИЕМ -->
   <section id="director" class="relative z-10 py-16 sm:py-20 px-4">
     <div class="max-w-6xl mx-auto glass-box rounded-3xl p-6 sm:p-12 relative overflow-hidden">
@@ -410,6 +452,51 @@
               <span>Лицензированное качественное образование</span>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- НОВЫЙ БЛОК: БЕЗОПАСНОСТЬ 360° -->
+  <section id="safety" class="relative z-10 py-16 sm:py-20 px-4">
+    <div class="max-w-6xl mx-auto glass-box rounded-3xl p-6 sm:p-10 border border-brand-gold/30">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <span class="text-brand-gold text-xs font-mono uppercase tracking-widest font-semibold">Спокойствие родителей</span>
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-white font-title mt-2">Стандарт безопасности 360°</h2>
+        <p class="text-xs sm:text-base text-slate-400 mt-2">Кампус спроектирован так, чтобы ребенок находился под непрерывной заботой и контролем.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-5 text-center sm:text-left">
+        <div class="p-5 rounded-2xl bg-black/40 border border-white/5">
+          <div class="w-10 h-10 rounded-xl bg-brand-gold/10 text-brand-gold flex items-center justify-center mb-3 mx-auto sm:mx-0">
+            <i data-lucide="shield" class="w-5 h-5"></i>
+          </div>
+          <h4 class="font-bold text-white text-base mb-1">Закрытый периметр</h4>
+          <p class="text-slate-400 text-xs">Охраняемая огороженная территория с пропускным режимом без доступа посторонних.</p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-black/40 border border-white/5">
+          <div class="w-10 h-10 rounded-xl bg-brand-gold/10 text-brand-gold flex items-center justify-center mb-3 mx-auto sm:mx-0">
+            <i data-lucide="video" class="w-5 h-5"></i>
+          </div>
+          <h4 class="font-bold text-white text-base mb-1">Видеонаблюдение 24/7</h4>
+          <p class="text-slate-400 text-xs">Камеры во всех коридорах, спортзале, столовой и по всей игровой площадке.</p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-black/40 border border-white/5">
+          <div class="w-10 h-10 rounded-xl bg-brand-gold/10 text-brand-gold flex items-center justify-center mb-3 mx-auto sm:mx-0">
+            <i data-lucide="heart-pulse" class="w-5 h-5"></i>
+          </div>
+          <h4 class="font-bold text-white text-base mb-1">Медицинский блок</h4>
+          <p class="text-slate-400 text-xs">Штатный врач и медсестра проводят утренний фильтр здоровья и следят за самочувствием.</p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-black/40 border border-white/5">
+          <div class="w-10 h-10 rounded-xl bg-brand-gold/10 text-brand-gold flex items-center justify-center mb-3 mx-auto sm:mx-0">
+            <i data-lucide="bus" class="w-5 h-5"></i>
+          </div>
+          <h4 class="font-bold text-white text-base mb-1">Школьный трансфер</h4>
+          <p class="text-slate-400 text-xs">Комфортабельные автобусы с опытными водителями и сопровождающим куратором от дома до школы.</p>
         </div>
       </div>
     </div>
@@ -539,7 +626,6 @@
         </div>
       </div>
 
-      <!-- Итог калькулятора -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 pt-6 border-t border-white/10 font-mono text-center sm:text-left">
         <div class="p-4 rounded-2xl bg-black/40 border border-white/5">
           <span class="text-xs text-slate-400 block">Сэкономленное личное время родителей:</span>
@@ -592,7 +678,6 @@
           </div>
         </div>
 
-        <!-- Итог подбора -->
         <div class="p-4 rounded-2xl bg-black/60 border border-brand-gold/30 flex flex-col sm:flex-row justify-between items-center gap-4">
           <div>
             <span class="text-[11px] font-mono text-slate-400 block">Рекомендованный маршрут:</span>
@@ -723,7 +808,6 @@
   <footer id="footer-section" class="relative z-10 border-t border-brand-gold/20 bg-black/95 pt-10 pb-12 px-4 text-xs text-slate-400">
     <div class="max-w-7xl mx-auto">
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 pb-8 border-b border-white/10">
-        <!-- Колонка 1 -->
         <div class="space-y-3">
           <div class="flex items-center gap-3">
             <div class="logo-container relative w-10 h-10 rounded-full border border-brand-gold/40 flex items-center justify-center overflow-hidden">
@@ -739,7 +823,6 @@
           </p>
         </div>
 
-        <!-- Колонка 2 -->
         <div>
           <h4 class="text-white font-semibold text-sm mb-3 uppercase tracking-wider">Навигация</h4>
           <ul class="space-y-1.5">
@@ -751,7 +834,6 @@
           </ul>
         </div>
 
-        <!-- Колонка 3 -->
         <div>
           <h4 class="text-white font-semibold text-sm mb-3 uppercase tracking-wider">Документы и стандарты</h4>
           <ul class="space-y-1.5">
@@ -762,7 +844,6 @@
           </ul>
         </div>
 
-        <!-- Колонка 4 (СТАТИЧНЫЕ ДАННЫЕ ИЗ 2GIS) -->
         <div>
           <h4 class="text-white font-semibold text-sm mb-3 uppercase tracking-wider">Адрес и контакты</h4>
           <ul class="space-y-2.5">
@@ -796,14 +877,12 @@
         </div>
       </div>
 
-      <!-- Нижняя строка -->
       <div class="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left text-slate-500">
         <div>
           <p>© 2026 ЧИШ «ЮНОНА». Все права защищены.</p>
           <p class="text-[11px] text-slate-600 mt-0.5">Любое копирование материалов допускается только с разрешения администрации.</p>
         </div>
 
-        <!-- ПЛАШКА: IT LIFE & PAVLIKNEMOROZOFF -->
         <div class="flex items-center gap-3.5 px-4 py-2.5 rounded-2xl bg-white/[0.03] border border-brand-gold/30 hover:border-brand-gold/60 transition group">
           <div class="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></div>
           <div class="text-left leading-snug">
@@ -819,7 +898,7 @@
     </div>
   </footer>
 
-  <!-- КНОПКА «НАВЕРХ»: СТРОГО НАД ПЛАШКОЙ РАЗРАБОТЧИКА (БЕЗ НАЕЗДА) -->
+  <!-- КНОПКА «НАВЕРХ» -->
   <button id="back-to-top" aria-label="Подняться вверх" class="fixed bottom-36 sm:bottom-40 right-6 z-40 p-3 sm:p-3.5 rounded-full bg-brand-card/95 text-brand-gold border border-brand-gold/50 shadow-2xl shadow-black hover:bg-brand-gold hover:text-black transition-all duration-300 transform opacity-0 translate-y-10 pointer-events-none group hover:scale-110">
     <i data-lucide="chevron-up" class="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]"></i>
   </button>
@@ -828,7 +907,7 @@
   <script>
     lucide.createIcons();
 
-    // 1. ИНТЕРАКТИВНЫЙ ТАЙМЛАЙН ДНЯ
+    // 1. ТАЙМЛАЙН
     const dayData = [
       {
         badge: "08:30 – 09:00",
@@ -890,7 +969,68 @@
       document.getElementById('day-benefit').textContent = d.benefit;
     }
 
-    // 2. АУДИО-ГОЛОС ДИРЕКТОРА
+    // 2. ЭКО-МЕНЮ
+    const menuDays = [
+      {
+        bTitle: "Сырники из фермерского творога",
+        bDesc: "С ягодным натуральным кули, чай с алматинскими травами и свежее яблоко.",
+        lTitle: "Суп-пюре из брокколи & Индейка",
+        lDesc: "Нежное су-вид филе индейки с киноа и овощами на пару, домашний компот.",
+        sTitle: "Домашний пирог с тыквой",
+        sDesc: "Свежая бездрожжевая выпечка из школьной пекарни, теплое какао или молоко."
+      },
+      {
+        bTitle: "Овсяная каша с лесными ягодами",
+        bDesc: "На цельном или кокосовом молоке с медом и семенами чиа, тост с сыром.",
+        lTitle: "Чечевичный крем-суп & Лосось",
+        lDesc: "Стейк лосося на пару с бурым рисом и салатом из свежих огурцов и рукколы.",
+        sTitle: "Запеканка творожная со смородиной",
+        sDesc: "Нежный десерт с йогуртовым соусом и стаканом теплого ряженки."
+      },
+      {
+        bTitle: "Омлет со шпинатом и томатами",
+        bDesc: "Запеченный в пароконвектомате с сыром фета, цельнозерновой хлеб.",
+        lTitle: "Домашняя лапша из перепелки & Телятина",
+        lDesc: "Медальоны из телятины с запеченным картофелем по-деревенски, морс из клюквы.",
+        sTitle: "Печеное яблоко с грецким орехом",
+        sDesc: "Фруктовый десерт с корицей, злаковое печенье и ягодный отвар."
+      },
+      {
+        bTitle: "Блинчики со свежими фруктами",
+        bDesc: "На овсяной муке с натуральным медом, чай с шиповником и банан.",
+        lTitle: "Уха по-царски & Куриные кнели",
+        lDesc: "Нежные кнели из фермерской курицы с гречневой кашей и салатом Коул-слоу.",
+        sTitle: "Морковные маффины с изюмом",
+        sDesc: "Воздушные кексы без рафинированного сахара и теплое миндальное молоко."
+      },
+      {
+        bTitle: "Гранола с натуральным йогуртом",
+        bDesc: "Хрустящие хлопья со свежими фруктами и ягодами, чай с мятой.",
+        lTitle: "Борщ сибирский с фасолью & Говядина",
+        lDesc: "Томленая говядина со свежими овощами гриль и теплым ржаным тостом.",
+        sTitle: "Штрудель с алматинскими яблоками",
+        sDesc: "Ароматная выпечка с корицей, травяной чай и свежая груша."
+      }
+    ];
+
+    function setMenuDay(idx) {
+      document.querySelectorAll('.menu-day-btn').forEach((btn, i) => {
+        if (i === idx) {
+          btn.className = "menu-day-btn active px-4 py-2 rounded-xl bg-brand-gold text-black font-bold whitespace-nowrap";
+        } else {
+          btn.className = "menu-day-btn px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:border-brand-gold whitespace-nowrap";
+        }
+      });
+      const m = menuDays[idx];
+      document.getElementById('menu-breakfast-title').textContent = m.bTitle;
+      document.getElementById('menu-breakfast-desc').textContent = m.bDesc;
+      document.getElementById('menu-lunch-title').textContent = m.lTitle;
+      document.getElementById('menu-lunch-desc').textContent = m.lDesc;
+      document.getElementById('menu-snack-title').textContent = m.sTitle;
+      document.getElementById('menu-snack-desc').textContent = m.sDesc;
+    }
+
+    // 3. АУДИО ДИРЕКТОРА
     const dirAudio = document.getElementById('director-audio');
     const audioBtn = document.getElementById('audio-play-btn');
     const soundBars = document.getElementById('sound-bars');
@@ -919,7 +1059,7 @@
       lucide.createIcons();
     });
 
-    // 3. ВИРТУАЛЬНЫЙ ТУР
+    // 4. ТУР
     const tourData = [
       {
         tag: "Кабинет STEM & Робототехники",
@@ -972,7 +1112,7 @@
       document.getElementById('tour-img').src = t.img;
     }
 
-    // 4. ФИЛЬТРАЦИЯ ПРОЕКТОВ
+    // 5. ПРОЕКТЫ
     function filterProjects(cat) {
       document.querySelectorAll('.proj-btn').forEach(b => {
         b.classList.remove('bg-brand-gold', 'text-black', 'font-bold');
@@ -990,7 +1130,7 @@
       });
     }
 
-    // 5. КАЛЬКУЛЯТОР
+    // 6. КАЛЬКУЛЯТОР
     const tutorSlider = document.getElementById('tutor-slider');
     const hoursSlider = document.getElementById('hours-slider');
     const tutorVal = document.getElementById('tutor-val');
@@ -1009,7 +1149,7 @@
     hoursSlider.addEventListener('input', updateSavings);
     updateSavings();
 
-    // 6. КВИЗ
+    // 7. КВИЗ
     let quizState = {
       age: "2–6 лет (Сад)",
       focus: "IT & Роботы",
@@ -1045,9 +1185,7 @@
       }
     }
 
-    // =========================================================================
-    // 7. ЭЛЕГАНТНОЕ КОСМИЧЕСКОЕ НЕБО: ТОНКИЙ ГРАДИЕНТ, МЯГКИЕ ЗВЕЗДЫ И МЕТЕОРЫ
-    // =========================================================================
+    // 8. КОСМИЧЕСКИЙ CANVAS (ДЕЛИКАТНЫЕ ЗВЕЗДЫ)
     const canvas = document.getElementById('cosmos-canvas');
     const ctx = canvas.getContext('2d');
     let width = canvas.width = window.innerWidth;
@@ -1058,7 +1196,6 @@
       height = canvas.height = window.innerHeight;
     });
 
-    // Массив изящных звездочек
     const stars = [];
     const starCount = Math.min(Math.floor(window.innerWidth / 18), 75);
     const starColors = ['#FFFFFF', '#E0F2FE', '#FFF8DB', '#FDE047'];
@@ -1077,7 +1214,6 @@
       });
     }
 
-    // Мягкая звезда-сверхновая (без резких палок)
     const supernova = {
       xRatio: 0.82,
       y: 160,
@@ -1085,7 +1221,6 @@
       pulseSpeed: 0.025
     };
 
-    // Метеоры
     const shootingStars = [];
     function spawnShootingStar() {
       shootingStars.push({
@@ -1102,18 +1237,14 @@
       if (Math.random() > 0.4) spawnShootingStar();
     }, 5500);
 
-    // Функция отрисовки деликатных лучей звезды
     function drawSoftStar(x, y, size, color, alpha, hasRays) {
       ctx.save();
       ctx.globalAlpha = alpha;
-      
-      // Ядро
       ctx.beginPath();
       ctx.arc(x, y, size * 0.6, 0, Math.PI * 2);
       ctx.fillStyle = '#FFFFFF';
       ctx.fill();
 
-      // Нежные полупрозрачные лучи для избранных звезд
       if (hasRays) {
         ctx.strokeStyle = color;
         ctx.lineWidth = 0.8;
@@ -1129,7 +1260,6 @@
     function renderCosmos() {
       ctx.clearRect(0, 0, width, height);
 
-      // 1. Нежнейшая дуга горизонта
       const supernovaX = width * supernova.xRatio;
       ctx.save();
       ctx.beginPath();
@@ -1146,12 +1276,10 @@
       ctx.stroke();
       ctx.restore();
 
-      // 2. Кинематографичная Сверхновая (мягкое сияние)
       supernova.pulse += supernova.pulseSpeed;
       const glowScale = Math.sin(supernova.pulse) * 5;
       
       ctx.save();
-      // Глубокий рассеянный ореол
       const glowGrad = ctx.createRadialGradient(supernovaX, supernova.y, 1, supernovaX, supernova.y, 75 + glowScale);
       glowGrad.addColorStop(0, 'rgba(255, 255, 255, 0.85)');
       glowGrad.addColorStop(0.2, 'rgba(56, 189, 248, 0.4)');
@@ -1162,7 +1290,6 @@
       ctx.arc(supernovaX, supernova.y, 75 + glowScale, 0, Math.PI * 2);
       ctx.fill();
 
-      // Тонкие прозрачные оптические дифракционные иглы
       const rayLen = 55 + glowScale * 1.5;
       const rayGradH = ctx.createLinearGradient(supernovaX - rayLen, supernova.y, supernovaX + rayLen, supernova.y);
       rayGradH.addColorStop(0, 'rgba(255, 255, 255, 0)');
@@ -1185,14 +1312,12 @@
       ctx.lineTo(supernovaX, supernova.y + rayLen);
       ctx.stroke();
 
-      // Точечное ядро
       ctx.beginPath();
       ctx.arc(supernovaX, supernova.y, 3.5, 0, Math.PI * 2);
       ctx.fillStyle = '#FFFFFF';
       ctx.fill();
       ctx.restore();
 
-      // 3. Метеоры (падающие звезды)
       for (let i = shootingStars.length - 1; i >= 0; i--) {
         const ms = shootingStars[i];
         const tailX = ms.x - Math.cos(ms.angle) * ms.length;
@@ -1223,7 +1348,6 @@
         if (ms.opacity <= 0) shootingStars.splice(i, 1);
       }
 
-      // 4. Звездочки
       for (let i = 0; i < stars.length; i++) {
         const s = stars[i];
         s.alpha += s.delta;
@@ -1240,7 +1364,7 @@
     }
     renderCosmos();
 
-    // 8. YOUTUBE ПЛЕЕР
+    // 9. YOUTUBE
     let ytPlayer = null;
     let isYtReady = false;
     const vId = 'f4dKHRfvRDU';
@@ -1282,7 +1406,6 @@
       window.open(`https://www.youtube.com/watch?v=${vId}`, '_blank');
     }
 
-    // Мобильное меню
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     if (mobileMenuBtn && mobileMenu) {
@@ -1292,7 +1415,7 @@
       if (mobileMenu) mobileMenu.classList.add('hidden');
     }
 
-    // Кнопка «Наверх»
+    // 10. КНОПКА «НАВЕРХ»
     const backToTopBtn = document.getElementById('back-to-top');
 
     window.addEventListener('scroll', () => {
@@ -1312,7 +1435,6 @@
       });
     });
 
-    // Режим для слабовидящих
     const bviBtn = document.getElementById('toggle-accessible');
     bviBtn.addEventListener('click', () => {
       document.body.classList.toggle('accessible-mode');
@@ -1320,7 +1442,6 @@
       localStorage.setItem('accessibleMode', isAcc ? '1' : '0');
     });
 
-    // Перевод (3 языка)
     const translations = {
       ru: {
         bvi: "Версия для слабовидящих",
