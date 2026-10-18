@@ -12,13 +12,13 @@
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Fonts & Icons -->
+  <!-- Google Fonts & Lucide Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Montserrat:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- html2pdf.js для генерации PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-...
 
   <script>
     tailwind.config = {
@@ -37,6 +37,7 @@
           fontFamily: {
             title: ['Cinzel', 'serif'],
             sans: ['Montserrat', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
           }
         }
       }
@@ -55,7 +56,7 @@
 
     /* Полупрозрачные неоновые кнопки навигации */
     .btn-neon-prev {
-      background: rgba(15, 23, 42, 0.45);
+      background: rgba(15, 23, 42, 0.5);
       backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.15);
       color: #cbd5e1;
@@ -84,20 +85,35 @@
       transform: translateY(-2px);
     }
 
-    /* Стили для PDF */
-    .pdf-page {
-      width: 210mm;
-      min-height: 297mm;
-      padding: 15mm;
-      margin: 0 auto;
+    /* СТИЛИ ПРЕМИАЛЬНОГО БЛАНКА PDF (ЧЕТКИЙ ФОРМАТ А4) */
+    .pdf-sheet {
+      width: 794px;
+      height: 1123px;
+      max-height: 1123px;
+      padding: 38px 45px;
+      box-sizing: border-box;
       background: #080d16;
       color: #ffffff;
-      box-sizing: border-box;
       position: relative;
+      overflow: hidden;
+      font-family: 'Montserrat', sans-serif;
     }
     .pdf-break {
       page-break-after: always;
       break-after: page;
+    }
+    .gold-cert-frame {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border: 2px solid #D4AF37;
+      outline: 6px solid #0f172a;
+      box-shadow: 0 0 0 8px #D4AF37;
+      padding: 30px;
+      box-sizing: border-box;
+      display: flex;
+      flex-col;
+      justify-content: space-between;
     }
   </style>
 </head>
@@ -135,11 +151,11 @@
   </header>
 
   <!-- ОСНОВНОЙ КОНТЕНТ -->
-  <main class="relative z-10 flex-grow flex items-center justify-center p-4 sm:p-8 max-w-5xl mx-auto w-full">
+  <main class="relative z-10 flex-grow flex items-center justify-center p-4 sm:p-6 max-w-5xl mx-auto w-full">
 
     <!-- 1. ХАБ ВЫБОРА УРОВНЯ -->
-    <section id="screen-hub" class="w-full py-6">
-      <div class="text-center max-w-2xl mx-auto mb-10">
+    <section id="screen-hub" class="w-full py-4">
+      <div class="text-center max-w-2xl mx-auto mb-8">
         <span class="px-3.5 py-1 rounded-full text-xs font-semibold bg-brand-gold/10 text-brand-gold border border-brand-gold/30 inline-block mb-3" id="hub-badge">
           ✨ Индивидуальная карта развития
         </span>
@@ -157,7 +173,7 @@
           <div class="space-y-4">
             <div class="flex items-center justify-between">
               <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">1 – 4 классы (6–10 лет)</span>
-              <span class="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5 text-brand-gold"></i> ~3 мин</span>
+              <span class="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5 text-brand-gold"></i> 6 вопросов • ~3 мин</span>
             </div>
             <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-brand-gold transition" id="card-lvl1-title">Уровень 1: «Остров талантов»</h3>
             <p class="text-slate-300 text-xs sm:text-sm leading-relaxed" id="card-lvl1-desc">
@@ -165,7 +181,7 @@
             </p>
             <div class="flex items-center gap-2 text-xs text-brand-goldLight pt-2">
               <i data-lucide="check-circle" class="w-4 h-4 text-brand-gold"></i>
-              <span>Сертификат юного исследователя + Паспорт</span>
+              <span>Сертификат юного исследователя + Паспорт с графиком</span>
             </div>
           </div>
           <button onclick="openRegistrationModal(1)" class="w-full mt-6 py-3 rounded-xl font-bold bg-brand-gold/10 hover:bg-brand-gold hover:text-black border border-brand-gold text-brand-gold transition-all duration-300 text-sm flex items-center justify-center gap-2">
@@ -178,7 +194,7 @@
           <div class="space-y-4">
             <div class="flex items-center justify-between">
               <span class="px-3 py-1 rounded-full text-xs font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">5 – 8 классы (11–14 лет)</span>
-              <span class="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5 text-cyan-400"></i> ~5 мин</span>
+              <span class="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5 text-cyan-400"></i> 8 вопросов • ~5 мин</span>
             </div>
             <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-cyan-400 transition" id="card-lvl2-title">Уровень 2: «Навигатор компетенций»</h3>
             <p class="text-slate-300 text-xs sm:text-sm leading-relaxed" id="card-lvl2-desc">
@@ -186,7 +202,7 @@
             </p>
             <div class="flex items-center gap-2 text-xs text-cyan-300 pt-2">
               <i data-lucide="check-circle" class="w-4 h-4 text-cyan-400"></i>
-              <span>Академический профиль + Рекомендации кружков</span>
+              <span>Академический профиль + Рекомендации кружков + Диаграмма</span>
             </div>
           </div>
           <button onclick="openRegistrationModal(2)" class="w-full mt-6 py-3 rounded-xl font-bold bg-cyan-400/10 hover:bg-cyan-400 hover:text-black border border-cyan-400 text-cyan-300 transition-all duration-300 text-sm flex items-center justify-center gap-2">
@@ -261,7 +277,7 @@
     <!-- 3. ЭКРАН ТЕСТИРОВАНИЯ -->
     <section id="screen-quiz" class="w-full hidden">
       <!-- Навигатор-палитра номеров -->
-      <div class="mb-6 flex flex-col sm:flex-row items-center justify-between gap-4 bg-brand-card/70 border border-white/10 p-4 rounded-2xl backdrop-blur-md">
+      <div class="mb-5 flex flex-col sm:flex-row items-center justify-between gap-3 bg-brand-card/70 border border-white/10 p-3.5 rounded-2xl backdrop-blur-md">
         <div class="flex items-center gap-3">
           <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold" id="txt-quiz-title">Тест талантов:</span>
           <span class="text-sm font-bold text-brand-gold" id="txt-active-level-name">Уровень 1</span>
@@ -271,34 +287,34 @@
           <!-- Номера генерируются JS -->
         </div>
 
-        <div class="text-xs text-slate-400">
+        <div class="text-xs text-slate-400 font-mono">
           <span id="txt-progress-counter">1 из 6</span>
         </div>
       </div>
 
       <!-- Карточка вопроса -->
-      <div class="bg-gradient-to-b from-brand-card/90 to-brand-dark/95 border border-brand-gold/30 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
-        <div class="flex items-center gap-3 mb-4">
-          <span id="badge-question-category" class="px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-brand-gold/20 text-brand-gold border border-brand-gold/30">
+      <div class="bg-gradient-to-b from-brand-card/90 to-brand-dark/95 border border-brand-gold/30 rounded-3xl p-5 sm:p-8 shadow-2xl relative overflow-hidden">
+        <div class="flex items-center gap-3 mb-3">
+          <span id="badge-question-category" class="px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-brand-gold/20 text-brand-gold border border-brand-gold/30 font-mono">
             Категория
           </span>
         </div>
 
-        <h2 id="quiz-question-text" class="text-xl sm:text-2xl font-bold text-white mb-6 leading-relaxed">
+        <h2 id="quiz-question-text" class="text-lg sm:text-2xl font-bold text-white mb-6 leading-relaxed">
           Текст вопроса...
         </h2>
 
-        <div id="quiz-options-container" class="grid sm:grid-cols-2 gap-4 mb-8">
+        <div id="quiz-options-container" class="grid sm:grid-cols-2 gap-3.5 mb-6">
           <!-- Опции генерируются JS -->
         </div>
 
-        <!-- Нижняя панель действий с неоновой подсветкой -->
-        <div class="flex items-center justify-between pt-6 border-t border-white/10">
-          <button onclick="prevQuestion()" id="btn-prev-q" class="btn-neon-prev px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2">
+        <!-- Нижняя панель действий -->
+        <div class="flex items-center justify-between pt-5 border-t border-white/10">
+          <button onclick="prevQuestion()" id="btn-prev-q" class="btn-neon-prev px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2">
             <span>←</span> <span id="txt-btn-prev">Назад</span>
           </button>
 
-          <button onclick="skipQuestion()" id="btn-skip-q" class="btn-neon-skip px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2">
+          <button onclick="skipQuestion()" id="btn-skip-q" class="btn-neon-skip px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2">
             <span id="txt-btn-skip">Пропустить вопрос</span> <span>↷</span>
           </button>
         </div>
@@ -307,27 +323,27 @@
 
     <!-- 4. ЭКРАН РЕЗУЛЬТАТОВ -->
     <section id="screen-result" class="w-full hidden">
-      <div class="bg-brand-card/90 border border-brand-gold/40 rounded-3xl p-6 sm:p-10 shadow-2xl text-center max-w-3xl mx-auto">
-        <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-brand-gold/20 border-2 border-brand-gold flex items-center justify-center text-brand-gold">
-          <i data-lucide="award" class="w-10 h-10"></i>
+      <div class="bg-brand-card/90 border border-brand-gold/40 rounded-3xl p-6 sm:p-8 shadow-2xl text-center max-w-3xl mx-auto">
+        <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-brand-gold/20 border-2 border-brand-gold flex items-center justify-center text-brand-gold">
+          <i data-lucide="award" class="w-8 h-8"></i>
         </div>
 
-        <span class="text-xs font-bold uppercase tracking-widest text-brand-gold" id="res-badge">Тестирование успешно завершено</span>
-        <h2 class="text-2xl sm:text-4xl font-extrabold text-white font-title gold-text-gradient mt-1 mb-2" id="res-title-profile">
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-gold font-mono" id="res-badge">Тестирование успешно завершено</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white font-title gold-text-gradient mt-1 mb-2" id="res-title-profile">
           Архитектор Будущего & STEM
         </h2>
         <p class="text-sm text-slate-300 max-w-xl mx-auto mb-6" id="res-desc-profile">
           У вас ярко выражен логико-математический и пространственный интеллект.
         </p>
 
-        <div class="text-left bg-black/40 border border-white/10 rounded-2xl p-5 mb-8">
-          <h4 class="text-xs uppercase tracking-wider text-brand-gold font-bold mb-3 flex items-center gap-2">
+        <div class="text-left bg-black/40 border border-white/10 rounded-2xl p-4 sm:p-5 mb-6">
+          <h4 class="text-xs uppercase tracking-wider text-brand-gold font-bold mb-3 flex items-center gap-2 font-mono">
             <i data-lucide="compass" class="w-4 h-4"></i> <span id="res-clubs-header">Рекомендованные секции ЧИШ «ЮНОНА»:</span>
           </h4>
           <ul id="res-clubs-list" class="space-y-2 text-xs sm:text-sm text-slate-200"></ul>
         </div>
 
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <div class="flex flex-col sm:flex-row gap-3.5 justify-center">
           <button onclick="downloadOfficialPDF()" class="px-6 py-3.5 rounded-xl font-bold bg-gradient-to-r from-brand-gold to-brand-goldLight text-black shadow-lg shadow-brand-gold/20 hover:scale-105 transition flex items-center justify-center gap-2 text-sm">
             <i data-lucide="file-down" class="w-4 h-4"></i> <span id="btn-download-pdf">Скачать «Паспорт способностей» (PDF)</span>
           </button>
@@ -336,7 +352,7 @@
           </a>
         </div>
 
-        <div class="mt-6">
+        <div class="mt-5">
           <button onclick="restartAll()" class="text-xs text-slate-500 hover:text-slate-300 transition">
             ← Пройти другой тест
           </button>
@@ -346,127 +362,231 @@
 
   </main>
 
-  <!-- ШАБЛОН ДЛЯ ГЕНЕРАЦИИ ДВУХСТРАНИЧНОГО PDF ДОКУМЕНТА -->
+  <!-- КОМПАКТНЫЙ АККУРАТНЫЙ ПОДВАЛ (БЕЗ ОГРОМНЫХ ПУСТОТ) -->
+  <footer class="relative z-10 border-t border-white/10 bg-black/80 py-3 px-4 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px]">
+      <div>© 2026 ЧИШ «ЮНОНА». Модуль первичной профориентации.</div>
+      <div class="text-slate-400 font-mono">Разработано <span class="text-white font-bold">IT Life</span> (a PAVLIKneMOROZOFF company)</div>
+    </div>
+  </footer>
+
+  <!-- ============================================================== -->
+  <!-- ПРЕМИАЛЬНЫЙ ШАБЛОН ДЛЯ ГЕНЕРАЦИИ PDF (ЧЕТКИЙ А4 БЕЗ РАЗРЫВОВ)   -->
+  <!-- ============================================================== -->
   <div id="pdf-render-wrapper" style="position: absolute; left: -9999px; top: 0;">
     <div id="pdf-content">
       
-      <!-- СТРАНИЦА 1: СЕРТИФИКАТ -->
-      <div class="pdf-page pdf-break flex flex-col justify-between" style="background:#080d16; border: 12px solid #0f172a; outline: 3px double #D4AF37;">
-        <div class="text-center pt-6">
-          <div style="font-family:'Cinzel', serif; font-size:24px; color:#D4AF37; font-weight:800; letter-spacing:2px;">
-            ЧАСТНАЯ ИННОВАЦИОННАЯ ШКОЛА «ЮНОНА»
-          </div>
-          <div style="font-size:10px; color:#94a3b8; letter-spacing:3px; text-transform:uppercase; margin-top:2px;">
-            Private Innovative School & Kindergarten YUNONA • Kazakhstan
-          </div>
-          <div style="height:1px; width:80%; background:#D4AF37; margin:15px auto; opacity:0.4;"></div>
-        </div>
-
-        <div class="text-center my-auto px-8">
-          <div style="font-family:'Cinzel', serif; font-size:16px; color:#f3e5ab; letter-spacing:4px; text-transform:uppercase;">
-            ОФИЦИАЛЬНЫЙ СЕРТИФИКАТ
-          </div>
-          <div style="font-size:11px; color:#94a3b8; margin-top:4px;">
-            О прохождении первичной диагностики способностей и профориентации
-          </div>
-
-          <div style="font-size:13px; color:#cbd5e1; margin-top:25px;">Настоящим подтверждается, что:</div>
-          <div id="pdf-user-name" style="font-size:26px; color:#ffffff; font-weight:bold; margin-top:6px; border-bottom:1px solid #D4AF37; display:inline-block; padding:0 25px 4px 25px;">
-            Сериков Арман
-          </div>
-
-          <div id="pdf-user-details" style="font-size:12px; color:#94a3b8; margin-top:8px;">
-            Ученик 4 «А» класса • Возраст: 10 лет
-          </div>
-
-          <div style="margin-top:30px; padding:15px; background:rgba(212,175,55,0.08); border:1px solid rgba(212,175,55,0.3); border-radius:12px;">
-            <div style="font-size:10px; text-transform:uppercase; letter-spacing:2px; color:#D4AF37;">Присвоенный профиль талантов:</div>
-            <div id="pdf-profile-title" style="font-family:'Cinzel', serif; font-size:20px; font-weight:bold; color:#ffffff; margin-top:4px;">
-              Архитектор Будущего & STEM
+      <!-- СТРАНИЦА 1: ОФИЦИАЛЬНЫЙ СЕРТИФИКАТ С ГРАФИКОМ -->
+      <div class="pdf-sheet pdf-break">
+        <div class="gold-cert-frame">
+          
+          <!-- Шапка сертификата -->
+          <div style="text-align: center;">
+            <div style="font-family:'Cinzel', serif; font-size:22px; color:#D4AF37; font-weight:800; letter-spacing:2px; line-height: 1.2;">
+              ЧАСТНАЯ ИННОВАЦИОННАЯ ШКОЛА «ЮНОНА»
             </div>
-            <div id="pdf-profile-summary" style="font-size:11px; color:#e2e8f0; margin-top:6px; line-height:1.5;">
-              Высокая склонность к точным наукам, аналитическому моделированию и пространственному конструированию.
+            <div style="font-size:9px; color:#94a3b8; letter-spacing:2.5px; text-transform:uppercase; margin-top:4px;">
+              PRIVATE INNOVATIVE SCHOOL & KINDERGARTEN YUNONA • KAZAKHSTAN
+            </div>
+            <div style="height:1px; width:60%; background:#D4AF37; margin:14px auto 0 auto; opacity:0.5;"></div>
+          </div>
+
+          <!-- Центральная часть сертификата -->
+          <div style="text-align: center; margin: 15px 0;">
+            <div style="font-family:'Cinzel', serif; font-size:15px; color:#f3e5ab; letter-spacing:4px; text-transform:uppercase;">
+              ОФИЦИАЛЬНЫЙ СЕРТИФИКАТ
+            </div>
+            <div style="font-size:10px; color:#94a3b8; margin-top:3px;">
+              О прохождении комплексной диагностики талантов и структуры интеллекта
+            </div>
+
+            <div style="font-size:12px; color:#cbd5e1; margin-top:20px;">Настоящим подтверждается, что:</div>
+            <div id="pdf-user-name" style="font-size:24px; color:#ffffff; font-weight:bold; margin-top:4px; border-bottom:1.5px solid #D4AF37; display:inline-block; padding:0 30px 4px 30px; letter-spacing: 0.5px;">
+              Сериков Арман
+            </div>
+
+            <div id="pdf-user-details" style="font-size:11px; color:#94a3b8; margin-top:6px; font-family: 'JetBrains Mono', monospace;">
+              Класс: 4 «А» • Возраст: 10 лет • Абитуриент ЧИШ «ЮНОНА»
+            </div>
+
+            <!-- Блок профиля -->
+            <div style="margin-top:22px; padding:14px; background:rgba(212,175,55,0.06); border:1px solid rgba(212,175,55,0.35); border-radius:10px;">
+              <div style="font-size:10px; text-transform:uppercase; letter-spacing:2px; color:#D4AF37; font-weight: bold;">
+                Присвоенный профиль талантов:
+              </div>
+              <div id="pdf-profile-title" style="font-family:'Cinzel', serif; font-size:19px; font-weight:bold; color:#ffffff; margin-top:3px;">
+                Архитектор Будущего & STEM
+              </div>
+              <div id="pdf-profile-summary" style="font-size:10.5px; color:#e2e8f0; margin-top:5px; line-height:1.5; max-width: 580px; margin-left: auto; margin-right: auto;">
+                Высокая склонность к точным наукам, аналитическому моделированию и пространственному конструированию.
+              </div>
+            </div>
+
+            <!-- КРУГОВАЯ ДИАГРАММА / РАДАР СПОСОБНОСТЕЙ В СЕРТИФИКАТЕ -->
+            <div style="margin-top: 18px; display: flex; align-items: center; justify-content: center; gap: 25px;">
+              <!-- Интерактивный SVG график -->
+              <svg id="pdf-donut-chart" width="105" height="105" viewBox="0 0 36 36" style="transform: rotate(-90deg);">
+                <circle cx="18" cy="18" r="15.9155" fill="none" stroke="#1e293b" stroke-width="3"></circle>
+                <circle id="donut-seg-stem" cx="18" cy="18" r="15.9155" fill="none" stroke="#38bdf8" stroke-width="3.5" stroke-dasharray="40 60" stroke-dashoffset="0"></circle>
+                <circle id="donut-seg-art" cx="18" cy="18" r="15.9155" fill="none" stroke="#ec4899" stroke-width="3.5" stroke-dasharray="25 75" stroke-dashoffset="-40"></circle>
+                <circle id="donut-seg-leader" cx="18" cy="18" r="15.9155" fill="none" stroke="#D4AF37" stroke-width="3.5" stroke-dasharray="20 80" stroke-dashoffset="-65"></circle>
+                <circle id="donut-seg-nature" cx="18" cy="18" r="15.9155" fill="none" stroke="#22c55e" stroke-width="3.5" stroke-dasharray="15 85" stroke-dashoffset="-85"></circle>
+              </svg>
+              <!-- Легенда графика -->
+              <div style="text-align: left; font-size: 10px; line-height: 1.6; font-family: 'JetBrains Mono', monospace;">
+                <div style="color: #38bdf8;">■ Логика & STEM: <strong id="pdf-pct-stem">40%</strong></div>
+                <div style="color: #ec4899;">■ Творчество & Арт: <strong id="pdf-pct-art">25%</strong></div>
+                <div style="color: #D4AF37;">■ Лидерство & Коммуникация: <strong id="pdf-pct-leader">20%</strong></div>
+                <div style="color: #22c55e;">■ Естествознание & Эко: <strong id="pdf-pct-nature">15%</strong></div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Подвал сертификата с печатью -->
+          <div style="border-top:1px solid rgba(255,255,255,0.12); padding-top:14px; display: flex; justify-content: space-between; align-items: flex-end;">
+            <div style="font-size:9.5px; color:#94a3b8; font-family:'JetBrains Mono', monospace; line-height: 1.5;">
+              <div>Дата выдачи: <span id="pdf-date" style="color:#ffffff;">18.10.2026</span></div>
+              <div>Протокол: <span id="pdf-doc-id" style="color:#D4AF37;">YN-2026-8492</span></div>
+              <div>Верификация: <span style="color:#D4AF37;">чиш-юнона.kz</span></div>
+            </div>
+
+            <!-- Имитация круглой золотой печати -->
+            <div style="width: 72px; height: 72px; border: 1.5px dashed #D4AF37; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-align: center; color: #D4AF37; font-size: 6.5px; text-transform: uppercase; letter-spacing: 0.5px; padding: 4px; box-sizing: border-box; transform: rotate(-8deg);">
+              ★ ЧИШ ЮНОНА ★<br>ОФИЦИАЛЬНАЯ<br>АККРЕДИТАЦИЯ
+            </div>
+
+            <div style="text-align: right; font-size:9.5px; color:#94a3b8;">
+              <div style="font-weight:bold; color:#ffffff; font-size: 11px;">Борисова Елена Геннадьевна</div>
+              <div>Директор ЧИШ «ЮНОНА»</div>
+              <div style="color:#D4AF37; font-size:8.5px; margin-top:2px;">Подпись аккредитована ЭЦП</div>
             </div>
           </div>
-        </div>
 
-        <div class="pb-6 px-8 flex justify-between items-end" style="border-top:1px solid rgba(255,255,255,0.1); padding-top:15px;">
-          <div class="text-left" style="font-size:10px; color:#94a3b8;">
-            <div>Дата: <span id="pdf-date">18.10.2026</span></div>
-            <div>Регистрационный №: <span id="pdf-doc-id">YN-2026-8492</span></div>
-            <div>Верификация: <span style="color:#D4AF37;">чиш-юнона.kz</span></div>
-          </div>
-
-          <div class="text-right" style="font-size:10px; color:#94a3b8;">
-            <div style="font-weight:bold; color:#ffffff;">Борисова Елена Геннадьевна</div>
-            <div>Директор ЧИШ «ЮНОНА»</div>
-            <div style="color:#D4AF37; font-size:9px; margin-top:2px;">Печать & Подпись аккредитованы</div>
-          </div>
         </div>
       </div>
 
-      <!-- СТРАНИЦА 2: ПАСПОРТ СПОСОБНОСТЕЙ -->
-      <div class="pdf-page flex flex-col justify-between" style="background:#080d16; border: 12px solid #0f172a; outline: 3px double #D4AF37;">
-        <div>
-          <div class="flex justify-between items-center border-b border-white/10 pb-4 mb-6">
-            <div>
-              <div style="font-family:'Cinzel', serif; font-size:16px; color:#D4AF37; font-weight:bold;">
-                ПАСПОРТ СПОСОБНОСТЕЙ РЕБЁНКА
-              </div>
-              <div style="font-size:10px; color:#94a3b8;">Приложение к сертификату диагностики ЧИШ «ЮНОНА»</div>
-            </div>
-            <div style="font-size:10px; color:#D4AF37; text-align:right;">Страница 2 из 2</div>
-          </div>
-
-          <div class="mb-6">
-            <h4 style="font-size:12px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:6px;">
-              1. Ведущие каналы интеллекта (модель Г. Гарднера & Е. Климова):
-            </h4>
-            <div id="pdf-intellect-desc" style="font-size:11px; color:#e2e8f0; line-height:1.6; background:rgba(255,255,255,0.03); padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.08);">
-              Ребёнок демонстрирует способность легко выстраивать логические цепочки, анализировать алгоритмы и синтезировать визуальные образы в объемные модели.
-            </div>
-          </div>
-
-          <div class="mb-6">
-            <h4 style="font-size:12px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:6px;">
-              2. Рекомендованные образовательные кружки и секции ЧИШ «ЮНОНА»:
-            </h4>
-            <div id="pdf-clubs-breakdown" style="font-size:11px; color:#cbd5e1; line-height:1.6;" class="space-y-2"></div>
-          </div>
-
-          <div class="mb-6">
-            <h4 style="font-size:12px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:6px;">
-              3. Вектор развития от психологической службы школы:
-            </h4>
-            <div style="font-size:10px; color:#94a3b8; line-height:1.6; background:rgba(212,175,55,0.05); padding:10px; border-radius:8px; border-left:3px solid #D4AF37;">
-              Рекомендуется поощрять самостоятельные исследовательские проекты, не перегружая избыточной зубрежкой фактов.
-            </div>
-          </div>
-        </div>
-
-        <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:12px; font-size:10px; color:#94a3b8;" class="flex justify-between items-center">
+      <!-- СТРАНИЦА 2: АНАЛИТИЧЕСКИЙ ПАСПОРТ СПОСОБНОСТЕЙ -->
+      <div class="pdf-sheet">
+        <div class="gold-cert-frame">
+          
           <div>
-            <div style="color:#ffffff; font-weight:bold;">Частная Инновационная Школа «ЮНОНА»</div>
-            <div>пос. Боралдай, ул. Терешковой, 1а • Тел: +7 707 645 78 28</div>
+            <!-- Шапка 2 страницы -->
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 12px; margin-bottom: 16px;">
+              <div>
+                <div style="font-family:'Cinzel', serif; font-size:17px; color:#D4AF37; font-weight:bold;">
+                  ПАСПОРТ СПОСОБНОСТЕЙ РЕБЁНКА
+                </div>
+                <div style="font-size:9.5px; color:#94a3b8;">Приложение к сертификату диагностики ЧИШ «ЮНОНА»</div>
+              </div>
+              <div style="font-size:10px; color:#D4AF37; font-family:'JetBrains Mono', monospace;">Страница 2 из 2</div>
+            </div>
+
+            <!-- Раздел 1: Диагностика интеллекта -->
+            <div style="margin-bottom: 16px;">
+              <div style="font-size:11px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:6px; letter-spacing: 0.5px;">
+                1. Ведущие каналы интеллекта (модель Г. Гарднера & Е. Климова):
+              </div>
+              <div id="pdf-intellect-desc" style="font-size:10.5px; color:#e2e8f0; line-height:1.55; background:rgba(255,255,255,0.03); padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.08);">
+                Ребёнок демонстрирует способность легко выстраивать логические цепочки, анализировать алгоритмы и синтезировать визуальные образы в объемные модели.
+              </div>
+            </div>
+
+            <!-- Раздел 2: Шкалы компетенций (Горизонтальные бары) -->
+            <div style="margin-bottom: 16px;">
+              <div style="font-size:11px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:8px; letter-spacing: 0.5px;">
+                2. Баланс развиваемых компетенций:
+              </div>
+              <div style="background:rgba(255,255,255,0.02); padding: 12px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06); font-size: 10px; font-family: 'JetBrains Mono', monospace;" class="space-y-2">
+                <div>
+                  <div style="display:flex; justify-content:space-between; margin-bottom:2px;">
+                    <span style="color:#e2e8f0;">Логико-математическое мышление & STEM:</span>
+                    <span id="bar-num-stem" style="color:#38bdf8;">85%</span>
+                  </div>
+                  <div style="width:100%; height:6px; background:#1e293b; border-radius:3px; overflow:hidden;">
+                    <div id="bar-fill-stem" style="width:85%; height:100%; background:#38bdf8;"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div style="display:flex; justify-content:space-between; margin-bottom:2px;">
+                    <span style="color:#e2e8f0;">Креативность и пространственное воображение:</span>
+                    <span id="bar-num-art" style="color:#ec4899;">70%</span>
+                  </div>
+                  <div style="width:100%; height:6px; background:#1e293b; border-radius:3px; overflow:hidden;">
+                    <div id="bar-fill-art" style="width:70%; height:100%; background:#ec4899;"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div style="display:flex; justify-content:space-between; margin-bottom:2px;">
+                    <span style="color:#e2e8f0;">Коммуникация и лидерские задатки (Soft Skills):</span>
+                    <span id="bar-num-leader" style="color:#D4AF37;">65%</span>
+                  </div>
+                  <div style="width:100%; height:6px; background:#1e293b; border-radius:3px; overflow:hidden;">
+                    <div id="bar-fill-leader" style="width:65%; height:100%; background:#D4AF37;"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div style="display:flex; justify-content:space-between; margin-bottom:2px;">
+                    <span style="color:#e2e8f0;">Исследовательский и натуралистический интерес:</span>
+                    <span id="bar-num-nature" style="color:#22c55e;">60%</span>
+                  </div>
+                  <div style="width:100%; height:6px; background:#1e293b; border-radius:3px; overflow:hidden;">
+                    <div id="bar-fill-nature" style="width:60%; height:100%; background:#22c55e;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Раздел 3: Рекомендации кружков -->
+            <div style="margin-bottom: 16px;">
+              <div style="font-size:11px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:6px; letter-spacing: 0.5px;">
+                3. Рекомендованные образовательные кружки и секции ЧИШ «ЮНОНА»:
+              </div>
+              <div id="pdf-clubs-breakdown" style="font-size:10.5px; color:#cbd5e1; line-height:1.55;" class="space-y-1.5">
+                <!-- Секции заполняются JS -->
+              </div>
+            </div>
+
+            <!-- Раздел 4: Психологическая служба -->
+            <div>
+              <div style="font-size:11px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:6px; letter-spacing: 0.5px;">
+                4. Вектор развития от психологической службы школы:
+              </div>
+              <div style="font-size:9.5px; color:#94a3b8; line-height:1.5; background:rgba(212,175,55,0.05); padding:10px 12px; border-radius:8px; border-left:3px solid #D4AF37;">
+                Рекомендуется поощрять самостоятельные исследовательские проекты, не перегружая избыточной зубрежкой фактов. Эффективно развивать командную коммуникацию через участие в школьных турнирах и олимпиадах.
+              </div>
+            </div>
           </div>
-          <div style="text-align:right;">
-            <div style="color:#D4AF37;">Запись на пробный день: info@yunona.kz</div>
+
+          <!-- Нижний колонтитул 2 страницы -->
+          <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:10px; font-size:9px; color:#94a3b8; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <div style="color:#ffffff; font-weight:bold;">Частная Инновационная Школа «ЮНОНА»</div>
+              <div>пос. Боралдай, ул. Терешковой, 1а • Тел: +7 707 645 78 28</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="color:#D4AF37; font-weight:bold;">Запись на пробный день: info@yunona.kz</div>
+            </div>
           </div>
+
         </div>
       </div>
 
     </div>
   </div>
 
-  <footer class="relative z-10 border-t border-white/10 bg-black/60 py-4 px-4 text-center text-xs text-slate-500">
-    © 2026 ЧИШ «ЮНОНА». Модуль тестирования разработан IT Live (a PAVLIKneMOROZOFF company).
-  </footer>
-
-  <!-- СКРИПТЫ И ДВИЖОК ТЕСТОВ -->
+  <!-- ============================================================== -->
+  <!-- СКРИПТЫ: 8 ВОПРОСОВ + ДИАГРАММЫ + PDF ENGINE                   -->
+  <!-- ============================================================== -->
   <script>
     lucide.createIcons();
 
+    // 1. БАЗА ВОПРОСОВ (ПОЛНЫЕ 8 ВОПРОСОВ ДЛЯ УРОВНЯ 2 И 6 ДЛЯ УРОВНЯ 1)
     const testData = {
+      // УРОВЕНЬ 1 (1–4 классы, 6–10 лет) — 6 вопросов
       lvl1: [
         {
           id: 1,
@@ -566,6 +686,7 @@
         }
       ],
 
+      // УРОВЕНЬ 2 (5–8 классы, 11–14 лет) — ПОЛНЫЕ 8 ВОПРОСОВ
       lvl2: [
         {
           id: 1,
@@ -577,10 +698,10 @@
             en: "You are tasked with a school digital project. Which part will you choose?"
           },
           options: [
-            { text: { ru: "Написание программного кода и логики работы базы данных", kz: "Бағдарламалық код пен мәліметтер базасының логикасын жазу", en: "Writing backend code and database architecture" }, profile: "stem" },
+            { text: { ru: "Написание программного кода и логики базы данных", kz: "Бағдарламалық код пен деректер базасын жазу", en: "Writing backend code and database architecture" }, profile: "stem" },
             { text: { ru: "UI/UX дизайн интерфейса, иконки и визуальный стиль", kz: "UI/UX интерфейс дизайны, иконкалар мен визуалды стиль", en: "UI/UX interface design, icons, and aesthetic look" }, profile: "art" },
-            { text: { ru: "Управление сроками команды, проведение презентации для жюри", kz: "Команданың уақытын басқару, қазылар алқасына таныстыру", en: "Managing team deadlines and pitching to the jury" }, profile: "leader" },
-            { text: { ru: "Интеграция эко-датчиков расхода энергии в школе", kz: "Мектептегі энергия шығынын өлшейтін эко-датчиктерді қосу", en: "Integrating smart eco-sensors for school energy efficiency" }, profile: "nature" }
+            { text: { ru: "Управление сроками команды, проведение презентации для жюри", kz: "Команда уақытын басқару, қазыларға таныстыру", en: "Managing team deadlines and pitching to the jury" }, profile: "leader" },
+            { text: { ru: "Интеграция эко-датчиков расхода энергии в школе", kz: "Мектептегі энергия өлшейтін эко-датчиктерді қосу", en: "Integrating smart eco-sensors for school energy efficiency" }, profile: "nature" }
           ]
         },
         {
@@ -610,7 +731,7 @@
           },
           options: [
             { text: { ru: "Работающий умный механизм или автоматизированная программа", kz: "Жұмыс істеп тұрған ақылды механизм немесе бағдарлама", en: "A functioning smart mechanism or automated program" }, profile: "stem" },
-            { text: { ru: "Снятый короткометражный фильм или персональная художественная выставка", kz: "Түсірілген қысқаметражды фильм немесе көрме", en: "A completed short movie or personal art exhibition" }, profile: "art" },
+            { text: { ru: "Снятый короткометражный фильм или персональная выставка", kz: "Түсірілген қысқаметражды фильм немесе көрме", en: "A completed short movie or personal art exhibition" }, profile: "art" },
             { text: { ru: "Успешный социальный стартап или победа в дебатном турнире", kz: "Сәтті әлеуметтік стартап немесе дебат турниріндегі жеңіс", en: "A successful social startup or winning a debate tournament" }, profile: "leader" },
             { text: { ru: "Научное биологическое исследование или запущенная эко-акция", kz: "Ғылыми биологиялық зерттеу немесе эко-акция", en: "A scientific biology study or launched eco-initiative" }, profile: "nature" }
           ]
@@ -630,16 +751,81 @@
             { text: { ru: "Медиа-холдинг: школьный подкаст, дизайн мерча и журнал", kz: "Медиа-холдинг: подкаст, мектеп мерчі мен журнал дизайны", en: "Media group: school podcast, merch design, and magazine" }, profile: "art" },
             { text: { ru: "Экологический клуб и благоустройство территории комплекса", kz: "Экологиялық клуб және мектеп аумағын көгалдандыру", en: "Eco-club and campus greening development" }, profile: "nature" }
           ]
+        },
+        {
+          id: 5,
+          category: { ru: "Командный кризис", kz: "Дағдарысты шешу", en: "Crisis Management" },
+          ambient: "rgba(239, 68, 68, 0.15)",
+          text: {
+            ru: "За день до сдачи проекта выясняется, что часть работы утеряна. Твоя реакция?",
+            kz: "Жобаны тапсыруға бір күн қалғанда жұмыстың бір бөлігі жоғалғаны белгілі болды. Не істейсің?",
+            en: "A day before submission, part of the project is lost. What is your reaction?"
+          },
+          options: [
+            { text: { ru: "Соберу всех, распределю роли заново и поддержу командный дух", kz: "Барлығын жинап, рөлдерді қайта бөліп, жігерлендіремін", en: "Rally everyone, redistribute roles and boost morale" }, profile: "leader" },
+            { text: { ru: "Быстро напишу скрипт или формулу, чтобы восстановить расчеты", kz: "Есептерді тез қалпына келтіру үшін скрипт немесе формула жазамын", en: "Quickly write code/formulas to recalculate the lost data" }, profile: "stem" },
+            { text: { ru: "Придумаю креативную подачу того, что осталось, сделав упор на визуал", kz: "Қалған бөлікті визуалды түрде ерекше етіп безендіремін", en: "Redesign the presentation visually to highlight remaining parts" }, profile: "art" },
+            { text: { ru: "Проанализирую причины сбоя, чтобы ситуация никогда не повторилась", kz: "Бұл жағдай қайталанбас үшін себептерін сараптаймын", en: "Analyze root causes and secure safe backup protocols" }, profile: "nature" }
+          ]
+        },
+        {
+          id: 6,
+          category: { ru: "Наука & Эксперимент", kz: "Ғылым & Тәжірибе", en: "Science & Discovery" },
+          ambient: "rgba(34, 197, 94, 0.15)",
+          text: {
+            ru: "В лаборатории ЧИШ «ЮНОНА» вам разрешили провести любой опыт. Что выберешь?",
+            kz: "«ЮНОНА» зертханасында кез келген тәжірибе жасауға рұқсат берілді. Нені таңдайсың?",
+            en: "In YUNONA's laboratory, you can conduct any experiment. What will you choose?"
+          },
+          options: [
+            { text: { ru: "Изучение клеточных культур под электронным микроскопом", kz: "Электронды микроскоппен жасушаларды зерттеу", en: "Studying cellular organisms under an electron microscope" }, profile: "nature" },
+            { text: { ru: "Сборка и программирование микросхемы автономного дрона", kz: "Автономды дронның микросызбасын құрастыру және бағдарламалау", en: "Assembling and coding microcircuits for an autonomous drone" }, profile: "stem" },
+            { text: { ru: "Создание полимерных красок с изменяющимся от света цветом", kz: "Жарыққа байланысты түсі өзгеретін полимерлі бояулар жасау", en: "Creating photochromic artistic pigments and resin paints" }, profile: "art" },
+            { text: { ru: "Социологический опрос и анализ поведения разных классов", kz: "Сыныптар арасында әлеуметтік сауалнама жүргізу және талдау", en: "Running a school behavioral psychology and social survey" }, profile: "leader" }
+          ]
+        },
+        {
+          id: 7,
+          category: { ru: "Маркетинг & Презентация", kz: "Маркетинг & Медиа", en: "Media & Pitching" },
+          ambient: "rgba(245, 158, 11, 0.15)",
+          text: {
+            ru: "Школа запускает благотворительную ярмарку. В чем твоя суперсила?",
+            kz: "Мектеп қайырымдылық жәрмеңкесін өткізеді. Сенің мықты тұсың қайсы?",
+            en: "The school is launching a charity fair. Where is your superpower?"
+          },
+          options: [
+            { text: { ru: "Договориться со спонсорами и ярко презентовать миссию со сцены", kz: "Демеушілермен келісу және сахнада жарқын сөз сөйлеу", en: "Negotiating with sponsors and pitching from the stage" }, profile: "leader" },
+            { text: { ru: "Создать фирменный стиль, мерч, логотип и видеотизеры для соцсетей", kz: "Фирмалық стиль, мерч, логотип пен әлеуметтік желіге видео жасау", en: "Creating branding, merch, posters, and video reels" }, profile: "art" },
+            { text: { ru: "Настроить электронный учет билетов и автоматический подсчет кассы", kz: "Электронды билеттер мен кассаны автоматты түрде есептеу", en: "Setting up barcode entry and digital accounting spreadsheets" }, profile: "stem" },
+            { text: { ru: "Организовать эко-зону по сбору макулатуры и посадке саженцев", kz: "Макулатура жинау және көшет отырғызу эко-аймағын ұйымдастыру", en: "Organizing green eco-recycling and plant-seedling stations" }, profile: "nature" }
+          ]
+        },
+        {
+          id: 8,
+          category: { ru: "Стратегия будущего", kz: "Болашақ стратегиясы", en: "Future Strategy" },
+          ambient: "rgba(168, 85, 247, 0.15)",
+          text: {
+            ru: "Какой глобальный вызов человечества тебе хотелось бы решить в будущем?",
+            kz: "Болашақта адамзаттың қандай жаһандық мәселесін шешкің келеді?",
+            en: "What global challenge would you like to solve in the future?"
+          },
+          options: [
+            { text: { ru: "Создание безопасного ИИ и освоение дальнего космоса", kz: "Қауіпсіз жасанды интеллект және алыс ғарышты игеру", en: "Building safe Artificial General Intelligence and deep space travel" }, profile: "stem" },
+            { text: { ru: "Очищение океанов, сохранение биоразнообразия и экологии", kz: "Мұхиттарды тазарту, биоәртүрлілік пен экологияны сақтау", en: "Cleaning oceans and preserving Earth's biodiversity" }, profile: "nature" },
+            { text: { ru: "Искоренение конфликтов через международную дипломатию и образование", kz: "Халықаралық дипломатия мен білім беру арқылы қақтығыстарды жою", en: "Ending world conflicts through international diplomacy and education" }, profile: "leader" },
+            { text: { ru: "Создание культурных шедевров, объединяющих поколения через искусство", kz: "Өнер арқылы ұрпақтарды біріктіретін мәдени жауһарлар жасау", en: "Inspiring humanity through transformative digital art and cinema" }, profile: "art" }
+          ]
         }
       ]
     };
 
+    // 2. ПРОФИЛИ ТАЛАНТОВ И СЕКЦИИ
     const profiles = {
       stem: {
         title: { ru: "Архитектор Будущего & IT-Новатор", kz: "Болашақ Сәулетшісі & IT-Инноватор", en: "Future Architect & IT Innovator" },
         desc: {
           ru: "У вас ярко выражен логико-математический и системно-технический интеллект. Вы легко понимаете структуру сложных систем, алгоритмы и любите созидать работающие механизмы.",
-          kz: "Сізде логикалық-математикалық және техникалық интеллект өте жоғары. Сіз күрделі жүйелердің құрылымын, алгоритмдерін тез меңгересіз.",
+          kz: "Сізде логикалық-математикалық және техникалық интеллект өте жоғары. Сіз күрделі жүйелердің құрылымын тез меңгересіз.",
           en: "You possess high logical-mathematical and analytical capabilities. You thrive when solving problems and building functional systems."
         },
         clubs: {
@@ -840,7 +1026,7 @@
         btn.textContent = idx + 1;
         btn.onclick = () => jumpToQuestion(idx);
 
-        let classes = "w-7 h-7 sm:w-8 sm:h-8 rounded-lg text-xs font-bold transition flex items-center justify-center ";
+        let classes = "w-7 h-7 sm:w-8 sm:h-8 rounded-lg text-xs font-bold transition flex items-center justify-center font-mono ";
         
         if (idx === currentQuestionIndex) {
           classes += "ring-2 ring-brand-gold bg-brand-gold/30 text-brand-goldLight ";
@@ -877,7 +1063,7 @@
         btn.type = 'button';
         btn.onclick = () => chooseAnswer(q.id, opt.profile);
 
-        btn.className = `p-4 sm:p-5 rounded-2xl text-left transition duration-200 border flex items-start gap-3.5 text-xs sm:text-sm ${
+        btn.className = `p-3.5 sm:p-4 rounded-2xl text-left transition duration-200 border flex items-start gap-3.5 text-xs sm:text-sm ${
           isChosen 
             ? 'bg-brand-gold/20 border-brand-gold text-brand-goldLight shadow-lg shadow-brand-gold/10' 
             : 'bg-white/[0.03] border-white/10 hover:border-brand-gold/50 text-slate-200 hover:bg-white/[0.06]'
@@ -885,7 +1071,7 @@
 
         const letter = String.fromCharCode(65 + oIdx);
         btn.innerHTML = `
-          <span class="w-6 h-6 rounded-md flex items-center justify-center font-bold text-xs shrink-0 ${isChosen ? 'bg-brand-gold text-black' : 'bg-white/10 text-slate-400'}">
+          <span class="w-6 h-6 rounded-md flex items-center justify-center font-bold text-xs shrink-0 font-mono ${isChosen ? 'bg-brand-gold text-black' : 'bg-white/10 text-slate-400'}">
             ${letter}
           </span>
           <span class="leading-relaxed font-medium">${opt.text[currentLang] || opt.text.ru}</span>
@@ -959,8 +1145,11 @@
       showFinalResult();
     }
 
+    // 3. ПОДСЧЕТ РЕЗУЛЬТАТОВ И ОБНОВЛЕНИЕ ГРАФИКОВ
     function showFinalResult() {
       const scores = { stem: 0, art: 0, leader: 0, nature: 0 };
+      const totalAnswered = Object.keys(userAnswers).length || 1;
+
       Object.values(userAnswers).forEach(p => {
         if (scores[p] !== undefined) scores[p]++;
       });
@@ -1000,14 +1189,15 @@
       );
       document.getElementById('btn-whatsapp-lead').href = `https://wa.me/${phone}?text=${message}`;
 
-      preparePDFTemplate(profData);
+      preparePDFTemplate(profData, scores, totalAnswered);
       lucide.createIcons();
     }
 
-    function preparePDFTemplate(profData) {
+    // 4. ГЕНЕРАТОР ГРАФИКОВ И ДАННЫХ ДЛЯ PDF
+    function preparePDFTemplate(profData, scores, total) {
       document.getElementById('pdf-user-name').textContent = userData.name;
       document.getElementById('pdf-user-details').textContent = 
-        `Класс: ${userData.gradeNum} «${userData.gradeLetter}» • Возраст: ${userData.age} лет • ${userData.isStudent ? 'Ученик ЧИШ ЮНОНА' : 'Абитуриент ЧИШ ЮНОНА'}`;
+        `Класс: ${userData.gradeNum} «${userData.gradeLetter}» • Возраст: ${userData.age} лет • ${userData.isStudent ? 'Ученик ЧИШ «ЮНОНА»' : 'Абитуриент ЧИШ «ЮНОНА»'}`;
       document.getElementById('pdf-profile-title').textContent = profData.title.ru;
       document.getElementById('pdf-profile-summary').textContent = profData.desc.ru;
 
@@ -1015,24 +1205,69 @@
       document.getElementById('pdf-date').textContent = today.toLocaleDateString('ru-RU');
       document.getElementById('pdf-doc-id').textContent = `YN-${today.getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
 
+      // Расчет процентов
+      const pctStem = Math.max(10, Math.round((scores.stem / total) * 100));
+      const pctArt = Math.max(10, Math.round((scores.art / total) * 100));
+      const pctLeader = Math.max(10, Math.round((scores.leader / total) * 100));
+      const pctNature = Math.max(10, 100 - (pctStem + pctArt + pctLeader));
+
+      // Цифры диаграммы
+      document.getElementById('pdf-pct-stem').textContent = pctStem + '%';
+      document.getElementById('pdf-pct-art').textContent = pctArt + '%';
+      document.getElementById('pdf-pct-leader').textContent = pctLeader + '%';
+      document.getElementById('pdf-pct-nature').textContent = pctNature + '%';
+
+      // SVG Donut сегменты
+      const cStem = document.getElementById('donut-seg-stem');
+      const cArt = document.getElementById('donut-seg-art');
+      const cLeader = document.getElementById('donut-seg-leader');
+      const cNature = document.getElementById('donut-seg-nature');
+
+      cStem.setAttribute('stroke-dasharray', `${pctStem} ${100 - pctStem}`);
+      cStem.setAttribute('stroke-dashoffset', '0');
+
+      cArt.setAttribute('stroke-dasharray', `${pctArt} ${100 - pctArt}`);
+      cArt.setAttribute('stroke-dashoffset', `-${pctStem}`);
+
+      cLeader.setAttribute('stroke-dasharray', `${pctLeader} ${100 - pctLeader}`);
+      cLeader.setAttribute('stroke-dashoffset', `-${pctStem + pctArt}`);
+
+      cNature.setAttribute('stroke-dasharray', `${pctNature} ${100 - pctNature}`);
+      cNature.setAttribute('stroke-dashoffset', `-${pctStem + pctArt + pctLeader}`);
+
+      // Шкалы 2 страницы (горизонтальные бары)
+      document.getElementById('bar-num-stem').textContent = pctStem + '%';
+      document.getElementById('bar-fill-stem').style.width = pctStem + '%';
+
+      document.getElementById('bar-num-art').textContent = pctArt + '%';
+      document.getElementById('bar-fill-art').style.width = pctArt + '%';
+
+      document.getElementById('bar-num-leader').textContent = pctLeader + '%';
+      document.getElementById('bar-fill-leader').style.width = pctLeader + '%';
+
+      document.getElementById('bar-num-nature').textContent = pctNature + '%';
+      document.getElementById('bar-fill-nature').style.width = pctNature + '%';
+
+      // Список кружков
       const breakdownBox = document.getElementById('pdf-clubs-breakdown');
       breakdownBox.innerHTML = '';
       profData.clubs.ru.forEach(c => {
         const div = document.createElement('div');
-        div.style.cssText = "padding:6px 10px; background:rgba(212,175,55,0.06); border-radius:6px; border-left:2px solid #D4AF37;";
-        div.textContent = `• ${c}`;
+        div.style.cssText = "padding:6px 10px; background:rgba(212,175,55,0.06); border-radius:6px; border-left:3px solid #D4AF37;";
+        div.textContent = `★ ${c}`;
         breakdownBox.appendChild(div);
       });
     }
 
+    // 5. ГЕНЕРАЦИЯ PDF С ВЫСОКИМ КАЧЕСТВОМ
     function downloadOfficialPDF() {
       const element = document.getElementById('pdf-content');
       const opt = {
         margin:       0,
         filename:     `Паспорт_Талантов_ЮНОНА_${userData.name.replace(/\s+/g, '_')}.pdf`,
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#080d16' },
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#080d16', scrollY: 0 },
+        jsPDF:        { unit: 'px', format: [794, 1123], orientation: 'portrait' }
       };
       html2pdf().set(opt).from(element).save();
     }
