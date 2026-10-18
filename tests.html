@@ -15,7 +15,7 @@
   <!-- Google Fonts & Lucide Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Montserrat:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Montserrat:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
   <!-- html2pdf.js для генерации PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -367,7 +367,7 @@
   </footer>
 
   <!-- ================================================================= -->
-  <!-- ШАБЛОН PDF: СТРОГАЯ СИММЕТРИЯ 794x1120px (ПОЛНОЦЕННЫЙ А4)         -->
+  <!-- ШАБЛОН PDF: КРУПНЫЙ КРУГ, ЧЕТКИЙ ТЕКСТ И БЕЗ НАЛОЖЕНИЙ             -->
   <!-- ================================================================= -->
   <div id="pdf-render-wrapper" style="position: absolute; left: 0; top: 0; width: 794px; display: none; z-index: -999; background: #080d16;">
     <div id="pdf-content" class="pdf-render-root">
@@ -378,7 +378,7 @@
           <table style="width: 100%; height: 100%; border-collapse: collapse; margin: 0 auto; table-layout: fixed;">
             
             <!-- Шапка сертификата -->
-            <tr style="height: 95px;">
+            <tr style="height: 90px;">
               <td colspan="2" style="text-align: center; vertical-align: top; padding: 0;">
                 <div style="font-family:'Cinzel', serif; font-size:22px; color:#D4AF37; font-weight:800; letter-spacing:2px; line-height: 1.2;">
                   ЧАСТНАЯ ИННОВАЦИОННАЯ ШКОЛА «ЮНОНА»
@@ -392,7 +392,7 @@
 
             <!-- Центральный блок -->
             <tr>
-              <td colspan="2" style="text-align: center; vertical-align: middle; padding: 10px 0;">
+              <td colspan="2" style="text-align: center; vertical-align: middle; padding: 5px 0;">
                 <div style="font-family:'Cinzel', serif; font-size:15px; color:#f3e5ab; letter-spacing:4px; text-transform:uppercase;">
                   ОФИЦИАЛЬНЫЙ СЕРТИФИКАТ
                 </div>
@@ -400,48 +400,53 @@
                   О прохождении комплексной диагностики талантов и структуры интеллекта
                 </div>
 
-                <div style="font-size:12px; color:#cbd5e1; margin-top:18px;">Настоящим подтверждается, что:</div>
-                <div id="pdf-user-name" style="font-size:24px; color:#ffffff; font-weight:bold; margin-top:4px; border-bottom:1.5px solid #D4AF37; display:inline-block; padding:0 30px 4px 30px; letter-spacing: 0.5px;">
+                <div style="font-size:12px; color:#cbd5e1; margin-top:16px;">Настоящим подтверждается, что:</div>
+                <div id="pdf-user-name" style="font-size:25px; color:#ffffff; font-weight:bold; margin-top:4px; border-bottom:1.5px solid #D4AF37; display:inline-block; padding:0 30px 4px 30px; letter-spacing: 0.5px;">
                   Сериков Арман
                 </div>
 
-                <div id="pdf-user-details" style="font-size:11px; color:#94a3b8; margin-top:6px; font-family: 'JetBrains Mono', monospace;">
+                <div id="pdf-user-details" style="font-size:11.5px; color:#94a3b8; margin-top:6px; font-family: 'JetBrains Mono', monospace;">
                   Класс: 4 «А» • Возраст: 10 лет • Абитуриент ЧИШ «ЮНОНА»
                 </div>
 
                 <!-- Плашка профиля -->
-                <div style="margin:20px auto 0 auto; width: 94%; padding:14px; background:rgba(212,175,55,0.06); border:1px solid rgba(212,175,55,0.35); border-radius:10px; box-sizing: border-box;">
+                <div style="margin:18px auto 0 auto; width: 95%; padding:14px 18px; background:rgba(212,175,55,0.06); border:1px solid rgba(212,175,55,0.35); border-radius:10px; box-sizing: border-box;">
                   <div style="font-size:10px; text-transform:uppercase; letter-spacing:2px; color:#D4AF37; font-weight: bold;">
                     Присвоенный профиль талантов:
                   </div>
-                  <div id="pdf-profile-title" style="font-family:'Cinzel', serif; font-size:19px; font-weight:bold; color:#ffffff; margin-top:3px;">
+                  <div id="pdf-profile-title" style="font-family:'Cinzel', serif; font-size:20px; font-weight:bold; color:#ffffff; margin-top:4px;">
                     Архитектор Будущего & STEM
                   </div>
-                  <div id="pdf-profile-summary" style="font-size:10.5px; color:#e2e8f0; margin-top:5px; line-height:1.5;">
+                  <div id="pdf-profile-summary" style="font-size:11px; color:#e2e8f0; margin-top:6px; line-height:1.5;">
                     Высокая склонность к точным наукам, аналитическому моделированию и пространственному конструированию.
                   </div>
                 </div>
 
-                <!-- Диаграмма и легенда на центрированной таблице -->
-                <table style="width: 82%; margin: 20px auto 0 auto; border-collapse: collapse;">
-                  <tr>
-                    <td style="width: 130px; text-align: center; vertical-align: middle;">
-                      <svg width="110" height="110" viewBox="0 0 36 36" style="transform: rotate(-90deg); margin: 0 auto; display: block;">
-                        <circle cx="18" cy="18" r="15.9155" fill="none" stroke="#1e293b" stroke-width="3.5"></circle>
-                        <circle id="donut-seg-stem" cx="18" cy="18" r="15.9155" fill="none" stroke="#38bdf8" stroke-width="4" stroke-dasharray="25 75" stroke-dashoffset="0"></circle>
-                        <circle id="donut-seg-art" cx="18" cy="18" r="15.9155" fill="none" stroke="#ec4899" stroke-width="4" stroke-dasharray="25 75" stroke-dashoffset="-25"></circle>
-                        <circle id="donut-seg-leader" cx="18" cy="18" r="15.9155" fill="none" stroke="#D4AF37" stroke-width="4" stroke-dasharray="25 75" stroke-dashoffset="-50"></circle>
-                        <circle id="donut-seg-nature" cx="18" cy="18" r="15.9155" fill="none" stroke="#22c55e" stroke-width="4" stroke-dasharray="25 75" stroke-dashoffset="-75"></circle>
-                      </svg>
-                    </td>
-                    <td style="text-align: left; vertical-align: middle; padding-left: 20px; font-size: 11px; line-height: 1.75; font-family: 'JetBrains Mono', monospace;">
-                      <div style="color: #38bdf8;">■ Логика & STEM: <strong id="pdf-pct-stem">25%</strong></div>
-                      <div style="color: #ec4899;">■ Творчество & Арт: <strong id="pdf-pct-art">25%</strong></div>
-                      <div style="color: #D4AF37;">■ Лидерство & Soft-skills: <strong id="pdf-pct-leader">25%</strong></div>
-                      <div style="color: #22c55e;">■ Естествознание & Эко: <strong id="pdf-pct-nature">25%</strong></div>
-                    </td>
-                  </tr>
-                </table>
+                <!-- КРУПНАЯ ДИАГРАММА И БОЛЬШИЕ ПРОЦЕНТЫ (БЕЗ НАЛОЖЕНИЯ) -->
+                <div style="margin-top: 36px; padding-top: 10px;">
+                  <table style="width: 86%; margin: 0 auto; border-collapse: collapse;">
+                    <tr>
+                      <!-- Увеличенный в 1.5 раза круг (150px) -->
+                      <td style="width: 170px; text-align: center; vertical-align: middle;">
+                        <svg width="150" height="150" viewBox="0 0 36 36" style="transform: rotate(-90deg); margin: 0 auto; display: block; overflow: visible;">
+                          <circle cx="18" cy="18" r="15.9155" fill="none" stroke="#1e293b" stroke-width="4"></circle>
+                          <circle id="donut-seg-stem" cx="18" cy="18" r="15.9155" fill="none" stroke="#38bdf8" stroke-width="4.5" stroke-dasharray="25 75" stroke-dashoffset="0"></circle>
+                          <circle id="donut-seg-art" cx="18" cy="18" r="15.9155" fill="none" stroke="#ec4899" stroke-width="4.5" stroke-dasharray="25 75" stroke-dashoffset="-25"></circle>
+                          <circle id="donut-seg-leader" cx="18" cy="18" r="15.9155" fill="none" stroke="#D4AF37" stroke-width="4.5" stroke-dasharray="25 75" stroke-dashoffset="-50"></circle>
+                          <circle id="donut-seg-nature" cx="18" cy="18" r="15.9155" fill="none" stroke="#22c55e" stroke-width="4.5" stroke-dasharray="25 75" stroke-dashoffset="-75"></circle>
+                        </svg>
+                      </td>
+                      <!-- Увеличенные шрифты результатов с отступами -->
+                      <td style="text-align: left; vertical-align: middle; padding-left: 28px; font-size: 13.5px; line-height: 2.1; font-family: 'JetBrains Mono', monospace;">
+                        <div style="color: #38bdf8;">■ Логика & STEM: <strong id="pdf-pct-stem" style="color:#ffffff; font-size:15px; margin-left:6px;">25%</strong></div>
+                        <div style="color: #ec4899;">■ Творчество & Арт: <strong id="pdf-pct-art" style="color:#ffffff; font-size:15px; margin-left:6px;">25%</strong></div>
+                        <div style="color: #D4AF37;">■ Лидерство & Soft-skills: <strong id="pdf-pct-leader" style="color:#ffffff; font-size:15px; margin-left:6px;">25%</strong></div>
+                        <div style="color: #22c55e;">■ Естествознание & Эко: <strong id="pdf-pct-nature" style="color:#ffffff; font-size:15px; margin-left:6px;">25%</strong></div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+
               </td>
             </tr>
 
@@ -1150,7 +1155,7 @@
         if (scores[p] !== undefined) scores[p]++;
       });
 
-      // Ранжирование без фиксированного дефолта
+      // Ранжирование без дефолта
       const sortedProfiles = Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
       const winner = sortedProfiles[0];
       const profData = profiles[winner];
@@ -1194,13 +1199,12 @@
       document.getElementById('pdf-date').textContent = today.toLocaleDateString('ru-RU');
       document.getElementById('pdf-doc-id').textContent = `YN-${today.getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
 
-      // Честный расчет реальных процентов
+      // Честный расчет процентов
       let pctStem = Math.round((scores.stem / total) * 100);
       let pctArt = Math.round((scores.art / total) * 100);
       let pctLeader = Math.round((scores.leader / total) * 100);
       let pctNature = 100 - (pctStem + pctArt + pctLeader);
 
-      // Корректировка нулевых значений для эстетики диаграммы
       if (pctNature < 0) pctNature = 0;
 
       document.getElementById('pdf-pct-stem').textContent = pctStem + '%';
@@ -1239,7 +1243,6 @@
       document.getElementById('bar-num-nature').textContent = pctNature + '%';
       document.getElementById('bar-fill-nature').style.width = pctNature + '%';
 
-      // Динамический вывод описания интеллекта и напутствия
       document.getElementById('pdf-intellect-desc').textContent = profData.intellectDesc;
       document.getElementById('pdf-psycho-advice').textContent = profData.psychoAdvice;
 
@@ -1254,12 +1257,11 @@
       });
     }
 
-    // ИСПРАВЛЕННЫЙ ВЫСОКОТОЧНЫЙ РЕНДЕР С ГАРАНТИРОВАННОЙ ЦЕНТРОВКОЙ
+    // ИСПРАВЛЕННЫЙ ВЫСОКОТОЧНЫЙ РЕНДЕР
     function downloadOfficialPDF() {
       const wrapper = document.getElementById('pdf-render-wrapper');
       const element = document.getElementById('pdf-content');
 
-      // Показываем контейнер строго в координатах 0, 0
       wrapper.style.display = 'block';
 
       const opt = {
