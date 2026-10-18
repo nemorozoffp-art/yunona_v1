@@ -80,17 +80,17 @@
       100% { height: 100%; }
     }
 
-    /* Неоновое свечение кнопки теста талантов */
+    /* Компактная неоновая кнопка Теста талантов */
     .nav-talent-glow {
       background: rgba(212, 175, 55, 0.12);
       border: 1px solid rgba(212, 175, 55, 0.45);
-      box-shadow: 0 0 12px rgba(212, 175, 55, 0.2);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+      transition: all 0.25s ease;
     }
     .nav-talent-glow:hover {
       background: #D4AF37;
       color: #000000 !important;
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.55);
+      box-shadow: 0 0 18px rgba(212, 175, 55, 0.5);
       transform: translateY(-1px);
     }
 
@@ -189,57 +189,59 @@
     </div>
   </aside>
 
-  <!-- ШАПКА САЙТА С ПУНКТОМ "ТЕСТ ТАЛАНТОВ" -->
+  <!-- ШАПКА САЙТА: АДАПТИРОВАННОЕ МЕНЮ (ВСЕ КНОПКИ ПОМЕЩАЮТСЯ) -->
   <header class="sticky top-0 z-40 bg-brand-dark/95 backdrop-blur-xl border-b border-brand-gold/20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-2">
+    <div class="max-w-[1440px] mx-auto px-3 sm:px-5 py-2.5 flex items-center justify-between gap-1 sm:gap-2">
       
       <!-- ЛОГОТИП -->
-      <a href="#" class="flex items-center gap-2 sm:gap-3 group shrink-0">
-        <div class="logo-container relative w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-brand-gold/40 flex items-center justify-center overflow-hidden group-hover:border-brand-gold transition duration-300 shrink-0">
+      <a href="#" class="flex items-center gap-2 group shrink-0">
+        <div class="logo-container relative w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-brand-gold/40 flex items-center justify-center overflow-hidden group-hover:border-brand-gold transition duration-300 shrink-0">
           <img src="logo.jpg" alt="ЧИШ ЮНОНА" class="logo-image w-full h-full object-cover scale-125 transform group-hover:scale-130 transition duration-300">
         </div>
-        <div class="leading-tight">
-          <span class="block font-title text-base sm:text-lg tracking-[0.18em] font-extrabold gold-text-gradient">ЮНОНА</span>
-          <span class="block text-[8px] sm:text-[9px] tracking-wider uppercase text-slate-400 font-medium leading-tight" data-key="sublogo">
+        <div class="leading-tight hidden min-[380px]:block">
+          <span class="block font-title text-sm sm:text-base tracking-[0.16em] font-extrabold gold-text-gradient">ЮНОНА</span>
+          <span class="block text-[7.5px] sm:text-[8.5px] tracking-wider uppercase text-slate-400 font-medium leading-tight" data-key="sublogo">
             Частная школа &amp; сад
           </span>
         </div>
       </a>
 
-      <!-- МЕНЮ -->
-      <nav class="hidden xl:flex items-center gap-3 2xl:gap-4 text-xs 2xl:text-sm font-medium shrink">
+      <!-- ДЕСКТОПНОЕ МЕНЮ: оптимизированные отступы и размеры шрифта -->
+      <nav class="hidden lg:flex items-center gap-2 xl:gap-3 2xl:gap-4 text-[11px] xl:text-xs 2xl:text-[13px] font-medium shrink mx-1">
         <a href="#about" class="hover:text-brand-gold transition whitespace-nowrap" data-key="nav_about">О школе</a>
-        <a href="#day-schedule" class="hover:text-brand-gold transition whitespace-nowrap" data-key="nav_day">День ученика</a>
+        <a href="#director" class="hover:text-brand-gold transition whitespace-nowrap" data-key="nav_director">Руководство</a>
         <a href="#branches" class="hover:text-brand-gold transition whitespace-nowrap" data-key="nav_branches">Школа и Сад</a>
+        <a href="#day-schedule" class="hover:text-brand-gold transition whitespace-nowrap" data-key="nav_day">День ученика</a>
         <a href="#menu-section" class="hover:text-brand-gold transition whitespace-nowrap" data-key="nav_food">Питание</a>
         <a href="#safety" class="hover:text-brand-gold transition whitespace-nowrap" data-key="nav_safety">Безопасность</a>
-        <a href="#projects" class="hover:text-brand-gold transition whitespace-nowrap" data-key="nav_projects">Проекты детей</a>
+        <a href="#projects" class="hover:text-brand-gold transition whitespace-nowrap" data-key="nav_projects">Проекты</a>
         <a href="#virtual-tour" class="hover:text-brand-gold transition whitespace-nowrap" data-key="nav_tour">Территория</a>
         <a href="#calculator" class="hover:text-brand-gold transition whitespace-nowrap" data-key="nav_calc">Калькулятор</a>
         <a href="#contacts" class="hover:text-brand-gold transition whitespace-nowrap" data-key="nav_contacts">Контакты</a>
 
-        <!-- АКЦЕНТНЫЙ ПУНКТ: ТЕСТ ТАЛАНТОВ -->
-        <a href="tests.html" class="nav-talent-glow inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-brand-goldLight text-xs font-semibold whitespace-nowrap">
+        <!-- КНОПКА ТЕСТА В МЕНЮ -->
+        <a href="tests.html" class="nav-talent-glow inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-brand-goldLight text-[11px] xl:text-xs font-semibold whitespace-nowrap">
           <span>✨</span> <span data-key="nav_test">Тест талантов</span>
         </a>
       </nav>
 
-      <!-- КНОПКА ЗАПИСИ -->
+      <!-- ПРАВАЯ ЧАСТЬ: КНОПКА ЗАПИСИ И БУРГЕР -->
       <div class="flex items-center gap-2 shrink-0">
-        <a href="#lead-form" class="hidden sm:inline-flex items-center justify-center px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs font-semibold rounded-full bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-gold text-black hover:opacity-95 shadow-md shadow-brand-gold/20 transition-all whitespace-nowrap" data-key="btn_tour">
-          Записаться на экскурсию
+        <a href="#lead-form" class="hidden sm:inline-flex items-center justify-center px-3 py-1.5 sm:px-3.5 sm:py-2 text-[11px] xl:text-xs font-semibold rounded-full bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-gold text-black hover:opacity-95 shadow-md shadow-brand-gold/20 transition-all whitespace-nowrap" data-key="btn_tour">
+          Экскурсия
         </a>
-        <button id="mobile-menu-btn" class="xl:hidden p-2 rounded-lg bg-white/5 border border-white/10 text-brand-gold hover:bg-white/10" aria-label="Меню">
+        <button id="mobile-menu-btn" class="lg:hidden p-1.5 sm:p-2 rounded-lg bg-white/5 border border-white/10 text-brand-gold hover:bg-white/10" aria-label="Меню">
           <i data-lucide="menu" class="w-5 h-5"></i>
         </button>
       </div>
     </div>
 
     <!-- Мобильное меню -->
-    <div id="mobile-menu" class="hidden xl:hidden bg-brand-dark/98 border-b border-brand-gold/30 px-6 py-6 space-y-3 font-medium">
+    <div id="mobile-menu" class="hidden lg:hidden bg-brand-dark/98 border-b border-brand-gold/30 px-6 py-6 space-y-3 font-medium">
       <a href="#about" onclick="closeMobileMenu()" class="block hover:text-brand-gold py-1 border-b border-white/5" data-key="nav_about">О школе</a>
-      <a href="#day-schedule" onclick="closeMobileMenu()" class="block hover:text-brand-gold py-1 border-b border-white/5" data-key="nav_day">День ученика</a>
+      <a href="#director" onclick="closeMobileMenu()" class="block hover:text-brand-gold py-1 border-b border-white/5" data-key="nav_director">Руководство</a>
       <a href="#branches" onclick="closeMobileMenu()" class="block hover:text-brand-gold py-1 border-b border-white/5" data-key="nav_branches">Школа и Сад</a>
+      <a href="#day-schedule" onclick="closeMobileMenu()" class="block hover:text-brand-gold py-1 border-b border-white/5" data-key="nav_day">День ученика</a>
       <a href="#menu-section" onclick="closeMobileMenu()" class="block hover:text-brand-gold py-1 border-b border-white/5" data-key="nav_food">Питание</a>
       <a href="#safety" onclick="closeMobileMenu()" class="block hover:text-brand-gold py-1 border-b border-white/5" data-key="nav_safety">Безопасность</a>
       <a href="#projects" onclick="closeMobileMenu()" class="block hover:text-brand-gold py-1 border-b border-white/5" data-key="nav_projects">Проекты детей</a>
@@ -265,7 +267,7 @@
 
     <div class="relative z-10 max-w-5xl mx-auto text-center">
       
-      <!-- HERO-ПЛАШКИ С ПЕРЕХОДОМ В ТЕСТ -->
+      <!-- HERO-ПЛАШКИ -->
       <div class="flex flex-wrap items-center justify-center gap-2.5 mb-6 sm:mb-8">
         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-goldLight text-xs sm:text-sm font-medium">
           <i data-lucide="sparkles" class="w-3.5 h-3.5 text-brand-gold shrink-0"></i>
@@ -320,48 +322,67 @@
     </div>
   </section>
 
-  <!-- ИНТЕРАКТИВНЫЙ ТАЙМЛАЙН ДНЯ -->
-  <section id="day-schedule" class="relative z-10 py-16 sm:py-20 px-4 bg-brand-card/50 backdrop-blur-md border-y border-white/5">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <span class="text-brand-gold text-xs font-mono uppercase tracking-widest font-semibold" data-key="day_badge">Распорядок полного дня</span>
-        <h2 class="text-2xl sm:text-4xl font-extrabold text-white font-title mt-2" data-key="day_title">Один день из жизни ученика в «ЮНОНЕ»</h2>
-        <p class="text-xs sm:text-base text-slate-400 mt-2" data-key="day_sub">Никаких домашних заданий по вечерам и поездок по репетиторам — всё продумано до мелочей.</p>
-      </div>
-
-      <div class="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-4 mb-8 font-mono text-xs">
-        <button onclick="setDayTime(0)" class="time-step-btn active px-4 py-2.5 rounded-xl bg-brand-gold text-black font-bold whitespace-nowrap transition" data-key="t_step0">08:30 Встреча</button>
-        <button onclick="setDayTime(1)" class="time-step-btn px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:border-brand-gold whitespace-nowrap transition" data-key="t_step1">09:00 Академический блок</button>
-        <button onclick="setDayTime(2)" class="time-step-btn px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:border-brand-gold whitespace-nowrap transition" data-key="t_step2">13:30 Шеф-обед &amp; Прогулка</button>
-        <button onclick="setDayTime(3)" class="time-step-btn px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:border-brand-gold whitespace-nowrap transition" data-key="t_step3">14:30 Самоподготовка (Д/З)</button>
-        <button onclick="setDayTime(4)" class="time-step-btn px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:border-brand-gold whitespace-nowrap transition" data-key="t_step4">16:00 Секции &amp; IT</button>
-        <button onclick="setDayTime(5)" class="time-step-btn px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:border-brand-gold whitespace-nowrap transition" data-key="t_step5">17:30 Итоги &amp; Домой</button>
-      </div>
-
-      <div id="day-card" class="glass-box p-6 sm:p-10 rounded-3xl border border-brand-gold/40 flex flex-col md:flex-row items-center gap-8">
-        <div class="w-full md:w-1/3 text-center md:text-left">
-          <span id="day-time-badge" class="px-3.5 py-1 rounded-full text-xs font-mono font-bold bg-brand-gold/20 text-brand-gold border border-brand-gold/40">08:30 – 09:00</span>
-          <h3 id="day-title" class="text-2xl font-bold text-white mt-3 mb-2 font-title">Встреча и утренний круг</h3>
-          <p id="day-desc" class="text-slate-300 text-xs sm:text-sm leading-relaxed">
-            Безопасная доставка учеников школьным трансфером, тёплая встреча с куратором, измерение самочувствия и полезный сбалансированный завтрак.
-          </p>
-        </div>
-        <div class="w-full md:w-2/3 grid sm:grid-cols-2 gap-4 text-xs font-mono">
-          <div class="p-4 rounded-2xl bg-black/40 border border-white/5">
-            <span class="text-brand-gold block font-bold mb-1" data-key="day_focus_label">Фокус внимания:</span>
-            <span id="day-focus" class="text-slate-200">Психологический настрой на день, дружеское общение и заряд энергии</span>
+  <!-- 2. БЛОК: СЛОВО РУКОВОДИТЕЛЯ (ПОДНЯТ ПЕРВЫМ ПОСЛЕ HERO) -->
+  <section id="director" class="relative z-10 py-16 sm:py-20 px-4">
+    <div class="max-w-6xl mx-auto glass-box rounded-3xl p-6 sm:p-12 relative overflow-hidden">
+      <div class="grid md:grid-cols-12 gap-8 items-center">
+        
+        <div class="md:col-span-5 flex justify-center">
+          <div class="relative group max-w-xs sm:max-w-sm w-full">
+            <div class="absolute -inset-1.5 bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-goldDark rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+            <img src="Директор.jpg" alt="Директор ЧИШ ЮНОНА" class="relative rounded-2xl w-full object-cover shadow-2xl" onerror="this.onerror=null; this.src='director.jpg';">
           </div>
-          <div class="p-4 rounded-2xl bg-black/40 border border-white/5">
-            <span class="text-emerald-400 block font-bold mb-1" data-key="day_benefit_label">Плюс для родителей:</span>
-            <span id="day-benefit" class="text-slate-200">Вы спокойны за безопасность и здоровое горячее питание с самого утра</span>
+        </div>
+
+        <div class="md:col-span-7">
+          <div class="inline-block px-3 py-1 rounded bg-brand-gold/10 text-brand-gold text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-2" data-key="dir_badge">
+            Слово руководителя
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-1" data-key="dir_name">Борисова Елена Геннадьевна</h2>
+          <p class="text-brand-gold text-xs sm:text-sm font-medium mb-5" data-key="dir_role">Директор ЧИШ «ЮНОНА», лауреат международных наград в сфере образования</p>
+
+          <blockquote class="text-slate-300 text-xs sm:text-base italic leading-relaxed mb-6 border-l-2 border-brand-gold pl-4" data-key="dir_quote">
+            «Каждый ребенок приходит в этот мир со своей уникальной искрой таланта. Наша миссия — не просто дать школьную программу, а создать атмосферу доверия, в которой ученик не боится ошибаться, учится мыслить самостоятельно и верит в свои силы.»
+          </blockquote>
+
+          <div class="p-4 rounded-2xl bg-black/60 border border-brand-gold/40 flex items-center justify-between gap-4 mb-6">
+            <div class="flex items-center gap-3">
+              <button id="audio-play-btn" onclick="toggleDirectorAudio()" class="w-11 h-11 rounded-full bg-brand-gold text-black flex items-center justify-center hover:scale-105 transition shadow-lg shadow-brand-gold/30 shrink-0">
+                <i data-lucide="play" class="w-5 h-5 fill-current ml-0.5"></i>
+              </button>
+              <div>
+                <span class="block text-xs font-bold text-white" data-key="dir_audio_title">Послушать обращение директора</span>
+                <span id="audio-status-txt" class="block text-[11px] font-mono text-brand-goldLight" data-key="dir_audio_sub">Аудио-визитка (0:45)</span>
+              </div>
+            </div>
+
+            <div id="sound-bars" class="flex items-center gap-1 h-6 opacity-40 transition-opacity">
+              <span class="w-1 bg-brand-gold rounded-full wave-bar h-2"></span>
+              <span class="w-1 bg-brand-goldLight rounded-full wave-bar h-5" style="animation-delay: 0.2s;"></span>
+              <span class="w-1 bg-brand-gold rounded-full wave-bar h-3" style="animation-delay: 0.4s;"></span>
+              <span class="w-1 bg-brand-goldLight rounded-full wave-bar h-6" style="animation-delay: 0.1s;"></span>
+              <span class="w-1 bg-brand-gold rounded-full wave-bar h-4" style="animation-delay: 0.3s;"></span>
+            </div>
+          </div>
+          <audio id="director-audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="metadata"></audio>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs text-slate-300">
+            <div class="flex items-center gap-2">
+              <i data-lucide="award" class="w-4 h-4 text-brand-gold shrink-0"></i>
+              <span data-key="dir_f1">Опыт и международное признание</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="shield-check" class="w-4 h-4 text-brand-gold shrink-0"></i>
+              <span data-key="dir_f2">Лицензированное качественное образование</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 2. СЕКЦИЯ: ШКОЛА И САДИК -->
-  <section id="branches" class="relative z-10 py-16 sm:py-20 px-4">
+  <!-- 3. БЛОК: ЕДИНЫЙ ОБРАЗОВАТЕЛЬНЫЙ КОМПЛЕКС (ШКОЛА И САД) -->
+  <section id="branches" class="relative z-10 py-16 sm:py-20 px-4 bg-brand-card/40 backdrop-blur-md border-y border-white/5">
     <div class="max-w-7xl mx-auto">
       <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
         <h2 class="text-2xl sm:text-4xl font-extrabold mb-3 font-title gold-text-gradient" data-key="branches_title">Единый Образовательный Комплекс</h2>
@@ -423,67 +444,48 @@
     </div>
   </section>
 
-  <!-- БЛОК ДИРЕКТОРА С ГОЛОСОВЫМ ПРИВЕТСТВИЕМ -->
-  <section id="director" class="relative z-10 py-16 sm:py-20 px-4">
-    <div class="max-w-6xl mx-auto glass-box rounded-3xl p-6 sm:p-12 relative overflow-hidden">
-      <div class="grid md:grid-cols-12 gap-8 items-center">
-        
-        <div class="md:col-span-5 flex justify-center">
-          <div class="relative group max-w-xs sm:max-w-sm w-full">
-            <div class="absolute -inset-1.5 bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-goldDark rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-            <img src="Директор.jpg" alt="Директор ЧИШ ЮНОНА" class="relative rounded-2xl w-full object-cover shadow-2xl" onerror="this.onerror=null; this.src='director.jpg';">
-          </div>
+  <!-- 4. ИНТЕРАКТИВНЫЙ ТАЙМЛАЙН ДНЯ (РАСПОЛОЖЕН ПОСЛЕ КОМПЛЕКСА) -->
+  <section id="day-schedule" class="relative z-10 py-16 sm:py-20 px-4 bg-brand-card/50 backdrop-blur-md border-b border-white/5">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-brand-gold text-xs font-mono uppercase tracking-widest font-semibold" data-key="day_badge">Распорядок полного дня</span>
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-white font-title mt-2" data-key="day_title">Один день из жизни ученика в «ЮНОНЕ»</h2>
+        <p class="text-xs sm:text-base text-slate-400 mt-2" data-key="day_sub">Никаких домашних заданий по вечерам и поездок по репетиторам — всё продумано до мелочей.</p>
+      </div>
+
+      <div class="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-4 mb-8 font-mono text-xs">
+        <button onclick="setDayTime(0)" class="time-step-btn active px-4 py-2.5 rounded-xl bg-brand-gold text-black font-bold whitespace-nowrap transition" data-key="t_step0">08:30 Встреча</button>
+        <button onclick="setDayTime(1)" class="time-step-btn px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:border-brand-gold whitespace-nowrap transition" data-key="t_step1">09:00 Академический блок</button>
+        <button onclick="setDayTime(2)" class="time-step-btn px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:border-brand-gold whitespace-nowrap transition" data-key="t_step2">13:30 Шеф-обед &amp; Прогулка</button>
+        <button onclick="setDayTime(3)" class="time-step-btn px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:border-brand-gold whitespace-nowrap transition" data-key="t_step3">14:30 Самоподготовка (Д/З)</button>
+        <button onclick="setDayTime(4)" class="time-step-btn px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:border-brand-gold whitespace-nowrap transition" data-key="t_step4">16:00 Секции &amp; IT</button>
+        <button onclick="setDayTime(5)" class="time-step-btn px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:border-brand-gold whitespace-nowrap transition" data-key="t_step5">17:30 Итоги &amp; Домой</button>
+      </div>
+
+      <div id="day-card" class="glass-box p-6 sm:p-10 rounded-3xl border border-brand-gold/40 flex flex-col md:flex-row items-center gap-8">
+        <div class="w-full md:w-1/3 text-center md:text-left">
+          <span id="day-time-badge" class="px-3.5 py-1 rounded-full text-xs font-mono font-bold bg-brand-gold/20 text-brand-gold border border-brand-gold/40">08:30 – 09:00</span>
+          <h3 id="day-title" class="text-2xl font-bold text-white mt-3 mb-2 font-title">Встреча и утренний круг</h3>
+          <p id="day-desc" class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+            Безопасная доставка учеников школьным трансфером, тёплая встреча с куратором, измерение самочувствия и полезный сбалансированный завтрак.
+          </p>
         </div>
-
-        <div class="md:col-span-7">
-          <div class="inline-block px-3 py-1 rounded bg-brand-gold/10 text-brand-gold text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-2" data-key="dir_badge">
-            Слово руководителя
+        <div class="w-full md:w-2/3 grid sm:grid-cols-2 gap-4 text-xs font-mono">
+          <div class="p-4 rounded-2xl bg-black/40 border border-white/5">
+            <span class="text-brand-gold block font-bold mb-1" data-key="day_focus_label">Фокус внимания:</span>
+            <span id="day-focus" class="text-slate-200">Психологический настрой на день, дружеское общение и заряд энергии</span>
           </div>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-1" data-key="dir_name">Борисова Елена Геннадьевна</h2>
-          <p class="text-brand-gold text-xs sm:text-sm font-medium mb-5" data-key="dir_role">Директор ЧИШ «ЮНОНА», лауреат международных наград в сфере образования</p>
-
-          <blockquote class="text-slate-300 text-xs sm:text-base italic leading-relaxed mb-6 border-l-2 border-brand-gold pl-4" data-key="dir_quote">
-            «Каждый ребенок приходит в этот мир со своей уникальной искрой таланта. Наша миссия — не просто дать школьную программу, а создать атмосферу доверия, в которой ученик не боится ошибаться, учится мыслить самостоятельно и верит в свои силы.»
-          </blockquote>
-
-          <div class="p-4 rounded-2xl bg-black/60 border border-brand-gold/40 flex items-center justify-between gap-4 mb-6">
-            <div class="flex items-center gap-3">
-              <button id="audio-play-btn" onclick="toggleDirectorAudio()" class="w-11 h-11 rounded-full bg-brand-gold text-black flex items-center justify-center hover:scale-105 transition shadow-lg shadow-brand-gold/30 shrink-0">
-                <i data-lucide="play" class="w-5 h-5 fill-current ml-0.5"></i>
-              </button>
-              <div>
-                <span class="block text-xs font-bold text-white" data-key="dir_audio_title">Послушать обращение директора</span>
-                <span id="audio-status-txt" class="block text-[11px] font-mono text-brand-goldLight" data-key="dir_audio_sub">Аудио-визитка (0:45)</span>
-              </div>
-            </div>
-
-            <div id="sound-bars" class="flex items-center gap-1 h-6 opacity-40 transition-opacity">
-              <span class="w-1 bg-brand-gold rounded-full wave-bar h-2"></span>
-              <span class="w-1 bg-brand-goldLight rounded-full wave-bar h-5" style="animation-delay: 0.2s;"></span>
-              <span class="w-1 bg-brand-gold rounded-full wave-bar h-3" style="animation-delay: 0.4s;"></span>
-              <span class="w-1 bg-brand-goldLight rounded-full wave-bar h-6" style="animation-delay: 0.1s;"></span>
-              <span class="w-1 bg-brand-gold rounded-full wave-bar h-4" style="animation-delay: 0.3s;"></span>
-            </div>
-          </div>
-          <audio id="director-audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="metadata"></audio>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs text-slate-300">
-            <div class="flex items-center gap-2">
-              <i data-lucide="award" class="w-4 h-4 text-brand-gold shrink-0"></i>
-              <span data-key="dir_f1">Опыт и международное признание</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <i data-lucide="shield-check" class="w-4 h-4 text-brand-gold shrink-0"></i>
-              <span data-key="dir_f2">Лицензированное качественное образование</span>
-            </div>
+          <div class="p-4 rounded-2xl bg-black/40 border border-white/5">
+            <span class="text-emerald-400 block font-bold mb-1" data-key="day_benefit_label">Плюс для родителей:</span>
+            <span id="day-benefit" class="text-slate-200">Вы спокойны за безопасность и здоровое горячее питание с самого утра</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- БЛОК: ЭКО-МЕНЮ -->
-  <section id="menu-section" class="relative z-10 py-16 sm:py-20 px-4 bg-brand-card/50 backdrop-blur-md border-y border-white/5">
+  <!-- 5. БЛОК: ЭКО-МЕНЮ -->
+  <section id="menu-section" class="relative z-10 py-16 sm:py-20 px-4">
     <div class="max-w-6xl mx-auto">
       <div class="text-center max-w-3xl mx-auto mb-10">
         <span class="text-brand-gold text-xs font-mono uppercase tracking-widest font-semibold" data-key="menu_badge">Здоровое питание</span>
@@ -521,8 +523,8 @@
     </div>
   </section>
 
-  <!-- БЛОК: БЕЗОПАСНОСТЬ 360° -->
-  <section id="safety" class="relative z-10 py-16 sm:py-20 px-4">
+  <!-- 6. БЛОК: БЕЗОПАСНОСТЬ 360° -->
+  <section id="safety" class="relative z-10 py-16 sm:py-20 px-4 bg-brand-card/40 backdrop-blur-md border-y border-white/5">
     <div class="max-w-6xl mx-auto glass-box rounded-3xl p-6 sm:p-10 border border-brand-gold/30">
       <div class="text-center max-w-3xl mx-auto mb-10">
         <span class="text-brand-gold text-xs font-mono uppercase tracking-widest font-semibold" data-key="safe_badge">Спокойствие родителей</span>
@@ -566,8 +568,8 @@
     </div>
   </section>
 
-  <!-- ВИТРИНА ПРОЕКТОВ УЧЕНИКОВ -->
-  <section id="projects" class="relative z-10 py-16 sm:py-20 px-4 bg-brand-card/40 backdrop-blur-md border-t border-white/5">
+  <!-- 7. ВИТРИНА ПРОЕКТОВ УЧЕНИКОВ -->
+  <section id="projects" class="relative z-10 py-16 sm:py-20 px-4">
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
         <div>
@@ -622,8 +624,8 @@
     </div>
   </section>
 
-  <!-- ВИРТУАЛЬНЫЙ ТУР -->
-  <section id="virtual-tour" class="relative z-10 py-16 sm:py-20 px-4">
+  <!-- 8. ВИРТУАЛЬНЫЙ ТУР -->
+  <section id="virtual-tour" class="relative z-10 py-16 sm:py-20 px-4 bg-brand-card/50 backdrop-blur-md border-y border-white/5">
     <div class="max-w-6xl mx-auto glass-box rounded-3xl p-6 sm:p-10 border border-brand-gold/40">
       <div class="text-center max-w-3xl mx-auto mb-8">
         <span class="text-brand-gold text-xs font-mono uppercase tracking-widest font-semibold" data-key="tour_badge">Пространство развития</span>
@@ -663,8 +665,8 @@
     </div>
   </section>
 
-  <!-- КАЛЬКУЛЯТОР ВРЕМЕНИ И БЮДЖЕТА -->
-  <section id="calculator" class="relative z-10 py-16 sm:py-20 px-4 bg-brand-card/50 backdrop-blur-md border-y border-white/5">
+  <!-- 9. КАЛЬКУЛЯТОР ВРЕМЕНИ И БЮДЖЕТА -->
+  <section id="calculator" class="relative z-10 py-16 sm:py-20 px-4">
     <div class="max-w-4xl mx-auto glass-box rounded-3xl p-6 sm:p-12 border border-brand-gold/40">
       <div class="text-center mb-8">
         <span class="text-brand-gold text-xs font-mono uppercase tracking-widest font-semibold" data-key="calc_badge">Ценность для семьи</span>
@@ -706,8 +708,8 @@
     </div>
   </section>
 
-  <!-- КВИЗ ДЛЯ РОДИТЕЛЕЙ -->
-  <section id="quiz-section" class="relative z-10 py-16 sm:py-20 px-4">
+  <!-- 10. КВИЗ ДЛЯ РОДИТЕЛЕЙ -->
+  <section id="quiz-section" class="relative z-10 py-16 sm:py-20 px-4 bg-brand-card/50 backdrop-blur-md border-t border-white/5">
     <div class="max-w-3xl mx-auto glass-box rounded-3xl p-6 sm:p-10 border border-brand-gold/40">
       <div class="text-center mb-8">
         <span class="text-brand-gold text-xs font-mono uppercase tracking-widest font-semibold" data-key="quiz_badge">Гид для родителей</span>
@@ -755,7 +757,7 @@
     </div>
   </section>
 
-  <!-- ВИДЕО -->
+  <!-- 11. ВИДЕО И СОЦСЕТИ -->
   <section id="media" class="relative z-10 py-16 sm:py-20 px-4 bg-brand-card/50 backdrop-blur-md border-t border-white/5">
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12">
@@ -824,7 +826,7 @@
     </div>
   </section>
 
-  <!-- ФОРМА ЗАЯВКИ -->
+  <!-- 12. ФОРМА ЗАЯВКИ -->
   <section id="lead-form" class="relative z-10 py-16 sm:py-20 px-4">
     <div class="max-w-3xl mx-auto bg-gradient-to-b from-brand-card to-brand-dark/95 border border-brand-gold/40 rounded-3xl p-6 sm:p-12 shadow-2xl backdrop-blur-md">
       <div class="text-center mb-8">
@@ -892,8 +894,9 @@
           <ul class="space-y-1.5">
             <li><a href="#about" class="hover:text-brand-gold transition" data-key="nav_about">О школе и миссии</a></li>
             <li><a href="tests.html" class="hover:text-brand-gold transition text-amber-300 font-medium">✨ Тест талантов и кружков</a></li>
-            <li><a href="#day-schedule" class="hover:text-brand-gold transition" data-key="nav_day">День ученика</a></li>
+            <li><a href="#director" class="hover:text-brand-gold transition" data-key="nav_director">Руководство</a></li>
             <li><a href="#branches" class="hover:text-brand-gold transition" data-key="nav_branches">Школьные программы</a></li>
+            <li><a href="#day-schedule" class="hover:text-brand-gold transition" data-key="nav_day">День ученика</a></li>
             <li><a href="#projects" class="hover:text-brand-gold transition" data-key="nav_projects">Проекты детей</a></li>
             <li><a href="#virtual-tour" class="hover:text-brand-gold transition" data-key="nav_tour">Виртуальный тур</a></li>
           </ul>
@@ -1521,16 +1524,17 @@
         top_garden: "Садик",
         sublogo: "Частная школа & сад",
         nav_about: "О школе",
-        nav_day: "День ученика",
+        nav_director: "Руководство",
         nav_branches: "Школа и Сад",
+        nav_day: "День ученика",
         nav_food: "Питание",
         nav_safety: "Безопасность",
-        nav_projects: "Проекты детей",
+        nav_projects: "Проекты",
         nav_tour: "Территория",
         nav_calc: "Калькулятор",
         nav_contacts: "Контакты",
         nav_test: "Тест талантов",
-        btn_tour: "Записаться на экскурсию",
+        btn_tour: "Экскурсия",
         hero_badge: "Двуязычное обучение: Русский и Казахский классы",
         hero_title1: "Пространство, где раскрывается",
         hero_title2: "Потенциал Каждого Ребёнка",
@@ -1653,16 +1657,17 @@
         top_garden: "Балабақша",
         sublogo: "Жеке мектеп & бақша",
         nav_about: "Мектеп туралы",
-        nav_day: "Оқушы күні",
+        nav_director: "Басшылық",
         nav_branches: "Мектеп және Бақша",
+        nav_day: "Оқушы күні",
         nav_food: "Тамақтану",
         nav_safety: "Қауіпсіздік",
-        nav_projects: "Балалар жобалары",
+        nav_projects: "Жобалар",
         nav_tour: "Кампус",
         nav_calc: "Калькулятор",
         nav_contacts: "Байланыс",
         nav_test: "Дарын тесті",
-        btn_tour: "Экскурсияға жазылу",
+        btn_tour: "Экскурсия",
         hero_badge: "Қос тілде оқыту: Қазақ және Орыс сыныптары",
         hero_title1: "Әр баланың қабілеті ашылатын",
         hero_title2: "Шабыт пен Білім Кеңістігі",
@@ -1785,8 +1790,9 @@
         top_garden: "Kindergarten",
         sublogo: "Private School & Kindergarten",
         nav_about: "About Us",
-        nav_day: "Student's Day",
+        nav_director: "Leadership",
         nav_branches: "School & Kindergarten",
+        nav_day: "Student's Day",
         nav_food: "Nutrition",
         nav_safety: "Safety",
         nav_projects: "Projects",
@@ -1794,7 +1800,7 @@
         nav_calc: "Calculator",
         nav_contacts: "Contacts",
         nav_test: "Talent Test",
-        btn_tour: "Book a Tour",
+        btn_tour: "Book Tour",
         hero_badge: "Bilingual Education: Kazakh & Russian streams",
         hero_title1: "The Space Where Every Child's",
         hero_title2: "True Potential Unfolds",
