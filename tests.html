@@ -85,45 +85,44 @@
       transform: translateY(-2px);
     }
 
-    /* СТИЛИ ПРЕМИАЛЬНОГО БЛАНКА PDF (ЧЕТКИЙ ФОРМАТ А4) */
-    .pdf-sheet {
+    /* ЖЕСТКИЙ СТАТУСНЫЙ БЛАНК PDF (СТРОГО 794x1122 px БЕЗ СМЯТИЯ) */
+    .pdf-render-box {
       width: 794px;
-      height: 1123px;
-      max-height: 1123px;
-      padding: 38px 45px;
-      box-sizing: border-box;
       background: #080d16;
       color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .pdf-page-container {
+      width: 794px;
+      height: 1120px;
+      max-height: 1120px;
+      padding: 30px;
+      box-sizing: border-box;
+      background: #080d16;
       position: relative;
       overflow: hidden;
-      font-family: 'Montserrat', sans-serif;
     }
-    .pdf-break {
-      page-break-after: always;
-      break-after: page;
-    }
-    .gold-cert-frame {
-      position: relative;
+    .pdf-gold-border {
       width: 100%;
       height: 100%;
+      box-sizing: border-box;
       border: 2px solid #D4AF37;
       outline: 6px solid #0f172a;
       box-shadow: 0 0 0 8px #D4AF37;
-      padding: 30px;
-      box-sizing: border-box;
-      display: flex;
-      flex-col;
-      justify-content: space-between;
+      padding: 26px 32px;
+      position: relative;
     }
   </style>
 </head>
-<body class="bg-brand-dark text-slate-100 font-sans antialiased min-h-screen relative flex flex-col justify-between selection:bg-brand-gold selection:text-black">
+<body class="bg-brand-dark text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-brand-gold selection:text-black">
 
   <!-- ДИНАМИЧЕСКИЙ ФОНОВЫЙ ОРЕОЛ -->
   <div id="ambient-bg" class="ambient-glow fixed inset-0 pointer-events-none z-0 bg-[radial-gradient(ellipse_at_top,rgba(212,175,55,0.12)_0%,transparent_70%)]"></div>
 
   <!-- ШАПКА -->
-  <header class="relative z-20 border-b border-brand-gold/20 bg-brand-dark/90 backdrop-blur-xl py-3 px-4 sm:px-8">
+  <header class="relative z-20 border-b border-brand-gold/20 bg-brand-dark/90 backdrop-blur-xl py-3 px-4 sm:px-8 shrink-0">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-3 group">
         <div class="w-10 h-10 rounded-full border border-brand-gold/40 flex items-center justify-center overflow-hidden bg-brand-card">
@@ -150,7 +149,7 @@
     </div>
   </header>
 
-  <!-- ОСНОВНОЙ КОНТЕНТ -->
+  <!-- ОСНОВНОЙ КОНТЕНТ (РАСТЯГИВАЕТСЯ НА ВЕСЬ ЭКРАН) -->
   <main class="relative z-10 flex-grow flex items-center justify-center p-4 sm:p-6 max-w-5xl mx-auto w-full">
 
     <!-- 1. ХАБ ВЫБОРА УРОВНЯ -->
@@ -362,231 +361,226 @@
 
   </main>
 
-  <!-- КОМПАКТНЫЙ АККУРАТНЫЙ ПОДВАЛ (БЕЗ ОГРОМНЫХ ПУСТОТ) -->
-  <footer class="relative z-10 border-t border-white/10 bg-black/80 py-3 px-4 text-center text-xs text-slate-500">
+  <!-- КОМПАКТНЫЙ ПОДВАЛ (ПРИЖАТ СТРОГО К САМОМУ НИЗУ ЭКРАНА) -->
+  <footer class="relative z-10 border-t border-white/10 bg-black/85 py-3 px-4 text-xs text-slate-500 shrink-0">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px]">
       <div>© 2026 ЧИШ «ЮНОНА». Модуль первичной профориентации.</div>
       <div class="text-slate-400 font-mono">Разработано <span class="text-white font-bold">IT Life</span> (a PAVLIKneMOROZOFF company)</div>
     </div>
   </footer>
 
-  <!-- ============================================================== -->
-  <!-- ПРЕМИАЛЬНЫЙ ШАБЛОН ДЛЯ ГЕНЕРАЦИИ PDF (ЧЕТКИЙ А4 БЕЗ РАЗРЫВОВ)   -->
-  <!-- ============================================================== -->
-  <div id="pdf-render-wrapper" style="position: absolute; left: -9999px; top: 0;">
-    <div id="pdf-content">
+  <!-- ================================================================= -->
+  <!-- НАДЕЖНЫЙ ШАБЛОН PDF НА БАЗЕ ТАБЛИЦ (БЕЗ СМЯТИЯ И БЕЛЫХ ЛИСТОВ)   -->
+  <!-- ================================================================= -->
+  <div style="position: absolute; left: -9999px; top: 0;">
+    <div id="pdf-content" class="pdf-render-box">
       
-      <!-- СТРАНИЦА 1: ОФИЦИАЛЬНЫЙ СЕРТИФИКАТ С ГРАФИКОМ -->
-      <div class="pdf-sheet pdf-break">
-        <div class="gold-cert-frame">
-          
-          <!-- Шапка сертификата -->
-          <div style="text-align: center;">
-            <div style="font-family:'Cinzel', serif; font-size:22px; color:#D4AF37; font-weight:800; letter-spacing:2px; line-height: 1.2;">
-              ЧАСТНАЯ ИННОВАЦИОННАЯ ШКОЛА «ЮНОНА»
-            </div>
-            <div style="font-size:9px; color:#94a3b8; letter-spacing:2.5px; text-transform:uppercase; margin-top:4px;">
-              PRIVATE INNOVATIVE SCHOOL & KINDERGARTEN YUNONA • KAZAKHSTAN
-            </div>
-            <div style="height:1px; width:60%; background:#D4AF37; margin:14px auto 0 auto; opacity:0.5;"></div>
-          </div>
+      <!-- ЛИСТ 1: ОФИЦИАЛЬНЫЙ СЕРТИФИКАТ (СТРОГО 1120px) -->
+      <div class="pdf-page-container">
+        <div class="pdf-gold-border">
+          <table style="width: 100%; height: 100%; border-collapse: collapse;">
+            
+            <!-- Шапка -->
+            <tr style="height: 100px;">
+              <td colspan="2" style="text-align: center; vertical-align: top;">
+                <div style="font-family:'Cinzel', serif; font-size:22px; color:#D4AF37; font-weight:800; letter-spacing:2px; line-height: 1.2;">
+                  ЧАСТНАЯ ИННОВАЦИОННАЯ ШКОЛА «ЮНОНА»
+                </div>
+                <div style="font-size:9px; color:#94a3b8; letter-spacing:2.5px; text-transform:uppercase; margin-top:5px;">
+                  PRIVATE INNOVATIVE SCHOOL & KINDERGARTEN YUNONA • KAZAKHSTAN
+                </div>
+                <div style="height:1px; width:70%; background:#D4AF37; margin:14px auto 0 auto; opacity:0.5;"></div>
+              </td>
+            </tr>
 
-          <!-- Центральная часть сертификата -->
-          <div style="text-align: center; margin: 15px 0;">
-            <div style="font-family:'Cinzel', serif; font-size:15px; color:#f3e5ab; letter-spacing:4px; text-transform:uppercase;">
-              ОФИЦИАЛЬНЫЙ СЕРТИФИКАТ
-            </div>
-            <div style="font-size:10px; color:#94a3b8; margin-top:3px;">
-              О прохождении комплексной диагностики талантов и структуры интеллекта
-            </div>
+            <!-- Центральный блок -->
+            <tr>
+              <td colspan="2" style="text-align: center; vertical-align: middle; padding: 10px 0;">
+                <div style="font-family:'Cinzel', serif; font-size:15px; color:#f3e5ab; letter-spacing:4px; text-transform:uppercase;">
+                  ОФИЦИАЛЬНЫЙ СЕРТИФИКАТ
+                </div>
+                <div style="font-size:10px; color:#94a3b8; margin-top:3px;">
+                  О прохождении комплексной диагностики талантов и структуры интеллекта
+                </div>
 
-            <div style="font-size:12px; color:#cbd5e1; margin-top:20px;">Настоящим подтверждается, что:</div>
-            <div id="pdf-user-name" style="font-size:24px; color:#ffffff; font-weight:bold; margin-top:4px; border-bottom:1.5px solid #D4AF37; display:inline-block; padding:0 30px 4px 30px; letter-spacing: 0.5px;">
-              Сериков Арман
-            </div>
+                <div style="font-size:12px; color:#cbd5e1; margin-top:18px;">Настоящим подтверждается, что:</div>
+                <div id="pdf-user-name" style="font-size:24px; color:#ffffff; font-weight:bold; margin-top:4px; border-bottom:1.5px solid #D4AF37; display:inline-block; padding:0 30px 4px 30px; letter-spacing: 0.5px;">
+                  Сериков Арман
+                </div>
 
-            <div id="pdf-user-details" style="font-size:11px; color:#94a3b8; margin-top:6px; font-family: 'JetBrains Mono', monospace;">
-              Класс: 4 «А» • Возраст: 10 лет • Абитуриент ЧИШ «ЮНОНА»
-            </div>
+                <div id="pdf-user-details" style="font-size:11px; color:#94a3b8; margin-top:6px; font-family: 'JetBrains Mono', monospace;">
+                  Класс: 4 «А» • Возраст: 10 лет • Абитуриент ЧИШ «ЮНОНА»
+                </div>
 
-            <!-- Блок профиля -->
-            <div style="margin-top:22px; padding:14px; background:rgba(212,175,55,0.06); border:1px solid rgba(212,175,55,0.35); border-radius:10px;">
-              <div style="font-size:10px; text-transform:uppercase; letter-spacing:2px; color:#D4AF37; font-weight: bold;">
-                Присвоенный профиль талантов:
-              </div>
-              <div id="pdf-profile-title" style="font-family:'Cinzel', serif; font-size:19px; font-weight:bold; color:#ffffff; margin-top:3px;">
-                Архитектор Будущего & STEM
-              </div>
-              <div id="pdf-profile-summary" style="font-size:10.5px; color:#e2e8f0; margin-top:5px; line-height:1.5; max-width: 580px; margin-left: auto; margin-right: auto;">
-                Высокая склонность к точным наукам, аналитическому моделированию и пространственному конструированию.
-              </div>
-            </div>
+                <!-- Плашка профиля -->
+                <div style="margin:20px auto 0 auto; width: 92%; padding:14px; background:rgba(212,175,55,0.06); border:1px solid rgba(212,175,55,0.35); border-radius:10px;">
+                  <div style="font-size:10px; text-transform:uppercase; letter-spacing:2px; color:#D4AF37; font-weight: bold;">
+                    Присвоенный профиль талантов:
+                  </div>
+                  <div id="pdf-profile-title" style="font-family:'Cinzel', serif; font-size:19px; font-weight:bold; color:#ffffff; margin-top:3px;">
+                    Архитектор Будущего & STEM
+                  </div>
+                  <div id="pdf-profile-summary" style="font-size:10.5px; color:#e2e8f0; margin-top:5px; line-height:1.5;">
+                    Высокая склонность к точным наукам, аналитическому моделированию и пространственному конструированию.
+                  </div>
+                </div>
 
-            <!-- КРУГОВАЯ ДИАГРАММА / РАДАР СПОСОБНОСТЕЙ В СЕРТИФИКАТЕ -->
-            <div style="margin-top: 18px; display: flex; align-items: center; justify-content: center; gap: 25px;">
-              <!-- Интерактивный SVG график -->
-              <svg id="pdf-donut-chart" width="105" height="105" viewBox="0 0 36 36" style="transform: rotate(-90deg);">
-                <circle cx="18" cy="18" r="15.9155" fill="none" stroke="#1e293b" stroke-width="3"></circle>
-                <circle id="donut-seg-stem" cx="18" cy="18" r="15.9155" fill="none" stroke="#38bdf8" stroke-width="3.5" stroke-dasharray="40 60" stroke-dashoffset="0"></circle>
-                <circle id="donut-seg-art" cx="18" cy="18" r="15.9155" fill="none" stroke="#ec4899" stroke-width="3.5" stroke-dasharray="25 75" stroke-dashoffset="-40"></circle>
-                <circle id="donut-seg-leader" cx="18" cy="18" r="15.9155" fill="none" stroke="#D4AF37" stroke-width="3.5" stroke-dasharray="20 80" stroke-dashoffset="-65"></circle>
-                <circle id="donut-seg-nature" cx="18" cy="18" r="15.9155" fill="none" stroke="#22c55e" stroke-width="3.5" stroke-dasharray="15 85" stroke-dashoffset="-85"></circle>
-              </svg>
-              <!-- Легенда графика -->
-              <div style="text-align: left; font-size: 10px; line-height: 1.6; font-family: 'JetBrains Mono', monospace;">
-                <div style="color: #38bdf8;">■ Логика & STEM: <strong id="pdf-pct-stem">40%</strong></div>
-                <div style="color: #ec4899;">■ Творчество & Арт: <strong id="pdf-pct-art">25%</strong></div>
-                <div style="color: #D4AF37;">■ Лидерство & Коммуникация: <strong id="pdf-pct-leader">20%</strong></div>
-                <div style="color: #22c55e;">■ Естествознание & Эко: <strong id="pdf-pct-nature">15%</strong></div>
-              </div>
-            </div>
+                <!-- Диаграмма и легенда на таблице (гарантирует отсутствие сжатия) -->
+                <table style="width: 75%; margin: 20px auto 0 auto;">
+                  <tr>
+                    <td style="width: 120px; text-align: center; vertical-align: middle;">
+                      <svg width="105" height="105" viewBox="0 0 36 36" style="transform: rotate(-90deg);">
+                        <circle cx="18" cy="18" r="15.9155" fill="none" stroke="#1e293b" stroke-width="3.5"></circle>
+                        <circle id="donut-seg-stem" cx="18" cy="18" r="15.9155" fill="none" stroke="#38bdf8" stroke-width="4" stroke-dasharray="40 60" stroke-dashoffset="0"></circle>
+                        <circle id="donut-seg-art" cx="18" cy="18" r="15.9155" fill="none" stroke="#ec4899" stroke-width="4" stroke-dasharray="25 75" stroke-dashoffset="-40"></circle>
+                        <circle id="donut-seg-leader" cx="18" cy="18" r="15.9155" fill="none" stroke="#D4AF37" stroke-width="4" stroke-dasharray="20 80" stroke-dashoffset="-65"></circle>
+                        <circle id="donut-seg-nature" cx="18" cy="18" r="15.9155" fill="none" stroke="#22c55e" stroke-width="4" stroke-dasharray="15 85" stroke-dashoffset="-85"></circle>
+                      </svg>
+                    </td>
+                    <td style="text-align: left; vertical-align: middle; padding-left: 20px; font-size: 10.5px; line-height: 1.7; font-family: 'JetBrains Mono', monospace;">
+                      <div style="color: #38bdf8;">■ Логика & STEM: <strong id="pdf-pct-stem">40%</strong></div>
+                      <div style="color: #ec4899;">■ Творчество & Арт: <strong id="pdf-pct-art">25%</strong></div>
+                      <div style="color: #D4AF37;">■ Лидерство & Soft-skills: <strong id="pdf-pct-leader">20%</strong></div>
+                      <div style="color: #22c55e;">■ Естествознание & Эко: <strong id="pdf-pct-nature">15%</strong></div>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
 
-          </div>
+            <!-- Подвал страницы 1 с печатью -->
+            <tr style="height: 90px; border-top: 1px solid rgba(255,255,255,0.12);">
+              <td style="text-align: left; vertical-align: bottom; font-size:9.5px; color:#94a3b8; font-family:'JetBrains Mono', monospace; line-height: 1.5;">
+                <div>Дата выдачи: <span id="pdf-date" style="color:#ffffff;">18.10.2026</span></div>
+                <div>Протокол: <span id="pdf-doc-id" style="color:#D4AF37;">YN-2026-8492</span></div>
+                <div>Верификация: <span style="color:#D4AF37;">чиш-юнона.kz</span></div>
+              </td>
+              <td style="text-align: right; vertical-align: bottom; font-size:9.5px; color:#94a3b8;">
+                <div style="font-weight:bold; color:#ffffff; font-size: 11px;">Борисова Елена Геннадьевна</div>
+                <div>Директор ЧИШ «ЮНОНА»</div>
+                <div style="color:#D4AF37; font-size:8.5px; margin-top:2px;">Подпись аккредитована ЭЦП</div>
+              </td>
+            </tr>
 
-          <!-- Подвал сертификата с печатью -->
-          <div style="border-top:1px solid rgba(255,255,255,0.12); padding-top:14px; display: flex; justify-content: space-between; align-items: flex-end;">
-            <div style="font-size:9.5px; color:#94a3b8; font-family:'JetBrains Mono', monospace; line-height: 1.5;">
-              <div>Дата выдачи: <span id="pdf-date" style="color:#ffffff;">18.10.2026</span></div>
-              <div>Протокол: <span id="pdf-doc-id" style="color:#D4AF37;">YN-2026-8492</span></div>
-              <div>Верификация: <span style="color:#D4AF37;">чиш-юнона.kz</span></div>
-            </div>
-
-            <!-- Имитация круглой золотой печати -->
-            <div style="width: 72px; height: 72px; border: 1.5px dashed #D4AF37; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-align: center; color: #D4AF37; font-size: 6.5px; text-transform: uppercase; letter-spacing: 0.5px; padding: 4px; box-sizing: border-box; transform: rotate(-8deg);">
-              ★ ЧИШ ЮНОНА ★<br>ОФИЦИАЛЬНАЯ<br>АККРЕДИТАЦИЯ
-            </div>
-
-            <div style="text-align: right; font-size:9.5px; color:#94a3b8;">
-              <div style="font-weight:bold; color:#ffffff; font-size: 11px;">Борисова Елена Геннадьевна</div>
-              <div>Директор ЧИШ «ЮНОНА»</div>
-              <div style="color:#D4AF37; font-size:8.5px; margin-top:2px;">Подпись аккредитована ЭЦП</div>
-            </div>
-          </div>
-
+          </table>
         </div>
       </div>
 
-      <!-- СТРАНИЦА 2: АНАЛИТИЧЕСКИЙ ПАСПОРТ СПОСОБНОСТЕЙ -->
-      <div class="pdf-sheet">
-        <div class="gold-cert-frame">
-          
-          <div>
-            <!-- Шапка 2 страницы -->
-            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 12px; margin-bottom: 16px;">
-              <div>
-                <div style="font-family:'Cinzel', serif; font-size:17px; color:#D4AF37; font-weight:bold;">
+      <!-- ЛИСТ 2: АНАЛИТИЧЕСКИЙ ПАСПОРТ СПОСОБНОСТЕЙ -->
+      <div class="pdf-page-container">
+        <div class="pdf-gold-border">
+          <table style="width: 100%; height: 100%; border-collapse: collapse;">
+            
+            <!-- Шапка 2 листа -->
+            <tr style="height: 60px; border-bottom: 1px solid rgba(255,255,255,0.12);">
+              <td style="text-align: left; vertical-align: top;">
+                <div style="font-family:'Cinzel', serif; font-size:16px; color:#D4AF37; font-weight:bold;">
                   ПАСПОРТ СПОСОБНОСТЕЙ РЕБЁНКА
                 </div>
-                <div style="font-size:9.5px; color:#94a3b8;">Приложение к сертификату диагностики ЧИШ «ЮНОНА»</div>
-              </div>
-              <div style="font-size:10px; color:#D4AF37; font-family:'JetBrains Mono', monospace;">Страница 2 из 2</div>
-            </div>
+                <div style="font-size:9px; color:#94a3b8;">Приложение к сертификату диагностики ЧИШ «ЮНОНА»</div>
+              </td>
+              <td style="text-align: right; vertical-align: top; font-size:10px; color:#D4AF37; font-family:'JetBrains Mono', monospace;">
+                Страница 2 из 2
+              </td>
+            </tr>
 
-            <!-- Раздел 1: Диагностика интеллекта -->
-            <div style="margin-bottom: 16px;">
-              <div style="font-size:11px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:6px; letter-spacing: 0.5px;">
-                1. Ведущие каналы интеллекта (модель Г. Гарднера & Е. Климова):
-              </div>
-              <div id="pdf-intellect-desc" style="font-size:10.5px; color:#e2e8f0; line-height:1.55; background:rgba(255,255,255,0.03); padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.08);">
-                Ребёнок демонстрирует способность легко выстраивать логические цепочки, анализировать алгоритмы и синтезировать визуальные образы в объемные модели.
-              </div>
-            </div>
-
-            <!-- Раздел 2: Шкалы компетенций (Горизонтальные бары) -->
-            <div style="margin-bottom: 16px;">
-              <div style="font-size:11px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:8px; letter-spacing: 0.5px;">
-                2. Баланс развиваемых компетенций:
-              </div>
-              <div style="background:rgba(255,255,255,0.02); padding: 12px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06); font-size: 10px; font-family: 'JetBrains Mono', monospace;" class="space-y-2">
-                <div>
-                  <div style="display:flex; justify-content:space-between; margin-bottom:2px;">
-                    <span style="color:#e2e8f0;">Логико-математическое мышление & STEM:</span>
-                    <span id="bar-num-stem" style="color:#38bdf8;">85%</span>
+            <!-- Тело 2 листа -->
+            <tr>
+              <td colspan="2" style="vertical-align: top; padding-top: 18px;">
+                
+                <!-- 1. Интеллект -->
+                <div style="margin-bottom: 16px;">
+                  <div style="font-size:11px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:5px;">
+                    1. Ведущие каналы интеллекта (модель Г. Гарднера & Е. Климова):
                   </div>
-                  <div style="width:100%; height:6px; background:#1e293b; border-radius:3px; overflow:hidden;">
-                    <div id="bar-fill-stem" style="width:85%; height:100%; background:#38bdf8;"></div>
+                  <div id="pdf-intellect-desc" style="font-size:10.5px; color:#e2e8f0; line-height:1.55; background:rgba(255,255,255,0.03); padding:10px 12px; border-radius:8px; border:1px solid rgba(255,255,255,0.08);">
+                    Ребёнок демонстрирует способность легко выстраивать логические цепочки, анализировать алгоритмы и синтезировать визуальные образы в объемные модели.
                   </div>
                 </div>
 
-                <div>
-                  <div style="display:flex; justify-content:space-between; margin-bottom:2px;">
-                    <span style="color:#e2e8f0;">Креативность и пространственное воображение:</span>
-                    <span id="bar-num-art" style="color:#ec4899;">70%</span>
+                <!-- 2. Горизонтальные шкалы -->
+                <div style="margin-bottom: 16px;">
+                  <div style="font-size:11px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:8px;">
+                    2. Баланс развиваемых компетенций:
                   </div>
-                  <div style="width:100%; height:6px; background:#1e293b; border-radius:3px; overflow:hidden;">
-                    <div id="bar-fill-art" style="width:70%; height:100%; background:#ec4899;"></div>
+                  <div style="background:rgba(255,255,255,0.02); padding: 12px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06); font-size: 10px; font-family: 'JetBrains Mono', monospace;">
+                    <div style="margin-bottom: 6px;">
+                      <table style="width: 100%;"><tr><td>Логико-математическое мышление & STEM:</td><td style="text-align:right; color:#38bdf8;" id="bar-num-stem">85%</td></tr></table>
+                      <div style="width:100%; height:6px; background:#1e293b; border-radius:3px; overflow:hidden; margin-top:2px;">
+                        <div id="bar-fill-stem" style="width:85%; height:100%; background:#38bdf8;"></div>
+                      </div>
+                    </div>
+
+                    <div style="margin-bottom: 6px;">
+                      <table style="width: 100%;"><tr><td>Креативность и пространственное воображение:</td><td style="text-align:right; color:#ec4899;" id="bar-num-art">70%</td></tr></table>
+                      <div style="width:100%; height:6px; background:#1e293b; border-radius:3px; overflow:hidden; margin-top:2px;">
+                        <div id="bar-fill-art" style="width:70%; height:100%; background:#ec4899;"></div>
+                      </div>
+                    </div>
+
+                    <div style="margin-bottom: 6px;">
+                      <table style="width: 100%;"><tr><td>Коммуникация и лидерские задатки (Soft Skills):</td><td style="text-align:right; color:#D4AF37;" id="bar-num-leader">65%</td></tr></table>
+                      <div style="width:100%; height:6px; background:#1e293b; border-radius:3px; overflow:hidden; margin-top:2px;">
+                        <div id="bar-fill-leader" style="width:65%; height:100%; background:#D4AF37;"></div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <table style="width: 100%;"><tr><td>Исследовательский и натуралистический интерес:</td><td style="text-align:right; color:#22c55e;" id="bar-num-nature">60%</td></tr></table>
+                      <div style="width:100%; height:6px; background:#1e293b; border-radius:3px; overflow:hidden; margin-top:2px;">
+                        <div id="bar-fill-nature" style="width:60%; height:100%; background:#22c55e;"></div>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div>
-                  <div style="display:flex; justify-content:space-between; margin-bottom:2px;">
-                    <span style="color:#e2e8f0;">Коммуникация и лидерские задатки (Soft Skills):</span>
-                    <span id="bar-num-leader" style="color:#D4AF37;">65%</span>
+                <!-- 3. Кружки Юноны -->
+                <div style="margin-bottom: 16px;">
+                  <div style="font-size:11px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:6px;">
+                    3. Рекомендованные образовательные кружки и секции ЧИШ «ЮНОНА»:
                   </div>
-                  <div style="width:100%; height:6px; background:#1e293b; border-radius:3px; overflow:hidden;">
-                    <div id="bar-fill-leader" style="width:65%; height:100%; background:#D4AF37;"></div>
+                  <div id="pdf-clubs-breakdown" style="font-size:10.5px; color:#cbd5e1; line-height:1.55;">
+                    <!-- Секции заполняются JS -->
+                  </div>
+                </div>
+
+                <!-- 4. Психологическая служба -->
+                <div>
+                  <div style="font-size:11px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:6px;">
+                    4. Вектор развития от психологической службы школы:
+                  </div>
+                  <div style="font-size:9.5px; color:#94a3b8; line-height:1.5; background:rgba(212,175,55,0.05); padding:10px 12px; border-radius:8px; border-left:3px solid #D4AF37;">
+                    Рекомендуется поощрять самостоятельные исследовательские проекты, не перегружая избыточной зубрежкой фактов. Эффективно развивать командную коммуникацию через участие в школьных турнирах и олимпиадах.
                   </div>
                 </div>
 
-                <div>
-                  <div style="display:flex; justify-content:space-between; margin-bottom:2px;">
-                    <span style="color:#e2e8f0;">Исследовательский и натуралистический интерес:</span>
-                    <span id="bar-num-nature" style="color:#22c55e;">60%</span>
-                  </div>
-                  <div style="width:100%; height:6px; background:#1e293b; border-radius:3px; overflow:hidden;">
-                    <div id="bar-fill-nature" style="width:60%; height:100%; background:#22c55e;"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              </td>
+            </tr>
 
-            <!-- Раздел 3: Рекомендации кружков -->
-            <div style="margin-bottom: 16px;">
-              <div style="font-size:11px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:6px; letter-spacing: 0.5px;">
-                3. Рекомендованные образовательные кружки и секции ЧИШ «ЮНОНА»:
-              </div>
-              <div id="pdf-clubs-breakdown" style="font-size:10.5px; color:#cbd5e1; line-height:1.55;" class="space-y-1.5">
-                <!-- Секции заполняются JS -->
-              </div>
-            </div>
+            <!-- Подвал 2 листа -->
+            <tr style="height: 60px; border-top: 1px solid rgba(255,255,255,0.1);">
+              <td style="text-align: left; vertical-align: bottom; font-size:9px; color:#94a3b8;">
+                <div style="color:#ffffff; font-weight:bold;">Частная Инновационная Школа «ЮНОНА»</div>
+                <div>пос. Боралдай, ул. Терешковой, 1а • Тел: +7 707 645 78 28</div>
+              </td>
+              <td style="text-align: right; vertical-align: bottom; font-size:9px; color:#D4AF37; font-weight:bold;">
+                Запись на пробный день: info@yunona.kz
+              </td>
+            </tr>
 
-            <!-- Раздел 4: Психологическая служба -->
-            <div>
-              <div style="font-size:11px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:6px; letter-spacing: 0.5px;">
-                4. Вектор развития от психологической службы школы:
-              </div>
-              <div style="font-size:9.5px; color:#94a3b8; line-height:1.5; background:rgba(212,175,55,0.05); padding:10px 12px; border-radius:8px; border-left:3px solid #D4AF37;">
-                Рекомендуется поощрять самостоятельные исследовательские проекты, не перегружая избыточной зубрежкой фактов. Эффективно развивать командную коммуникацию через участие в школьных турнирах и олимпиадах.
-              </div>
-            </div>
-          </div>
-
-          <!-- Нижний колонтитул 2 страницы -->
-          <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:10px; font-size:9px; color:#94a3b8; display: flex; justify-content: space-between; align-items: center;">
-            <div>
-              <div style="color:#ffffff; font-weight:bold;">Частная Инновационная Школа «ЮНОНА»</div>
-              <div>пос. Боралдай, ул. Терешковой, 1а • Тел: +7 707 645 78 28</div>
-            </div>
-            <div style="text-align:right;">
-              <div style="color:#D4AF37; font-weight:bold;">Запись на пробный день: info@yunona.kz</div>
-            </div>
-          </div>
-
+          </table>
         </div>
       </div>
 
     </div>
   </div>
 
-  <!-- ============================================================== -->
-  <!-- СКРИПТЫ: 8 ВОПРОСОВ + ДИАГРАММЫ + PDF ENGINE                   -->
-  <!-- ============================================================== -->
+  <!-- СКРИПТЫ -->
   <script>
     lucide.createIcons();
 
-    // 1. БАЗА ВОПРОСОВ (ПОЛНЫЕ 8 ВОПРОСОВ ДЛЯ УРОВНЯ 2 И 6 ДЛЯ УРОВНЯ 1)
+    // БАЗА ВОПРОСОВ (6 ДЛЯ LVL1, 8 ДЛЯ LVL2)
     const testData = {
-      // УРОВЕНЬ 1 (1–4 классы, 6–10 лет) — 6 вопросов
       lvl1: [
         {
           id: 1,
@@ -686,7 +680,6 @@
         }
       ],
 
-      // УРОВЕНЬ 2 (5–8 классы, 11–14 лет) — ПОЛНЫЕ 8 ВОПРОСОВ
       lvl2: [
         {
           id: 1,
@@ -819,7 +812,6 @@
       ]
     };
 
-    // 2. ПРОФИЛИ ТАЛАНТОВ И СЕКЦИИ
     const profiles = {
       stem: {
         title: { ru: "Архитектор Будущего & IT-Новатор", kz: "Болашақ Сәулетшісі & IT-Инноватор", en: "Future Architect & IT Innovator" },
@@ -1145,7 +1137,6 @@
       showFinalResult();
     }
 
-    // 3. ПОДСЧЕТ РЕЗУЛЬТАТОВ И ОБНОВЛЕНИЕ ГРАФИКОВ
     function showFinalResult() {
       const scores = { stem: 0, art: 0, leader: 0, nature: 0 };
       const totalAnswered = Object.keys(userAnswers).length || 1;
@@ -1193,7 +1184,6 @@
       lucide.createIcons();
     }
 
-    // 4. ГЕНЕРАТОР ГРАФИКОВ И ДАННЫХ ДЛЯ PDF
     function preparePDFTemplate(profData, scores, total) {
       document.getElementById('pdf-user-name').textContent = userData.name;
       document.getElementById('pdf-user-details').textContent = 
@@ -1211,13 +1201,12 @@
       const pctLeader = Math.max(10, Math.round((scores.leader / total) * 100));
       const pctNature = Math.max(10, 100 - (pctStem + pctArt + pctLeader));
 
-      // Цифры диаграммы
       document.getElementById('pdf-pct-stem').textContent = pctStem + '%';
       document.getElementById('pdf-pct-art').textContent = pctArt + '%';
       document.getElementById('pdf-pct-leader').textContent = pctLeader + '%';
       document.getElementById('pdf-pct-nature').textContent = pctNature + '%';
 
-      // SVG Donut сегменты
+      // SVG Donut
       const cStem = document.getElementById('donut-seg-stem');
       const cArt = document.getElementById('donut-seg-art');
       const cLeader = document.getElementById('donut-seg-leader');
@@ -1235,7 +1224,7 @@
       cNature.setAttribute('stroke-dasharray', `${pctNature} ${100 - pctNature}`);
       cNature.setAttribute('stroke-dashoffset', `-${pctStem + pctArt + pctLeader}`);
 
-      // Шкалы 2 страницы (горизонтальные бары)
+      // Шкалы
       document.getElementById('bar-num-stem').textContent = pctStem + '%';
       document.getElementById('bar-fill-stem').style.width = pctStem + '%';
 
@@ -1248,27 +1237,35 @@
       document.getElementById('bar-num-nature').textContent = pctNature + '%';
       document.getElementById('bar-fill-nature').style.width = pctNature + '%';
 
-      // Список кружков
+      // Кружки
       const breakdownBox = document.getElementById('pdf-clubs-breakdown');
       breakdownBox.innerHTML = '';
       profData.clubs.ru.forEach(c => {
         const div = document.createElement('div');
-        div.style.cssText = "padding:6px 10px; background:rgba(212,175,55,0.06); border-radius:6px; border-left:3px solid #D4AF37;";
+        div.style.cssText = "padding:6px 10px; background:rgba(212,175,55,0.06); border-radius:6px; border-left:3px solid #D4AF37; margin-bottom: 5px;";
         div.textContent = `★ ${c}`;
         breakdownBox.appendChild(div);
       });
     }
 
-    // 5. ГЕНЕРАЦИЯ PDF С ВЫСОКИМ КАЧЕСТВОМ
+    // ИСПРАВЛЕННЫЙ ВЫСОКОТОЧНЫЙ РЕНДЕР ДВУХСТРАНИЧНОГО PDF
     function downloadOfficialPDF() {
       const element = document.getElementById('pdf-content');
+      
       const opt = {
         margin:       0,
         filename:     `Паспорт_Талантов_ЮНОНА_${userData.name.replace(/\s+/g, '_')}.pdf`,
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#080d16', scrollY: 0 },
-        jsPDF:        { unit: 'px', format: [794, 1123], orientation: 'portrait' }
+        html2canvas:  { 
+          scale: 2, 
+          useCORS: true, 
+          backgroundColor: '#080d16',
+          windowWidth: 794
+        },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
       };
+
       html2pdf().set(opt).from(element).save();
     }
 
