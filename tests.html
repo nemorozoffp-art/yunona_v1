@@ -85,18 +85,28 @@
       transform: translateY(-2px);
     }
 
-    /* ИДЕАЛЬНЫЙ А4-БЛАНК ДЛЯ PDF (СТРОГАЯ СИММЕТРИЯ И ЦЕНТРОВКА) */
-    .pdf-page-container {
-      width: 210mm;
-      height: 296mm;
-      box-sizing: border-box;
+    /* СТРОГИЕ ПИКСЕЛЬНЫЕ РАЗМЕРЫ А4 ДЛЯ ИДЕАЛЬНОЙ ЦЕНТРОВКИ */
+    .pdf-render-root {
+      width: 794px;
+      margin: 0 auto;
+      padding: 0;
       background: #080d16;
       color: #ffffff;
-      padding: 12mm 14mm;
+      font-family: 'Montserrat', sans-serif;
+      box-sizing: border-box;
+    }
+    .pdf-page-container {
+      width: 794px;
+      height: 1120px;
+      max-height: 1120px;
+      padding: 24px;
       margin: 0 auto;
+      box-sizing: border-box;
+      background: #080d16;
       position: relative;
       overflow: hidden;
-      font-family: 'Montserrat', sans-serif;
+      page-break-after: always;
+      break-after: page;
     }
     .pdf-gold-border {
       width: 100%;
@@ -105,12 +115,8 @@
       border: 2px solid #D4AF37;
       outline: 5px solid #0f172a;
       box-shadow: 0 0 0 7px #D4AF37;
-      padding: 22px 28px;
+      padding: 24px 28px;
       position: relative;
-    }
-    .pdf-break {
-      page-break-after: always;
-      break-after: page;
     }
   </style>
 </head>
@@ -147,7 +153,7 @@
     </div>
   </header>
 
-  <!-- ОСНОВНОЙ КОНТЕНТ (РАСТЯГИВАЕТСЯ НА ВЕСЬ ЭКРАН) -->
+  <!-- ОСНОВНОЙ КОНТЕНТ -->
   <main class="relative z-10 flex-grow flex items-center justify-center p-4 sm:p-6 max-w-5xl mx-auto w-full">
 
     <!-- 1. ХАБ ВЫБОРА УРОВНЯ -->
@@ -273,23 +279,19 @@
 
     <!-- 3. ЭКРАН ТЕСТИРОВАНИЯ -->
     <section id="screen-quiz" class="w-full hidden">
-      <!-- Навигатор-палитра номеров -->
       <div class="mb-5 flex flex-col sm:flex-row items-center justify-between gap-3 bg-brand-card/70 border border-white/10 p-3.5 rounded-2xl backdrop-blur-md">
         <div class="flex items-center gap-3">
           <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold" id="txt-quiz-title">Тест талантов:</span>
           <span class="text-sm font-bold text-brand-gold" id="txt-active-level-name">Уровень 1</span>
         </div>
 
-        <div id="question-pills" class="flex items-center gap-1.5 flex-wrap justify-center">
-          <!-- Номера генерируются JS -->
-        </div>
+        <div id="question-pills" class="flex items-center gap-1.5 flex-wrap justify-center"></div>
 
         <div class="text-xs text-slate-400 font-mono">
           <span id="txt-progress-counter">1 из 6</span>
         </div>
       </div>
 
-      <!-- Карточка вопроса -->
       <div class="bg-gradient-to-b from-brand-card/90 to-brand-dark/95 border border-brand-gold/30 rounded-3xl p-5 sm:p-8 shadow-2xl relative overflow-hidden">
         <div class="flex items-center gap-3 mb-3">
           <span id="badge-question-category" class="px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-brand-gold/20 text-brand-gold border border-brand-gold/30 font-mono">
@@ -301,11 +303,8 @@
           Текст вопроса...
         </h2>
 
-        <div id="quiz-options-container" class="grid sm:grid-cols-2 gap-3.5 mb-6">
-          <!-- Опции генерируются JS -->
-        </div>
+        <div id="quiz-options-container" class="grid sm:grid-cols-2 gap-3.5 mb-6"></div>
 
-        <!-- Нижняя панель действий -->
         <div class="flex items-center justify-between pt-5 border-t border-white/10">
           <button onclick="prevQuestion()" id="btn-prev-q" class="btn-neon-prev px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2">
             <span>←</span> <span id="txt-btn-prev">Назад</span>
@@ -363,31 +362,31 @@
   <footer class="relative z-10 border-t border-white/10 bg-black/85 py-3 px-4 text-xs text-slate-500 shrink-0">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px]">
       <div>© 2026 ЧИШ «ЮНОНА». Модуль первичной профориентации.</div>
-      <div class="text-slate-400 font-mono">Разработано <span class="text-white font-bold">IT Life</span> (a PAVLIKneMOROZOFF company)[cite: 22]</div>
+      <div class="text-slate-400 font-mono">Разработано <span class="text-white font-bold">IT Life</span> (a PAVLIKneMOROZOFF company)</div>
     </div>
   </footer>
 
   <!-- ================================================================= -->
-  <!-- ШАБЛОН PDF: СТРОГАЯ СИММЕТРИЯ 210x297 мм БЕЗ СМЕЩЕНИЙ ВЛЕВО      -->
+  <!-- ШАБЛОН PDF: СТРОГАЯ СИММЕТРИЯ 794x1120px (ПОЛНОЦЕННЫЙ А4)         -->
   <!-- ================================================================= -->
-  <div id="pdf-render-wrapper" style="position: fixed; left: 0; top: 0; width: 100%; display: none; z-index: -10; background: #080d16;">
-    <div id="pdf-content" style="width: 210mm; margin: 0 auto; background: #080d16; color: #ffffff;">
+  <div id="pdf-render-wrapper" style="position: absolute; left: 0; top: 0; width: 794px; display: none; z-index: -999; background: #080d16;">
+    <div id="pdf-content" class="pdf-render-root">
       
       <!-- ЛИСТ 1: ОФИЦИАЛЬНЫЙ СЕРТИФИКАТ -->
-      <div class="pdf-page-container pdf-break">
+      <div class="pdf-page-container">
         <div class="pdf-gold-border">
-          <table style="width: 100%; height: 100%; border-collapse: collapse; text-align: center;">
+          <table style="width: 100%; height: 100%; border-collapse: collapse; margin: 0 auto; table-layout: fixed;">
             
             <!-- Шапка сертификата -->
-            <tr style="height: 90px;">
-              <td colspan="2" style="text-align: center; vertical-align: top;">
+            <tr style="height: 95px;">
+              <td colspan="2" style="text-align: center; vertical-align: top; padding: 0;">
                 <div style="font-family:'Cinzel', serif; font-size:22px; color:#D4AF37; font-weight:800; letter-spacing:2px; line-height: 1.2;">
                   ЧАСТНАЯ ИННОВАЦИОННАЯ ШКОЛА «ЮНОНА»
                 </div>
                 <div style="font-size:9.5px; color:#94a3b8; letter-spacing:2.5px; text-transform:uppercase; margin-top:5px;">
                   PRIVATE INNOVATIVE SCHOOL & KINDERGARTEN YUNONA • KAZAKHSTAN
                 </div>
-                <div style="height:1.5px; width:65%; background:#D4AF37; margin:12px auto 0 auto; opacity:0.6;"></div>
+                <div style="height:1.5px; width:70%; background:#D4AF37; margin:14px auto 0 auto; opacity:0.6;"></div>
               </td>
             </tr>
 
@@ -401,7 +400,7 @@
                   О прохождении комплексной диагностики талантов и структуры интеллекта
                 </div>
 
-                <div style="font-size:12px; color:#cbd5e1; margin-top:16px;">Настоящим подтверждается, что:</div>
+                <div style="font-size:12px; color:#cbd5e1; margin-top:18px;">Настоящим подтверждается, что:</div>
                 <div id="pdf-user-name" style="font-size:24px; color:#ffffff; font-weight:bold; margin-top:4px; border-bottom:1.5px solid #D4AF37; display:inline-block; padding:0 30px 4px 30px; letter-spacing: 0.5px;">
                   Сериков Арман
                 </div>
@@ -411,7 +410,7 @@
                 </div>
 
                 <!-- Плашка профиля -->
-                <div style="margin:18px auto 0 auto; width: 92%; padding:14px; background:rgba(212,175,55,0.06); border:1px solid rgba(212,175,55,0.35); border-radius:10px;">
+                <div style="margin:20px auto 0 auto; width: 94%; padding:14px; background:rgba(212,175,55,0.06); border:1px solid rgba(212,175,55,0.35); border-radius:10px; box-sizing: border-box;">
                   <div style="font-size:10px; text-transform:uppercase; letter-spacing:2px; color:#D4AF37; font-weight: bold;">
                     Присвоенный профиль талантов:
                   </div>
@@ -423,23 +422,23 @@
                   </div>
                 </div>
 
-                <!-- График и легенда -->
-                <table style="width: 80%; margin: 18px auto 0 auto; border-collapse: collapse;">
+                <!-- Диаграмма и легенда на центрированной таблице -->
+                <table style="width: 82%; margin: 20px auto 0 auto; border-collapse: collapse;">
                   <tr>
-                    <td style="width: 120px; text-align: center; vertical-align: middle;">
-                      <svg width="105" height="105" viewBox="0 0 36 36" style="transform: rotate(-90deg); margin: 0 auto; display: block;">
+                    <td style="width: 130px; text-align: center; vertical-align: middle;">
+                      <svg width="110" height="110" viewBox="0 0 36 36" style="transform: rotate(-90deg); margin: 0 auto; display: block;">
                         <circle cx="18" cy="18" r="15.9155" fill="none" stroke="#1e293b" stroke-width="3.5"></circle>
-                        <circle id="donut-seg-stem" cx="18" cy="18" r="15.9155" fill="none" stroke="#38bdf8" stroke-width="4" stroke-dasharray="40 60" stroke-dashoffset="0"></circle>
-                        <circle id="donut-seg-art" cx="18" cy="18" r="15.9155" fill="none" stroke="#ec4899" stroke-width="4" stroke-dasharray="25 75" stroke-dashoffset="-40"></circle>
-                        <circle id="donut-seg-leader" cx="18" cy="18" r="15.9155" fill="none" stroke="#D4AF37" stroke-width="4" stroke-dasharray="20 80" stroke-dashoffset="-65"></circle>
-                        <circle id="donut-seg-nature" cx="18" cy="18" r="15.9155" fill="none" stroke="#22c55e" stroke-width="4" stroke-dasharray="15 85" stroke-dashoffset="-85"></circle>
+                        <circle id="donut-seg-stem" cx="18" cy="18" r="15.9155" fill="none" stroke="#38bdf8" stroke-width="4" stroke-dasharray="25 75" stroke-dashoffset="0"></circle>
+                        <circle id="donut-seg-art" cx="18" cy="18" r="15.9155" fill="none" stroke="#ec4899" stroke-width="4" stroke-dasharray="25 75" stroke-dashoffset="-25"></circle>
+                        <circle id="donut-seg-leader" cx="18" cy="18" r="15.9155" fill="none" stroke="#D4AF37" stroke-width="4" stroke-dasharray="25 75" stroke-dashoffset="-50"></circle>
+                        <circle id="donut-seg-nature" cx="18" cy="18" r="15.9155" fill="none" stroke="#22c55e" stroke-width="4" stroke-dasharray="25 75" stroke-dashoffset="-75"></circle>
                       </svg>
                     </td>
-                    <td style="text-align: left; vertical-align: middle; padding-left: 20px; font-size: 10.5px; line-height: 1.7; font-family: 'JetBrains Mono', monospace;">
-                      <div style="color: #38bdf8;">■ Логика & STEM: <strong id="pdf-pct-stem">40%</strong></div>
+                    <td style="text-align: left; vertical-align: middle; padding-left: 20px; font-size: 11px; line-height: 1.75; font-family: 'JetBrains Mono', monospace;">
+                      <div style="color: #38bdf8;">■ Логика & STEM: <strong id="pdf-pct-stem">25%</strong></div>
                       <div style="color: #ec4899;">■ Творчество & Арт: <strong id="pdf-pct-art">25%</strong></div>
-                      <div style="color: #D4AF37;">■ Лидерство & Soft-skills: <strong id="pdf-pct-leader">20%</strong></div>
-                      <div style="color: #22c55e;">■ Естествознание & Эко: <strong id="pdf-pct-nature">15%</strong></div>
+                      <div style="color: #D4AF37;">■ Лидерство & Soft-skills: <strong id="pdf-pct-leader">25%</strong></div>
+                      <div style="color: #22c55e;">■ Естествознание & Эко: <strong id="pdf-pct-nature">25%</strong></div>
                     </td>
                   </tr>
                 </table>
@@ -447,7 +446,7 @@
             </tr>
 
             <!-- Подвал листа 1 -->
-            <tr style="height: 80px; border-top: 1px solid rgba(255,255,255,0.12);">
+            <tr style="height: 85px; border-top: 1px solid rgba(255,255,255,0.12);">
               <td style="text-align: left; vertical-align: bottom; font-size:9.5px; color:#94a3b8; font-family:'JetBrains Mono', monospace; line-height: 1.5;">
                 <div>Дата выдачи: <span id="pdf-date" style="color:#ffffff;">18.10.2026</span></div>
                 <div>Протокол: <span id="pdf-doc-id" style="color:#D4AF37;">YN-2026-8492</span></div>
@@ -467,10 +466,10 @@
       <!-- ЛИСТ 2: АНАЛИТИЧЕСКИЙ ПАСПОРТ СПОСОБНОСТЕЙ -->
       <div class="pdf-page-container">
         <div class="pdf-gold-border">
-          <table style="width: 100%; height: 100%; border-collapse: collapse;">
+          <table style="width: 100%; height: 100%; border-collapse: collapse; margin: 0 auto; table-layout: fixed;">
             
             <!-- Шапка листа 2 -->
-            <tr style="height: 55px; border-bottom: 1px solid rgba(255,255,255,0.12);">
+            <tr style="height: 60px; border-bottom: 1px solid rgba(255,255,255,0.12);">
               <td style="text-align: left; vertical-align: top;">
                 <div style="font-family:'Cinzel', serif; font-size:16px; color:#D4AF37; font-weight:bold;">
                   ПАСПОРТ СПОСОБНОСТЕЙ РЕБЁНКА
@@ -484,71 +483,69 @@
 
             <!-- Тело листа 2 -->
             <tr>
-              <td colspan="2" style="vertical-align: top; padding-top: 16px;">
+              <td colspan="2" style="vertical-align: top; padding-top: 18px;">
                 
                 <!-- 1. Интеллект -->
-                <div style="margin-bottom: 15px;">
+                <div style="margin-bottom: 16px;">
                   <div style="font-size:11px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:5px;">
                     1. Ведущие каналы интеллекта (модель Г. Гарднера & Е. Климова):
                   </div>
-                  <div id="pdf-intellect-desc" style="font-size:10px; color:#e2e8f0; line-height:1.55; background:rgba(255,255,255,0.03); padding:10px 12px; border-radius:8px; border:1px solid rgba(255,255,255,0.08);">
+                  <div id="pdf-intellect-desc" style="font-size:10.5px; color:#e2e8f0; line-height:1.55; background:rgba(255,255,255,0.03); padding:10px 12px; border-radius:8px; border:1px solid rgba(255,255,255,0.08);">
                     Ребёнок демонстрирует способность легко выстраивать логические цепочки, анализировать алгоритмы и синтезировать визуальные образы в объемные модели.
                   </div>
                 </div>
 
                 <!-- 2. Горизонтальные шкалы -->
-                <div style="margin-bottom: 15px;">
-                  <div style="font-size:11px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:7px;">
+                <div style="margin-bottom: 16px;">
+                  <div style="font-size:11px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:8px;">
                     2. Баланс развиваемых компетенций:
                   </div>
-                  <div style="background:rgba(255,255,255,0.02); padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06); font-size: 9.5px; font-family: 'JetBrains Mono', monospace;">
-                    <div style="margin-bottom: 5px;">
-                      <table style="width: 100%;"><tr><td>Логико-математическое мышление & STEM:</td><td style="text-align:right; color:#38bdf8;" id="bar-num-stem">85%</td></tr></table>
+                  <div style="background:rgba(255,255,255,0.02); padding: 12px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06); font-size: 10px; font-family: 'JetBrains Mono', monospace;">
+                    <div style="margin-bottom: 6px;">
+                      <table style="width: 100%;"><tr><td>Логико-математическое мышление & STEM:</td><td style="text-align:right; color:#38bdf8;" id="bar-num-stem">25%</td></tr></table>
                       <div style="width:100%; height:5px; background:#1e293b; border-radius:3px; overflow:hidden; margin-top:2px;">
-                        <div id="bar-fill-stem" style="width:85%; height:100%; background:#38bdf8;"></div>
+                        <div id="bar-fill-stem" style="width:25%; height:100%; background:#38bdf8;"></div>
                       </div>
                     </div>
 
-                    <div style="margin-bottom: 5px;">
-                      <table style="width: 100%;"><tr><td>Креативность и пространственное воображение:</td><td style="text-align:right; color:#ec4899;" id="bar-num-art">70%</td></tr></table>
+                    <div style="margin-bottom: 6px;">
+                      <table style="width: 100%;"><tr><td>Креативность и пространственное воображение:</td><td style="text-align:right; color:#ec4899;" id="bar-num-art">25%</td></tr></table>
                       <div style="width:100%; height:5px; background:#1e293b; border-radius:3px; overflow:hidden; margin-top:2px;">
-                        <div id="bar-fill-art" style="width:70%; height:100%; background:#ec4899;"></div>
+                        <div id="bar-fill-art" style="width:25%; height:100%; background:#ec4899;"></div>
                       </div>
                     </div>
 
-                    <div style="margin-bottom: 5px;">
-                      <table style="width: 100%;"><tr><td>Коммуникация и лидерские задатки (Soft Skills):</td><td style="text-align:right; color:#D4AF37;" id="bar-num-leader">65%</td></tr></table>
+                    <div style="margin-bottom: 6px;">
+                      <table style="width: 100%;"><tr><td>Коммуникация и лидерские задатки (Soft Skills):</td><td style="text-align:right; color:#D4AF37;" id="bar-num-leader">25%</td></tr></table>
                       <div style="width:100%; height:5px; background:#1e293b; border-radius:3px; overflow:hidden; margin-top:2px;">
-                        <div id="bar-fill-leader" style="width:65%; height:100%; background:#D4AF37;"></div>
+                        <div id="bar-fill-leader" style="width:25%; height:100%; background:#D4AF37;"></div>
                       </div>
                     </div>
 
                     <div>
-                      <table style="width: 100%;"><tr><td>Исследовательский и натуралистический интерес:</td><td style="text-align:right; color:#22c55e;" id="bar-num-nature">60%</td></tr></table>
+                      <table style="width: 100%;"><tr><td>Исследовательский и натуралистический интерес:</td><td style="text-align:right; color:#22c55e;" id="bar-num-nature">25%</td></tr></table>
                       <div style="width:100%; height:5px; background:#1e293b; border-radius:3px; overflow:hidden; margin-top:2px;">
-                        <div id="bar-fill-nature" style="width:60%; height:100%; background:#22c55e;"></div>
+                        <div id="bar-fill-nature" style="width:25%; height:100%; background:#22c55e;"></div>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 <!-- 3. Кружки Юноны -->
-                <div style="margin-bottom: 15px;">
-                  <div style="font-size:11px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:5px;">
+                <div style="margin-bottom: 16px;">
+                  <div style="font-size:11px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:6px;">
                     3. Рекомендованные образовательные кружки и секции ЧИШ «ЮНОНА»:
                   </div>
-                  <div id="pdf-clubs-breakdown" style="font-size:10px; color:#cbd5e1; line-height:1.5;">
-                    <!-- Секции заполняются JS -->
-                  </div>
+                  <div id="pdf-clubs-breakdown" style="font-size:10.5px; color:#cbd5e1; line-height:1.55;"></div>
                 </div>
 
                 <!-- 4. Психологическая служба -->
                 <div>
-                  <div style="font-size:11px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:5px;">
+                  <div style="font-size:11px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:6px;">
                     4. Вектор развития от психологической службы школы:
                   </div>
-                  <div style="font-size:9.5px; color:#94a3b8; line-height:1.5; background:rgba(212,175,55,0.05); padding:9px 12px; border-radius:8px; border-left:3px solid #D4AF37;">
-                    Рекомендуется поощрять самостоятельные исследовательские проекты, не перегружая избыточной зубрежкой фактов. Эффективно развивать командную коммуникацию через участие в школьных турнирах и олимпиадах.
+                  <div id="pdf-psycho-advice" style="font-size:9.5px; color:#94a3b8; line-height:1.5; background:rgba(212,175,55,0.05); padding:10px 12px; border-radius:8px; border-left:3px solid #D4AF37;">
+                    Рекомендуется поощрять исследовательскую инициативу, не перегружая зубрежкой. Развивать командные роли через школьные хакатоны и дебаты.
                   </div>
                 </div>
 
@@ -556,7 +553,7 @@
             </tr>
 
             <!-- Подвал листа 2 -->
-            <tr style="height: 50px; border-top: 1px solid rgba(255,255,255,0.1);">
+            <tr style="height: 55px; border-top: 1px solid rgba(255,255,255,0.1);">
               <td style="text-align: left; vertical-align: bottom; font-size:9px; color:#94a3b8;">
                 <div style="color:#ffffff; font-weight:bold;">Частная Инновационная Школа «ЮНОНА»</div>
                 <div>пос. Боралдай, ул. Терешковой, 1а • Тел: +7 707 645 78 28</div>
@@ -573,11 +570,11 @@
     </div>
   </div>
 
-  <!-- СКРИПТЫ -->
+  <!-- СКРИПТЫ ТЕСТИРОВАНИЯ И ГЕНЕРАЦИИ PDF -->
   <script>
     lucide.createIcons();
 
-    // БАЗА ВОПРОСОВ (6 ДЛЯ LVL1, 8 ДЛЯ LVL2)
+    // 1. БАЗА ВОПРОСОВ (6 ДЛЯ LVL1, 8 ДЛЯ LVL2)
     const testData = {
       lvl1: [
         {
@@ -810,6 +807,7 @@
       ]
     };
 
+    // 2. ПРОФИЛИ ТАЛАНТОВ, РАСШИФРОВКА И КРУЖКИ ЮНОНЫ
     const profiles = {
       stem: {
         title: { ru: "Архитектор Будущего & IT-Новатор", kz: "Болашақ Сәулетшісі & IT-Инноватор", en: "Future Architect & IT Innovator" },
@@ -818,6 +816,8 @@
           kz: "Сізде логикалық-математикалық және техникалық интеллект өте жоғары. Сіз күрделі жүйелердің құрылымын тез меңгересіз.",
           en: "You possess high logical-mathematical and analytical capabilities. You thrive when solving problems and building functional systems."
         },
+        intellectDesc: "Ребёнок демонстрирует способность легко выстраивать причинно-следственные связи, анализировать алгоритмические схемы и синтезировать визуальные образы в функциональные цифровые и физические модели.",
+        psychoAdvice: "Рекомендуется поощрять самостоятельные исследовательские проекты в области программирования и робототехники. Эффективно развивать командные навыки через участие в школьных хакатонах.",
         clubs: {
           ru: ["Кружок Робототехники и Arduino ЧИШ «ЮНОНА»", "Шахматный клуб гроссмейстерской школы", "Олимпиадная математика и алгоритмика"],
           kz: ["«ЮНОНА» робототехника және Arduino үйірмесі", "Шахмат клубы және логика", "Олимпиадалық математика және алгоритмдер"],
@@ -831,6 +831,8 @@
           kz: "Көру-кеңістіктік және көркемдік интеллект басым. Сіз стандартты емес ойлайсыз және идеяларды өнер туындысына айналдыра аласыз.",
           en: "Dominated by visual-spatial and artistic intelligence. You think creatively and turn abstract visions into tangible aesthetic works."
         },
+        intellectDesc: "Ярко выражено ассоциативное образное мышление, развитое эстетическое восприятие, чувство композиции и цвета. Ребёнок мыслит нестандартными категориями и легко генерирует оригинальные идеи.",
+        psychoAdvice: "Рекомендуется предоставлять свободу выбора творческих материалов, посещать арт-выставки и поддерживать проектную деятельность, не загоняя в строгие рамки шаблонов.",
         clubs: {
           ru: ["Школьная Арт-мастерская и Студия Живописи", "3D-моделирование и графический дизайн", "Театральная студия и музыкальный ансамбль"],
           kz: ["Мектептің Арт-шеберханасы және кескіндеме", "3D-модельдеу және графикалық дизайн", "Театр студиясы және музыкалық ансамбль"],
@@ -844,6 +846,8 @@
           kz: "Жетекші бағыт — тұлғааралық және эмоционалдық интеллект. Сізде адамдарды ортақ мақсатқа біріктіру және шабыттандыру қабілеті зор.",
           en: "Outstanding interpersonal and emotional intelligence. A natural talent for uniting people, public speaking, and leading collaborative projects."
         },
+        intellectDesc: "Высокий уровень эмоционального интеллекта (EQ), эмпатия, развитые ораторские навыки и врожденная способность координировать командные взаимодействия и разрешать конфликты.",
+        psychoAdvice: "Рекомендуется поощрять участие в школьном самоуправлении, дебатах и публичных выступлениях. Развивать навыки ведения переговоров и тайм-менеджмента.",
         clubs: {
           ru: ["Школьный Дебатный Клуб и Ораторское Искусство", "Лидерский Совет самоуправления ЧИШ «ЮНОНА»", "Клуб дипломатии и углубленный английский (IELTS)"],
           kz: ["Мектептің Дебат Клубы және шешендік өнер", "«ЮНОНА» мектеп көшбасшыларының кеңесі", "Дипломатия клубы және ағылшын тілі (IELTS)"],
@@ -857,6 +861,8 @@
           kz: "Жетекші вектор — натуралистік және зерттеу интеллектісі. Сіз қоршаған ортаны, биология мен экологияны терең түсінесіз.",
           en: "Naturalistic and investigative intelligence. Keen observational skills with a passion for ecology, biology, and applied sciences."
         },
+        intellectDesc: "Превосходная наблюдательность, исследовательский интерес к биосистемам и физическим явлениям окружающего мира. Склонность к эмпирическому познанию через опыты и наблюдения.",
+        psychoAdvice: "Рекомендуется поощрять естественно-научные эксперименты, участие в эко-проектах и олимпиадах по биологии и химии с выездными полевыми исследованиями.",
         clubs: {
           ru: ["Школьная Эко-лаборатория и Экспериментариум", "Олимпиадная биология и химия", "Спортивно-туристический клуб ЧИШ «ЮНОНА»"],
           kz: ["Мектептің Эко-зертханасы және Экспериментариум", "Олимпиадалық биология және химия", "Спорттық-туристік клуб"],
@@ -1135,6 +1141,7 @@
       showFinalResult();
     }
 
+    // 3. ЧЕСТНЫЙ ДИНАМИЧЕСКИЙ РАСЧЕТ ПОБЕДИТЕЛЯ
     function showFinalResult() {
       const scores = { stem: 0, art: 0, leader: 0, nature: 0 };
       const totalAnswered = Object.keys(userAnswers).length || 1;
@@ -1143,15 +1150,9 @@
         if (scores[p] !== undefined) scores[p]++;
       });
 
-      let maxScore = -1;
-      let winner = 'stem';
-      Object.keys(scores).forEach(key => {
-        if (scores[key] > maxScore) {
-          maxScore = scores[key];
-          winner = key;
-        }
-      });
-
+      // Ранжирование без фиксированного дефолта
+      const sortedProfiles = Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
+      const winner = sortedProfiles[0];
       const profData = profiles[winner];
 
       document.getElementById('screen-quiz').classList.add('hidden');
@@ -1193,11 +1194,14 @@
       document.getElementById('pdf-date').textContent = today.toLocaleDateString('ru-RU');
       document.getElementById('pdf-doc-id').textContent = `YN-${today.getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
 
-      // Расчет процентов
-      const pctStem = Math.max(10, Math.round((scores.stem / total) * 100));
-      const pctArt = Math.max(10, Math.round((scores.art / total) * 100));
-      const pctLeader = Math.max(10, Math.round((scores.leader / total) * 100));
-      const pctNature = Math.max(10, 100 - (pctStem + pctArt + pctLeader));
+      // Честный расчет реальных процентов
+      let pctStem = Math.round((scores.stem / total) * 100);
+      let pctArt = Math.round((scores.art / total) * 100);
+      let pctLeader = Math.round((scores.leader / total) * 100);
+      let pctNature = 100 - (pctStem + pctArt + pctLeader);
+
+      // Корректировка нулевых значений для эстетики диаграммы
+      if (pctNature < 0) pctNature = 0;
 
       document.getElementById('pdf-pct-stem').textContent = pctStem + '%';
       document.getElementById('pdf-pct-art').textContent = pctArt + '%';
@@ -1222,7 +1226,7 @@
       cNature.setAttribute('stroke-dasharray', `${pctNature} ${100 - pctNature}`);
       cNature.setAttribute('stroke-dashoffset', `-${pctStem + pctArt + pctLeader}`);
 
-      // Шкалы
+      // Шкалы на 2 странице
       document.getElementById('bar-num-stem').textContent = pctStem + '%';
       document.getElementById('bar-fill-stem').style.width = pctStem + '%';
 
@@ -1235,23 +1239,27 @@
       document.getElementById('bar-num-nature').textContent = pctNature + '%';
       document.getElementById('bar-fill-nature').style.width = pctNature + '%';
 
+      // Динамический вывод описания интеллекта и напутствия
+      document.getElementById('pdf-intellect-desc').textContent = profData.intellectDesc;
+      document.getElementById('pdf-psycho-advice').textContent = profData.psychoAdvice;
+
       // Кружки
       const breakdownBox = document.getElementById('pdf-clubs-breakdown');
       breakdownBox.innerHTML = '';
       profData.clubs.ru.forEach(c => {
         const div = document.createElement('div');
-        div.style.cssText = "padding:5px 8px; background:rgba(212,175,55,0.06); border-radius:6px; border-left:3px solid #D4AF37; margin-bottom: 4px;";
+        div.style.cssText = "padding:6px 10px; background:rgba(212,175,55,0.06); border-radius:6px; border-left:3px solid #D4AF37; margin-bottom: 5px;";
         div.textContent = `★ ${c}`;
         breakdownBox.appendChild(div);
       });
     }
 
-    // ИСПРАВЛЕННЫЙ ВЫСОКОТОЧНЫЙ РЕНДЕР: БЕЗ СМЕЩЕНИЙ ВЛЕВО И БЕЗ ОБРЕЗКИ ТЕКСТА
+    // ИСПРАВЛЕННЫЙ ВЫСОКОТОЧНЫЙ РЕНДЕР С ГАРАНТИРОВАННОЙ ЦЕНТРОВКОЙ
     function downloadOfficialPDF() {
       const wrapper = document.getElementById('pdf-render-wrapper');
       const element = document.getElementById('pdf-content');
 
-      // Делаем контейнер видимым для снимка с правильной центровкой
+      // Показываем контейнер строго в координатах 0, 0
       wrapper.style.display = 'block';
 
       const opt = {
@@ -1265,16 +1273,18 @@
           scrollX: 0,
           scrollY: 0,
           x: 0,
-          y: 0
+          y: 0,
+          width: 794,
+          windowWidth: 794
         },
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        jsPDF:        { unit: 'pt', format: 'a4', orientation: 'portrait' }
       };
 
       html2pdf().set(opt).from(element).save().then(() => {
         wrapper.style.display = 'none';
       }).catch(err => {
         wrapper.style.display = 'none';
-        console.error('PDF generation error:', err);
+        console.error('PDF error:', err);
       });
     }
 
