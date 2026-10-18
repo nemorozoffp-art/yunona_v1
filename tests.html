@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тест талантов и профориентация | ЧИШ ЮНОНА</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- html2pdf.js для генерации многостраничного PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#080d16',
+              card: '#0f172a',
+              gold: '#D4AF37',
+              goldLight: '#F3E5AB',
+              goldDark: '#997A15'
+            }
+          },
+          fontFamily: {
+            title: ['Cinzel', 'serif'],
+            sans: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .gold-text-gradient {
+      background: linear-gradient(135deg, #FFF1B0 0%, #D4AF37 50%, #AA771C 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .ambient-glow {
+      transition: background 0.8s ease;
+    }
+
+    /* Полупрозрачные неоновые кнопки навигации */
+    .btn-neon-prev {
+      background: rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #cbd5e1;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-neon-prev:hover {
+      background: rgba(212, 175, 55, 0.15);
+      border-color: #D4AF37;
+      color: #FFF1B0;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.4), inset 0 0 10px rgba(212, 175, 55, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .btn-neon-skip {
+      background: rgba(245, 158, 11, 0.08);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: #fcd34d;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-neon-skip:hover {
+      background: rgba(245, 158, 11, 0.22);
+      border-color: #fbbf24;
+      color: #ffffff;
+      box-shadow: 0 0 22px rgba(245, 158, 11, 0.45), inset 0 0 12px rgba(245, 158, 11, 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* Стили для PDF */
+    .pdf-page {
+      width: 210mm;
+      min-height: 297mm;
+      padding: 15mm;
+      margin: 0 auto;
+      background: #080d16;
+      color: #ffffff;
+      box-sizing: border-box;
+      position: relative;
+    }
+    .pdf-break {
+      page-break-after: always;
+      break-after: page;
+    }
+  </style>
+</head>
+<body class="bg-brand-dark text-slate-100 font-sans antialiased min-h-screen relative flex flex-col justify-between selection:bg-brand-gold selection:text-black">
+
+  <!-- ДИНАМИЧЕСКИЙ ФОНОВЫЙ ОРЕОЛ -->
+  <div id="ambient-bg" class="ambient-glow fixed inset-0 pointer-events-none z-0 bg-[radial-gradient(ellipse_at_top,rgba(212,175,55,0.12)_0%,transparent_70%)]"></div>
+
+  <!-- ШАПКА -->
+  <header class="relative z-20 border-b border-brand-gold/20 bg-brand-dark/90 backdrop-blur-xl py-3 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-full border border-brand-gold/40 flex items-center justify-center overflow-hidden bg-brand-card">
+          <img src="logo.jpg" alt="ЮНОНА" class="w-full h-full object-cover scale-125" onerror="this.src='https://via.placeholder.com/40/D4AF37/000?text=Ю'">
+        </div>
+        <div>
+          <span class="block font-title text-base sm:text-lg font-bold gold-text-gradient">ЧИШ ЮНОНА</span>
+          <span class="block text-[8px] sm:text-[9px] uppercase tracking-widest text-slate-400" id="header-subtitle">Диагностика талантов</span>
+        </div>
+      </a>
+
+      <div class="flex items-center gap-3 sm:gap-5">
+        <div class="flex items-center bg-white/5 rounded-full p-0.5 border border-white/10 text-xs font-semibold">
+          <button onclick="changeLanguage('ru')" id="lang-ru" class="lang-btn px-2.5 py-0.5 rounded-full bg-brand-gold text-black font-bold">RU</button>
+          <button onclick="changeLanguage('kz')" id="lang-kz" class="lang-btn px-2.5 py-0.5 rounded-full hover:text-brand-gold">KZ</button>
+          <button onclick="changeLanguage('en')" id="lang-en" class="lang-btn px-2.5 py-0.5 rounded-full hover:text-brand-gold">EN</button>
+        </div>
+
+        <a href="index.html" class="flex items-center gap-1.5 text-xs text-slate-300 hover:text-brand-gold transition px-3 py-1.5 rounded-lg bg-white/5 border border-white/10">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5 text-brand-gold"></i>
+          <span id="btn-back-home">На главный сайт</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ОСНОВНОЙ КОНТЕНТ -->
+  <main class="relative z-10 flex-grow flex items-center justify-center p-4 sm:p-8 max-w-5xl mx-auto w-full">
+
+    <!-- 1. ХАБ ВЫБОРА УРОВНЯ -->
+    <section id="screen-hub" class="w-full py-6">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="px-3.5 py-1 rounded-full text-xs font-semibold bg-brand-gold/10 text-brand-gold border border-brand-gold/30 inline-block mb-3" id="hub-badge">
+          ✨ Индивидуальная карта развития
+        </span>
+        <h1 class="text-3xl sm:text-4xl font-extrabold font-title gold-text-gradient mb-3" id="hub-title">
+          Центр диагностики способностей
+        </h1>
+        <p class="text-sm sm:text-base text-slate-300" id="hub-desc">
+          Выберите возрастную категорию для определения ведущего типа интеллекта, профориентационного профиля и рекомендованных секций в ЧИШ «ЮНОНА».
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 sm:gap-8">
+        <!-- Уровень 1 -->
+        <div class="group relative rounded-2xl bg-gradient-to-b from-white/[0.06] to-transparent border border-white/10 hover:border-brand-gold p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:shadow-2xl hover:shadow-brand-gold/10">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">1 – 4 классы (6–10 лет)</span>
+              <span class="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5 text-brand-gold"></i> ~3 мин</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-brand-gold transition" id="card-lvl1-title">Уровень 1: «Остров талантов»</h3>
+            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed" id="card-lvl1-desc">
+              Игровой визуальный квиз по методике Говарда Гарднера. Определяет первичные склонности: конструирование, арт, языки, природа или спорт.
+            </p>
+            <div class="flex items-center gap-2 text-xs text-brand-goldLight pt-2">
+              <i data-lucide="check-circle" class="w-4 h-4 text-brand-gold"></i>
+              <span>Сертификат юного исследователя + Паспорт</span>
+            </div>
+          </div>
+          <button onclick="openRegistrationModal(1)" class="w-full mt-6 py-3 rounded-xl font-bold bg-brand-gold/10 hover:bg-brand-gold hover:text-black border border-brand-gold text-brand-gold transition-all duration-300 text-sm flex items-center justify-center gap-2">
+            <span id="btn-start-lvl1">Начать тестирование</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Уровень 2 -->
+        <div class="group relative rounded-2xl bg-gradient-to-b from-white/[0.06] to-transparent border border-white/10 hover:border-cyan-400 p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-400/10">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">5 – 8 классы (11–14 лет)</span>
+              <span class="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5 text-cyan-400"></i> ~5 мин</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-bold text-white group-hover:text-cyan-400 transition" id="card-lvl2-title">Уровень 2: «Навигатор компетенций»</h3>
+            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed" id="card-lvl2-desc">
+              Сюжетные кейсы и командные роли (Климов + 4K skills). Оценивает логику, креативность, лидерство и профильные предпочтения (IT, STEM, медиа).
+            </p>
+            <div class="flex items-center gap-2 text-xs text-cyan-300 pt-2">
+              <i data-lucide="check-circle" class="w-4 h-4 text-cyan-400"></i>
+              <span>Академический профиль + Рекомендации кружков</span>
+            </div>
+          </div>
+          <button onclick="openRegistrationModal(2)" class="w-full mt-6 py-3 rounded-xl font-bold bg-cyan-400/10 hover:bg-cyan-400 hover:text-black border border-cyan-400 text-cyan-300 transition-all duration-300 text-sm flex items-center justify-center gap-2">
+            <span id="btn-start-lvl2">Начать тестирование</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. МОДАЛЬНОЕ ОКНО РЕГИСТРАЦИИ -->
+    <div id="modal-register" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+      <div class="bg-brand-card border border-brand-gold/40 rounded-3xl p-6 sm:p-8 max-w-lg w-full relative shadow-2xl">
+        <button onclick="closeRegistrationModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+          <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+        
+        <div class="text-center mb-6">
+          <h3 class="text-xl sm:text-2xl font-bold text-white font-title gold-text-gradient" id="modal-title">Карточка участника</h3>
+          <p class="text-xs text-slate-400 mt-1" id="modal-subtitle">Данные будут внесены в официальный именной сертификат</p>
+        </div>
+
+        <form onsubmit="handleStartQuiz(event)" class="space-y-4 text-xs sm:text-sm">
+          <div>
+            <label class="block font-semibold text-slate-300 mb-1" id="label-name">ФИО ребёнка (или ученика):</label>
+            <input type="text" id="reg-name" required placeholder="Например: Арман Сериков" class="w-full px-4 py-3 rounded-xl bg-black/50 border border-white/10 text-white focus:outline-none focus:border-brand-gold">
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block font-semibold text-slate-300 mb-1" id="label-age">Возраст (лет):</label>
+              <select id="reg-age" class="w-full px-4 py-3 rounded-xl bg-black/50 border border-white/10 text-white focus:outline-none focus:border-brand-gold">
+                <option value="6">6 лет</option>
+                <option value="7">7 лет</option>
+                <option value="8">8 лет</option>
+                <option value="9">9 лет</option>
+                <option value="10" selected>10 лет</option>
+                <option value="11">11 лет</option>
+                <option value="12">12 лет</option>
+                <option value="13">13 лет</option>
+                <option value="14">14 лет</option>
+                <option value="15">15 лет</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-300 mb-1" id="label-grade">Класс (1-11 и буква):</label>
+              <div class="flex gap-2">
+                <select id="reg-grade-num" class="w-1/2 px-2 py-3 rounded-xl bg-black/50 border border-white/10 text-white focus:outline-none focus:border-brand-gold">
+                  <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+                  <option value="4" selected>4</option><option value="5">5</option><option value="6">6</option>
+                  <option value="7">7</option><option value="8">8</option><option value="9">9</option>
+                  <option value="10">10</option><option value="11">11</option>
+                </select>
+                <input type="text" id="reg-grade-letter" maxlength="2" placeholder="А" value="А" class="w-1/2 px-3 py-3 rounded-xl bg-black/50 border border-white/10 text-white text-center uppercase focus:outline-none focus:border-brand-gold">
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <label class="flex items-center gap-3 cursor-pointer p-3 rounded-xl bg-white/[0.03] border border-white/10 hover:border-brand-gold/40 transition">
+              <input type="checkbox" id="reg-is-student" class="w-4 h-4 accent-brand-gold rounded">
+              <span class="text-slate-300" id="label-is-student">Ученик частной инновационной школы «ЮНОНА»</span>
+            </label>
+          </div>
+
+          <button type="submit" class="w-full py-3.5 mt-4 rounded-xl font-bold bg-gradient-to-r from-brand-gold via-brand-goldLight to-brand-gold text-black shadow-lg shadow-brand-gold/25 hover:opacity-95 transition text-sm">
+            <span id="btn-modal-go">Перейти к вопросам теста</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- 3. ЭКРАН ТЕСТИРОВАНИЯ -->
+    <section id="screen-quiz" class="w-full hidden">
+      <!-- Навигатор-палитра номеров -->
+      <div class="mb-6 flex flex-col sm:flex-row items-center justify-between gap-4 bg-brand-card/70 border border-white/10 p-4 rounded-2xl backdrop-blur-md">
+        <div class="flex items-center gap-3">
+          <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold" id="txt-quiz-title">Тест талантов:</span>
+          <span class="text-sm font-bold text-brand-gold" id="txt-active-level-name">Уровень 1</span>
+        </div>
+
+        <div id="question-pills" class="flex items-center gap-1.5 flex-wrap justify-center">
+          <!-- Номера генерируются JS -->
+        </div>
+
+        <div class="text-xs text-slate-400">
+          <span id="txt-progress-counter">1 из 6</span>
+        </div>
+      </div>
+
+      <!-- Карточка вопроса -->
+      <div class="bg-gradient-to-b from-brand-card/90 to-brand-dark/95 border border-brand-gold/30 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+        <div class="flex items-center gap-3 mb-4">
+          <span id="badge-question-category" class="px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-brand-gold/20 text-brand-gold border border-brand-gold/30">
+            Категория
+          </span>
+        </div>
+
+        <h2 id="quiz-question-text" class="text-xl sm:text-2xl font-bold text-white mb-6 leading-relaxed">
+          Текст вопроса...
+        </h2>
+
+        <div id="quiz-options-container" class="grid sm:grid-cols-2 gap-4 mb-8">
+          <!-- Опции генерируются JS -->
+        </div>
+
+        <!-- Нижняя панель действий с неоновой подсветкой -->
+        <div class="flex items-center justify-between pt-6 border-t border-white/10">
+          <button onclick="prevQuestion()" id="btn-prev-q" class="btn-neon-prev px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2">
+            <span>←</span> <span id="txt-btn-prev">Назад</span>
+          </button>
+
+          <button onclick="skipQuestion()" id="btn-skip-q" class="btn-neon-skip px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2">
+            <span id="txt-btn-skip">Пропустить вопрос</span> <span>↷</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. ЭКРАН РЕЗУЛЬТАТОВ -->
+    <section id="screen-result" class="w-full hidden">
+      <div class="bg-brand-card/90 border border-brand-gold/40 rounded-3xl p-6 sm:p-10 shadow-2xl text-center max-w-3xl mx-auto">
+        <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-brand-gold/20 border-2 border-brand-gold flex items-center justify-center text-brand-gold">
+          <i data-lucide="award" class="w-10 h-10"></i>
+        </div>
+
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-gold" id="res-badge">Тестирование успешно завершено</span>
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-white font-title gold-text-gradient mt-1 mb-2" id="res-title-profile">
+          Архитектор Будущего & STEM
+        </h2>
+        <p class="text-sm text-slate-300 max-w-xl mx-auto mb-6" id="res-desc-profile">
+          У вас ярко выражен логико-математический и пространственный интеллект.
+        </p>
+
+        <div class="text-left bg-black/40 border border-white/10 rounded-2xl p-5 mb-8">
+          <h4 class="text-xs uppercase tracking-wider text-brand-gold font-bold mb-3 flex items-center gap-2">
+            <i data-lucide="compass" class="w-4 h-4"></i> <span id="res-clubs-header">Рекомендованные секции ЧИШ «ЮНОНА»:</span>
+          </h4>
+          <ul id="res-clubs-list" class="space-y-2 text-xs sm:text-sm text-slate-200"></ul>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <button onclick="downloadOfficialPDF()" class="px-6 py-3.5 rounded-xl font-bold bg-gradient-to-r from-brand-gold to-brand-goldLight text-black shadow-lg shadow-brand-gold/20 hover:scale-105 transition flex items-center justify-center gap-2 text-sm">
+            <i data-lucide="file-down" class="w-4 h-4"></i> <span id="btn-download-pdf">Скачать «Паспорт способностей» (PDF)</span>
+          </button>
+          <a id="btn-whatsapp-lead" href="#" target="_blank" class="px-6 py-3.5 rounded-xl font-semibold border border-emerald-500/50 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 transition flex items-center justify-center gap-2 text-sm">
+            <i data-lucide="message-circle" class="w-4 h-4"></i> <span id="btn-wa-text">Записаться на пробный урок в эти кружки</span>
+          </a>
+        </div>
+
+        <div class="mt-6">
+          <button onclick="restartAll()" class="text-xs text-slate-500 hover:text-slate-300 transition">
+            ← Пройти другой тест
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ШАБЛОН ДЛЯ ГЕНЕРАЦИИ ДВУХСТРАНИЧНОГО PDF ДОКУМЕНТА -->
+  <div id="pdf-render-wrapper" style="position: absolute; left: -9999px; top: 0;">
+    <div id="pdf-content">
+      
+      <!-- СТРАНИЦА 1: СЕРТИФИКАТ -->
+      <div class="pdf-page pdf-break flex flex-col justify-between" style="background:#080d16; border: 12px solid #0f172a; outline: 3px double #D4AF37;">
+        <div class="text-center pt-6">
+          <div style="font-family:'Cinzel', serif; font-size:24px; color:#D4AF37; font-weight:800; letter-spacing:2px;">
+            ЧАСТНАЯ ИННОВАЦИОННАЯ ШКОЛА «ЮНОНА»
+          </div>
+          <div style="font-size:10px; color:#94a3b8; letter-spacing:3px; text-transform:uppercase; margin-top:2px;">
+            Private Innovative School & Kindergarten YUNONA • Kazakhstan
+          </div>
+          <div style="height:1px; width:80%; background:#D4AF37; margin:15px auto; opacity:0.4;"></div>
+        </div>
+
+        <div class="text-center my-auto px-8">
+          <div style="font-family:'Cinzel', serif; font-size:16px; color:#f3e5ab; letter-spacing:4px; text-transform:uppercase;">
+            ОФИЦИАЛЬНЫЙ СЕРТИФИКАТ
+          </div>
+          <div style="font-size:11px; color:#94a3b8; margin-top:4px;">
+            О прохождении первичной диагностики способностей и профориентации
+          </div>
+
+          <div style="font-size:13px; color:#cbd5e1; margin-top:25px;">Настоящим подтверждается, что:</div>
+          <div id="pdf-user-name" style="font-size:26px; color:#ffffff; font-weight:bold; margin-top:6px; border-bottom:1px solid #D4AF37; display:inline-block; padding:0 25px 4px 25px;">
+            Сериков Арман
+          </div>
+
+          <div id="pdf-user-details" style="font-size:12px; color:#94a3b8; margin-top:8px;">
+            Ученик 4 «А» класса • Возраст: 10 лет
+          </div>
+
+          <div style="margin-top:30px; padding:15px; background:rgba(212,175,55,0.08); border:1px solid rgba(212,175,55,0.3); border-radius:12px;">
+            <div style="font-size:10px; text-transform:uppercase; letter-spacing:2px; color:#D4AF37;">Присвоенный профиль талантов:</div>
+            <div id="pdf-profile-title" style="font-family:'Cinzel', serif; font-size:20px; font-weight:bold; color:#ffffff; margin-top:4px;">
+              Архитектор Будущего & STEM
+            </div>
+            <div id="pdf-profile-summary" style="font-size:11px; color:#e2e8f0; margin-top:6px; line-height:1.5;">
+              Высокая склонность к точным наукам, аналитическому моделированию и пространственному конструированию.
+            </div>
+          </div>
+        </div>
+
+        <div class="pb-6 px-8 flex justify-between items-end" style="border-top:1px solid rgba(255,255,255,0.1); padding-top:15px;">
+          <div class="text-left" style="font-size:10px; color:#94a3b8;">
+            <div>Дата: <span id="pdf-date">18.10.2026</span></div>
+            <div>Регистрационный №: <span id="pdf-doc-id">YN-2026-8492</span></div>
+            <div>Верификация: <span style="color:#D4AF37;">чиш-юнона.kz</span></div>
+          </div>
+
+          <div class="text-right" style="font-size:10px; color:#94a3b8;">
+            <div style="font-weight:bold; color:#ffffff;">Борисова Елена Геннадьевна</div>
+            <div>Директор ЧИШ «ЮНОНА»</div>
+            <div style="color:#D4AF37; font-size:9px; margin-top:2px;">Печать & Подпись аккредитованы</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- СТРАНИЦА 2: ПАСПОРТ СПОСОБНОСТЕЙ -->
+      <div class="pdf-page flex flex-col justify-between" style="background:#080d16; border: 12px solid #0f172a; outline: 3px double #D4AF37;">
+        <div>
+          <div class="flex justify-between items-center border-b border-white/10 pb-4 mb-6">
+            <div>
+              <div style="font-family:'Cinzel', serif; font-size:16px; color:#D4AF37; font-weight:bold;">
+                ПАСПОРТ СПОСОБНОСТЕЙ РЕБЁНКА
+              </div>
+              <div style="font-size:10px; color:#94a3b8;">Приложение к сертификату диагностики ЧИШ «ЮНОНА»</div>
+            </div>
+            <div style="font-size:10px; color:#D4AF37; text-align:right;">Страница 2 из 2</div>
+          </div>
+
+          <div class="mb-6">
+            <h4 style="font-size:12px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:6px;">
+              1. Ведущие каналы интеллекта (модель Г. Гарднера & Е. Климова):
+            </h4>
+            <div id="pdf-intellect-desc" style="font-size:11px; color:#e2e8f0; line-height:1.6; background:rgba(255,255,255,0.03); padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.08);">
+              Ребёнок демонстрирует способность легко выстраивать логические цепочки, анализировать алгоритмы и синтезировать визуальные образы в объемные модели.
+            </div>
+          </div>
+
+          <div class="mb-6">
+            <h4 style="font-size:12px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:6px;">
+              2. Рекомендованные образовательные кружки и секции ЧИШ «ЮНОНА»:
+            </h4>
+            <div id="pdf-clubs-breakdown" style="font-size:11px; color:#cbd5e1; line-height:1.6;" class="space-y-2"></div>
+          </div>
+
+          <div class="mb-6">
+            <h4 style="font-size:12px; color:#D4AF37; text-transform:uppercase; font-weight:bold; margin-bottom:6px;">
+              3. Вектор развития от психологической службы школы:
+            </h4>
+            <div style="font-size:10px; color:#94a3b8; line-height:1.6; background:rgba(212,175,55,0.05); padding:10px; border-radius:8px; border-left:3px solid #D4AF37;">
+              Рекомендуется поощрять самостоятельные исследовательские проекты, не перегружая избыточной зубрежкой фактов.
+            </div>
+          </div>
+        </div>
+
+        <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:12px; font-size:10px; color:#94a3b8;" class="flex justify-between items-center">
+          <div>
+            <div style="color:#ffffff; font-weight:bold;">Частная Инновационная Школа «ЮНОНА»</div>
+            <div>пос. Боралдай, ул. Терешковой, 1а • Тел: +7 707 645 78 28</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="color:#D4AF37;">Запись на пробный день: info@yunona.kz</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="relative z-10 border-t border-white/10 bg-black/60 py-4 px-4 text-center text-xs text-slate-500">
+    © 2026 ЧИШ «ЮНОНА». Модуль тестирования разработан IT Live (a PAVLIKneMOROZOFF company).
+  </footer>
+
+  <!-- СКРИПТЫ И ДВИЖОК ТЕСТОВ -->
+  <script>
+    lucide.createIcons();
+
+    const testData = {
+      lvl1: [
+        {
+          id: 1,
+          category: { ru: "Инженерия & Логика", kz: "Инженерия & Логика", en: "Engineering & Logic" },
+          ambient: "rgba(56, 189, 248, 0.15)",
+          text: {
+            ru: "Представь, что тебе подарили большую коробку деталей. Что ты захочешь собрать первым?",
+            kz: "Елестетіп көрші, саған бөлшектерге толы үлкен қорап сыйлады. Бірінші не құрастырасың?",
+            en: "Imagine you received a big box of parts. What would you build first?"
+          },
+          options: [
+            { text: { ru: "Робота или космический вездеход с мотором", kz: "Қозғалтқышы бар робот немесе ғарыш көлігін", en: "A robot or a motorized space rover" }, profile: "stem" },
+            { text: { ru: "Красивый замок с картинами и башнями", kz: "Суреттері мен мұнаралары бар әсем сарай", en: "A beautiful castle with paintings and towers" }, profile: "art" },
+            { text: { ru: "Заповедник для редких животных с растениями", kz: "Өсімдіктер мен сирек жануарларға арналған қорық", en: "A nature reserve for animals and plants" }, profile: "nature" },
+            { text: { ru: "Штаб для друзей, где мы придумываем правила игры", kz: "Ойын ережелерін ойлап табатын достар штабы", en: "A clubhouse for friends to invent game rules" }, profile: "leader" }
+          ]
+        },
+        {
+          id: 2,
+          category: { ru: "Творчество & Самовыражение", kz: "Шығармашылық", en: "Creativity & Art" },
+          ambient: "rgba(236, 72, 153, 0.15)",
+          text: {
+            ru: "Если бы в школе организовали большой праздник, в чём бы ты принял участие с радостью?",
+            kz: "Егер мектепте үлкен мереке өткізілсе, қай іске қуана қатысар едің?",
+            en: "If the school held a big festival, what role would you gladly take?"
+          },
+          options: [
+            { text: { ru: "Рисовать декорации, плакаты или лепить сувениры", kz: "Декорациялар, плакаттар салу немесе мүсіндеу", en: "Painting decorations, posters, or crafting souvenirs" }, profile: "art" },
+            { text: { ru: "Настроить музыку, микрофоны и световые эффекты", kz: "Музыканы, микрофондар мен жарықты баптау", en: "Setting up sound, microphones, and stage lighting" }, profile: "stem" },
+            { text: { ru: "Быть ведущим на сцене или встречать гостей на входе", kz: "Сахнада жүргізуші болу немесе қонақтарды қарсы алу", en: "Hosting the stage show or greeting guests at the door" }, profile: "leader" },
+            { text: { ru: "Подготовить живой уголок или выставку гербариев", kz: "Тірі табиғат бұрышын немесе өсімдіктер көрмесін ұйымдастыру", en: "Setting up a mini-zoo corner or botany exhibit" }, profile: "nature" }
+          ]
+        },
+        {
+          id: 3,
+          category: { ru: "Исследования & Природа", kz: "Зерттеу & Табиғат", en: "Nature & Exploration" },
+          ambient: "rgba(34, 197, 94, 0.15)",
+          text: {
+            ru: "Какая передача или книга увлечет тебя на целый вечер?",
+            kz: "Қандай бағдарлама немесе кітап сені кешке дейін қызықтыра алады?",
+            en: "Which show or book would captivate you for an entire evening?"
+          },
+          options: [
+            { text: { ru: "Как устроен вулкан, жизнь океанов и диких зверей", kz: "Жанартаудың құрылысы, мұхиттар мен аңдардың өмірі", en: "How volcanoes work, secrets of oceans and animals" }, profile: "nature" },
+            { text: { ru: "Головоломки, шахматные задачи и тайны шифров", kz: "Жұмбақтар, шахмат есептері және құпия шифрлар", en: "Brain-teasers, chess puzzles, and secret ciphers" }, profile: "stem" },
+            { text: { ru: "Биографии великих путешественников и лидеров", kz: "Ұлы саяхатшылар мен көшбасшылардың өмірі", en: "Stories of great explorers and leaders" }, profile: "leader" },
+            { text: { ru: "Сказки, комиксы, мультфильмы и анимация", kz: "Ертегілер, комикстер, мультфильмдер мен анимация", en: "Fairy tales, comics, cartoons, and animation" }, profile: "art" }
+          ]
+        },
+        {
+          id: 4,
+          category: { ru: "Общение & Команда", kz: "Қарым-қатынас", en: "Communication & Team" },
+          ambient: "rgba(212, 175, 55, 0.15)",
+          text: {
+            ru: "Твои друзья спорят, во что играть на перемене. Как ты поступишь?",
+            kz: "Үзілісте достарың қандай ойын ойнау керектігін дауласып жатыр. Не істейсің?",
+            en: "Your friends are arguing about what game to play. What will you do?"
+          },
+          options: [
+            { text: { ru: "Предложу компромисс и объединю всех в общую игру", kz: "Ортақ шешім ұсынып, барлығын бір ойынға біріктіремін", en: "Propose a compromise and unite everyone into one game" }, profile: "leader" },
+            { text: { ru: "Придумаю четкие правила и нарисую схему поля", kz: "Нақты ереже ойлап тауып, ойын сызбасын саламын", en: "Create clear rules and draw a map of the playing field" }, profile: "stem" },
+            { text: { ru: "Увлеку тех, кто не хочет бегать, рисованием или историей", kz: "Жүгіргісі келмегендерге қызықты сурет немесе әңгіме айтамын", en: "Engage calm friends with storytelling or sketching" }, profile: "art" },
+            { text: { ru: "Предложу пойти на школьный двор изучать растения", kz: "Мектеп ауласына шығып өсімдіктерді қарауды ұсынамын", en: "Suggest going to the yard to observe plants" }, profile: "nature" }
+          ]
+        },
+        {
+          id: 5,
+          category: { ru: "Пространство & Практика", kz: "Практика", en: "Practical Skills" },
+          ambient: "rgba(168, 85, 247, 0.15)",
+          text: {
+            ru: "Какой школьный кабинет в ЧИШ «ЮНОНА» тебе кажется самым интересным?",
+            kz: "«ЮНОНА» мектебінде саған қай кабинет ең қызықты болып көрінеді?",
+            en: "Which school classroom at YUNONA seems the most exciting to you?"
+          },
+          options: [
+            { text: { ru: "Кабинет робототехники с 3D-принтерами и конструкторами", kz: "3D-принтерлері бар робототехника кабинеті", en: "Robotics lab with 3D printers and constructor kits" }, profile: "stem" },
+            { text: { ru: "Арт-студия и музыкальный класс с инструментами", kz: "Арт-студия және музыкалық аспаптар сыныбы", en: "Art studio and music room with real instruments" }, profile: "art" },
+            { text: { ru: "Зал ораторского мастерства и школьный медиа-центр", kz: "Шешендік өнер залы мен мектеп медиа-орталығы", en: "Public speaking club and student media center" }, profile: "leader" },
+            { text: { ru: "Эко-лаборатория с микроскопами и живыми растениями", kz: "Микроскоптары мен өсімдіктері бар эко-зертхана", en: "Eco-laboratory with microscopes and live plants" }, profile: "nature" }
+          ]
+        },
+        {
+          id: 6,
+          category: { ru: "Будущие мечты", kz: "Болашақ арман", en: "Future Dreams" },
+          ambient: "rgba(212, 175, 55, 0.15)",
+          text: {
+            ru: "Кем бы ты хотел почувствовать себя на один день?",
+            kz: "Бір күнге өзіңді кім ретінде сезінгің келеді?",
+            en: "Who would you like to feel like for one day?"
+          },
+          options: [
+            { text: { ru: "Главным инженером космодрома или создателем видеоигр", kz: "Ғарыш айлағының бас инженері немесе ойын жасаушы", en: "Chief rocket engineer or video game creator" }, profile: "stem" },
+            { text: { ru: "Художником-мультипликатором или дизайнером одежды", kz: "Мультфильм суретшісі немесе сән дизайнері", en: "Animation artist or fashion designer" }, profile: "art" },
+            { text: { ru: "Капитаном исследовательской экспедиции в джунгли", kz: "Джунглиге экспедиция жасайтын зерттеу кемесінің капитаны", en: "Captain of an exploration vessel into wild jungles" }, profile: "nature" },
+            { text: { ru: "Директором школы или мэром современного города", kz: "Мектеп директоры немесе қазіргі қаланың әкімі", en: "School director or mayor of a modern city" }, profile: "leader" }
+          ]
+        }
+      ],
+
+      lvl2: [
+        {
+          id: 1,
+          category: { ru: "IT & Технологии", kz: "IT & Технология", en: "Tech & IT" },
+          ambient: "rgba(56, 189, 248, 0.15)",
+          text: {
+            ru: "Вам поручили разработать цифровой проект для школы. Какую часть задачи ты выберешь?",
+            kz: "Мектепке арналған сандық жоба жасау тапсырылды. Қай бөлігін өзіңе аласың?",
+            en: "You are tasked with a school digital project. Which part will you choose?"
+          },
+          options: [
+            { text: { ru: "Написание программного кода и логики работы базы данных", kz: "Бағдарламалық код пен мәліметтер базасының логикасын жазу", en: "Writing backend code and database architecture" }, profile: "stem" },
+            { text: { ru: "UI/UX дизайн интерфейса, иконки и визуальный стиль", kz: "UI/UX интерфейс дизайны, иконкалар мен визуалды стиль", en: "UI/UX interface design, icons, and aesthetic look" }, profile: "art" },
+            { text: { ru: "Управление сроками команды, проведение презентации для жюри", kz: "Команданың уақытын басқару, қазылар алқасына таныстыру", en: "Managing team deadlines and pitching to the jury" }, profile: "leader" },
+            { text: { ru: "Интеграция эко-датчиков расхода энергии в школе", kz: "Мектептегі энергия шығынын өлшейтін эко-датчиктерді қосу", en: "Integrating smart eco-sensors for school energy efficiency" }, profile: "nature" }
+          ]
+        },
+        {
+          id: 2,
+          category: { ru: "Критическое мышление", kz: "Сыни ойлау", en: "Critical Thinking" },
+          ambient: "rgba(212, 175, 55, 0.15)",
+          text: {
+            ru: "Столкнувшись со сложной незнакомой проблемой, с чего ты начинаешь поиск решения?",
+            kz: "Күрделі бейтаныс мәселеге тап болғанда, шешімді неден бастайсың?",
+            en: "Facing a complex unfamiliar problem, where do you begin?"
+          },
+          options: [
+            { text: { ru: "Ищу закономерности, разбиваю проблему на формулы и алгоритмы", kz: "Заңдылықтарды іздеймін, формулалар мен алгоритмдерге бөлемін", en: "Search for patterns, break it down into formulas & logic" }, profile: "stem" },
+            { text: { ru: "Генерирую нестандартные творческие ассоциации и визуальные метафоры", kz: "Шығармашылық ассоциациялар мен бейнелер ойлап табамын", en: "Brainstorm outside-the-box creative associations" }, profile: "art" },
+            { text: { ru: "Советуюсь с экспертами, организую мозговой штурм с одноклассниками", kz: "Сарапшылармен ақылдасамын, достарыммен талқылаймын", en: "Consult experts and organize a classmate brainstorming session" }, profile: "leader" },
+            { text: { ru: "Изучаю, как подобные задачи решены в живой природе (биомиметика)", kz: "Табиғатта мұндай мәселелер қалай шешілгенін зерттеймін", en: "Study how nature solves similar challenges (biomimicry)" }, profile: "nature" }
+          ]
+        },
+        {
+          id: 3,
+          category: { ru: "Проектная работа", kz: "Жобалық жұмыс", en: "Project Work" },
+          ambient: "rgba(168, 85, 247, 0.15)",
+          text: {
+            ru: "Какой результат самостоятельного проекта принесет тебе наибольшее удовлетворение?",
+            kz: "Өз бетіңмен жасаған жобаның қандай нәтижесі саған ең көп қуаныш сыйлайды?",
+            en: "What kind of project outcome will bring you the highest satisfaction?"
+          },
+          options: [
+            { text: { ru: "Работающий умный механизм или автоматизированная программа", kz: "Жұмыс істеп тұрған ақылды механизм немесе бағдарлама", en: "A functioning smart mechanism or automated program" }, profile: "stem" },
+            { text: { ru: "Снятый короткометражный фильм или персональная художественная выставка", kz: "Түсірілген қысқаметражды фильм немесе көрме", en: "A completed short movie or personal art exhibition" }, profile: "art" },
+            { text: { ru: "Успешный социальный стартап или победа в дебатном турнире", kz: "Сәтті әлеуметтік стартап немесе дебат турниріндегі жеңіс", en: "A successful social startup or winning a debate tournament" }, profile: "leader" },
+            { text: { ru: "Научное биологическое исследование или запущенная эко-акция", kz: "Ғылыми биологиялық зерттеу немесе эко-акция", en: "A scientific biology study or launched eco-initiative" }, profile: "nature" }
+          ]
+        },
+        {
+          id: 4,
+          category: { ru: "Лидерство & Soft Skills", kz: "Көшбасшылық", en: "Leadership" },
+          ambient: "rgba(212, 175, 55, 0.15)",
+          text: {
+            ru: "В школьном самоуправлении открылось несколько направлений. Какое возглавишь?",
+            kz: "Мектептің өзін-өзі басқару ұйымында бірнеше бағыт ашылды. Қайсысын басқарасың?",
+            en: "Student council is opening committees. Which one would you lead?"
+          },
+          options: [
+            { text: { ru: "Комитет дипломатии, связей с общественностью и школьных событий", kz: "Дипломатия, қоғаммен байланыс және іс-шаралар комитеті", en: "Diplomacy, PR, and school-wide events committee" }, profile: "leader" },
+            { text: { ru: "Научно-технический сектор и олимпиадное движение", kz: "Ғылыми-техникалық сектор және олимпиада қозғалысы", en: "STEM & Academic Olympiad community" }, profile: "stem" },
+            { text: { ru: "Медиа-холдинг: школьный подкаст, дизайн мерча и журнал", kz: "Медиа-холдинг: подкаст, мектеп мерчі мен журнал дизайны", en: "Media group: school podcast, merch design, and magazine" }, profile: "art" },
+            { text: { ru: "Экологический клуб и благоустройство территории комплекса", kz: "Экологиялық клуб және мектеп аумағын көгалдандыру", en: "Eco-club and campus greening development" }, profile: "nature" }
+          ]
+        }
+      ]
+    };
+
+    const profiles = {
+      stem: {
+        title: { ru: "Архитектор Будущего & IT-Новатор", kz: "Болашақ Сәулетшісі & IT-Инноватор", en: "Future Architect & IT Innovator" },
+        desc: {
+          ru: "У вас ярко выражен логико-математический и системно-технический интеллект. Вы легко понимаете структуру сложных систем, алгоритмы и любите созидать работающие механизмы.",
+          kz: "Сізде логикалық-математикалық және техникалық интеллект өте жоғары. Сіз күрделі жүйелердің құрылымын, алгоритмдерін тез меңгересіз.",
+          en: "You possess high logical-mathematical and analytical capabilities. You thrive when solving problems and building functional systems."
+        },
+        clubs: {
+          ru: ["Кружок Робототехники и Arduino ЧИШ «ЮНОНА»", "Шахматный клуб гроссмейстерской школы", "Олимпиадная математика и алгоритмика"],
+          kz: ["«ЮНОНА» робототехника және Arduino үйірмесі", "Шахмат клубы және логика", "Олимпиадалық математика және алгоритмдер"],
+          en: ["Robotics & Arduino Lab at YUNONA", "Grandmaster Chess Club", "Olympiad Mathematics & Logic"]
+        }
+      },
+      art: {
+        title: { ru: "Креативный Творец & Арт-Дизайнер", kz: "Шығармашыл Шебер & Арт-Дизайнер", en: "Creative Visionary & Art Designer" },
+        desc: {
+          ru: "Доминирует визуально-пространственный и образный интеллект. Вы мыслите нестандартно, тонко чувствуете гармонию, композицию и способны превращать идеи в яркие художественные шедевры.",
+          kz: "Көру-кеңістіктік және көркемдік интеллект басым. Сіз стандартты емес ойлайсыз және идеяларды өнер туындысына айналдыра аласыз.",
+          en: "Dominated by visual-spatial and artistic intelligence. You think creatively and turn abstract visions into tangible aesthetic works."
+        },
+        clubs: {
+          ru: ["Школьная Арт-мастерская и Студия Живописи", "3D-моделирование и графический дизайн", "Театральная студия и музыкальный ансамбль"],
+          kz: ["Мектептің Арт-шеберханасы және кескіндеме", "3D-модельдеу және графикалық дизайн", "Театр студиясы және музыкалық ансамбль"],
+          en: ["Art Studio & Fine Arts at YUNONA", "3D Modeling & Graphic Design", "Drama Club & School Music Ensemble"]
+        }
+      },
+      leader: {
+        title: { ru: "Лидер Сообщества & Дипломат", kz: "Көшбасшы & Дипломат", en: "Community Leader & Diplomat" },
+        desc: {
+          ru: "Ведущий тип — эмоциональный и межличностный интеллект (Человек–Человек). У вас врожденный дар объединять людей, вдохновлять на общие победы и ясно доносить свои мысли.",
+          kz: "Жетекші бағыт — тұлғааралық және эмоционалдық интеллект. Сізде адамдарды ортақ мақсатқа біріктіру және шабыттандыру қабілеті зор.",
+          en: "Outstanding interpersonal and emotional intelligence. A natural talent for uniting people, public speaking, and leading collaborative projects."
+        },
+        clubs: {
+          ru: ["Школьный Дебатный Клуб и Ораторское Искусство", "Лидерский Совет самоуправления ЧИШ «ЮНОНА»", "Клуб дипломатии и углубленный английский (IELTS)"],
+          kz: ["Мектептің Дебат Клубы және шешендік өнер", "«ЮНОНА» мектеп көшбасшыларының кеңесі", "Дипломатия клубы және ағылшын тілі (IELTS)"],
+          en: ["Debate & Public Speaking Society", "YUNONA Student Leadership Council", "Diplomacy Club & Advanced English (IELTS)"]
+        }
+      },
+      nature: {
+        title: { ru: "Естествоиспытатель & Эко-Ученый", kz: "Табиғат Зерттеушісі & Эко-Ғалым", en: "Naturalist & Eco-Scientist" },
+        desc: {
+          ru: "Ведущий вектор — натуралистический и экспериментальный интеллект (Человек–Природа). Вам свойственна наблюдательность, любовь к экологии, биологии и медицине.",
+          kz: "Жетекші вектор — натуралистік және зерттеу интеллектісі. Сіз қоршаған ортаны, биология мен экологияны терең түсінесіз.",
+          en: "Naturalistic and investigative intelligence. Keen observational skills with a passion for ecology, biology, and applied sciences."
+        },
+        clubs: {
+          ru: ["Школьная Эко-лаборатория и Экспериментариум", "Олимпиадная биология и химия", "Спортивно-туристический клуб ЧИШ «ЮНОНА»"],
+          kz: ["Мектептің Эко-зертханасы және Экспериментариум", "Олимпиадалық биология және химия", "Спорттық-туристік клуб"],
+          en: ["Eco-Laboratory & Science Exploratorium", "Olympiad Biology & Chemistry", "Outdoor Sports & Exploration Club"]
+        }
+      }
+    };
+
+    let currentLang = 'ru';
+    let selectedLevel = 1;
+    let currentQuestionIndex = 0;
+    let questionsList = [];
+    let userAnswers = {};
+    let userData = { name: "", age: 10, gradeNum: "4", gradeLetter: "А", isStudent: false };
+
+    function changeLanguage(lang) {
+      currentLang = lang;
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('bg-brand-gold', 'text-black', 'font-bold'));
+      const activeBtn = document.getElementById(`lang-${lang}`);
+      if (activeBtn) activeBtn.classList.add('bg-brand-gold', 'text-black', 'font-bold');
+
+      const uiText = {
+        ru: {
+          headerSub: "Диагностика талантов",
+          backHome: "На главный сайт",
+          hubBadge: "✨ Индивидуальная карта развития",
+          hubTitle: "Центр диагностики способностей",
+          hubDesc: "Выберите возрастную категорию для определения ведущего типа интеллекта, профориентационного профиля и рекомендованных секций в ЧИШ «ЮНОНА».",
+          lvl1Title: "Уровень 1: «Остров талантов»",
+          lvl1Desc: "Игровой визуальный квиз по методике Говарда Гарднера. Определяет первичные склонности: конструирование, арт, языки, природа или спорт.",
+          lvl2Title: "Уровень 2: «Навигатор компетенций»",
+          lvl2Desc: "Сюжетные кейсы и командные роли (Климов + 4K skills). Оценивает логику, креативность, лидерство и профильные предпочтения (IT, STEM, медиа).",
+          btnStart: "Начать тестирование",
+          modalTitle: "Карточка участника",
+          modalSub: "Данные будут внесены в официальный именной сертификат",
+          nameLabel: "ФИО ребёнка (или ученика):",
+          ageLabel: "Возраст (лет):",
+          gradeLabel: "Класс (1-11 и буква):",
+          studentLabel: "Ученик частной инновационной школы «ЮНОНА»",
+          modalGo: "Перейти к вопросам теста",
+          btnPrev: "Назад",
+          btnSkip: "Пропустить вопрос"
+        },
+        kz: {
+          headerSub: "Дарындылық диагностикасы",
+          backHome: "Басты бетке оралу",
+          hubBadge: "✨ Дамудың жеке картасы",
+          hubTitle: "Қабілеттерді анықтау орталығы",
+          hubDesc: "Жетекші интеллект түрін, кәсіби бағдарын және «ЮНОНА» мектебінің сәйкес үйірмелерін таңдау үшін жас санатын таңдаңыз.",
+          lvl1Title: "1-деңгей: «Дарындар аралы»",
+          lvl1Desc: "Говард Гарднер әдістемесі бойынша ойын викторинасы. Бастапқы бейімділіктерді анықтайды: құрастыру, өнер, тілдер, табиғат.",
+          lvl2Title: "2-деңгей: «Құзыреттер навигаторы»",
+          lvl2Desc: "Сюжеттік кейстер мен командалық рөлдер (Климов + 4K). Логика, шығармашылық, көшбасшылық қасиеттерді бағалайды.",
+          btnStart: "Тестілеуді бастау",
+          modalTitle: "Қатысушы карточкасы",
+          modalSub: "Мәліметтер ресми атаулы сертификатқа енгізіледі",
+          nameLabel: "Баланың (оқушының) аты-жөні:",
+          ageLabel: "Жасы (жыл):",
+          gradeLabel: "Сыныбы (1-11 және әрпі):",
+          studentLabel: "«ЮНОНА» жеке инновациялық мектебінің оқушысы",
+          modalGo: "Сұрақтарға көшу",
+          btnPrev: "Артқа",
+          btnSkip: "Сұрақты өткізіп жіберу"
+        },
+        en: {
+          headerSub: "Talent Diagnostics",
+          backHome: "Back to Home",
+          hubBadge: "✨ Individual Development Track",
+          hubTitle: "Talent Assessment Center",
+          hubDesc: "Choose age level to determine leading multiple intelligences, career orientation, and recommended clubs at YUNONA.",
+          lvl1Title: "Level 1: «Talent Island»",
+          lvl1Desc: "Playful visual quiz based on Howard Gardner's theory. Identifies STEM, art, languages, or naturalistic traits.",
+          lvl2Title: "Level 2: «Competence Navigator»",
+          lvl2Desc: "Situational case studies and team roles (Klimov + 4K skills). Assesses analytical logic, creativity, and leadership.",
+          btnStart: "Start Assessment",
+          modalTitle: "Participant Details",
+          modalSub: "Information will be printed on the official certificate",
+          nameLabel: "Child's Full Name:",
+          ageLabel: "Age (years):",
+          gradeLabel: "Grade (1-11 & letter):",
+          studentLabel: "Student of YUNONA Private Innovative School",
+          modalGo: "Proceed to Questions",
+          btnPrev: "Back",
+          btnSkip: "Skip question"
+        }
+      };
+
+      const t = uiText[lang];
+      document.getElementById('header-subtitle').textContent = t.headerSub;
+      document.getElementById('btn-back-home').textContent = t.backHome;
+      document.getElementById('hub-badge').textContent = t.hubBadge;
+      document.getElementById('hub-title').textContent = t.hubTitle;
+      document.getElementById('hub-desc').textContent = t.hubDesc;
+      document.getElementById('card-lvl1-title').textContent = t.lvl1Title;
+      document.getElementById('card-lvl1-desc').textContent = t.lvl1Desc;
+      document.getElementById('card-lvl2-title').textContent = t.lvl2Title;
+      document.getElementById('card-lvl2-desc').textContent = t.lvl2Desc;
+      document.getElementById('btn-start-lvl1').textContent = t.btnStart;
+      document.getElementById('btn-start-lvl2').textContent = t.btnStart;
+      document.getElementById('modal-title').textContent = t.modalTitle;
+      document.getElementById('modal-subtitle').textContent = t.modalSub;
+      document.getElementById('label-name').textContent = t.nameLabel;
+      document.getElementById('label-age').textContent = t.ageLabel;
+      document.getElementById('label-grade').textContent = t.gradeLabel;
+      document.getElementById('label-is-student').textContent = t.studentLabel;
+      document.getElementById('btn-modal-go').textContent = t.modalGo;
+      document.getElementById('txt-btn-prev').textContent = t.btnPrev;
+      document.getElementById('txt-btn-skip').textContent = t.btnSkip;
+
+      if (!document.getElementById('screen-quiz').classList.contains('hidden')) {
+        renderQuestion();
+      }
+    }
+
+    function openRegistrationModal(level) {
+      selectedLevel = level;
+      document.getElementById('modal-register').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeRegistrationModal() {
+      document.getElementById('modal-register').classList.add('hidden');
+    }
+
+    function handleStartQuiz(e) {
+      e.preventDefault();
+      userData.name = document.getElementById('reg-name').value.trim() || "Юный Исследователь";
+      userData.age = document.getElementById('reg-age').value;
+      userData.gradeNum = document.getElementById('reg-grade-num').value;
+      userData.gradeLetter = document.getElementById('reg-grade-letter').value.trim().toUpperCase() || "А";
+      userData.isStudent = document.getElementById('reg-is-student').checked;
+
+      closeRegistrationModal();
+
+      questionsList = selectedLevel === 1 ? testData.lvl1 : testData.lvl2;
+      userAnswers = {};
+      currentQuestionIndex = 0;
+
+      document.getElementById('screen-hub').classList.add('hidden');
+      document.getElementById('screen-result').classList.add('hidden');
+      document.getElementById('screen-quiz').classList.remove('hidden');
+
+      document.getElementById('txt-active-level-name').textContent = selectedLevel === 1 ? 
+        (currentLang === 'ru' ? 'Уровень 1 (1–4 классы)' : currentLang === 'kz' ? '1-деңгей (1–4 сынып)' : 'Level 1 (Grades 1–4)') : 
+        (currentLang === 'ru' ? 'Уровень 2 (5–8 классы)' : currentLang === 'kz' ? '2-деңгей (5–8 сынып)' : 'Level 2 (Grades 5–8)');
+
+      renderPills();
+      renderQuestion();
+    }
+
+    function renderPills() {
+      const container = document.getElementById('question-pills');
+      container.innerHTML = '';
+
+      questionsList.forEach((q, idx) => {
+        const btn = document.createElement('button');
+        btn.textContent = idx + 1;
+        btn.onclick = () => jumpToQuestion(idx);
+
+        let classes = "w-7 h-7 sm:w-8 sm:h-8 rounded-lg text-xs font-bold transition flex items-center justify-center ";
+        
+        if (idx === currentQuestionIndex) {
+          classes += "ring-2 ring-brand-gold bg-brand-gold/30 text-brand-goldLight ";
+        } else if (userAnswers[q.id]) {
+          classes += "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 ";
+        } else {
+          classes += "bg-white/5 text-slate-400 hover:bg-white/10 border border-white/5 ";
+        }
+
+        btn.className = classes;
+        container.appendChild(btn);
+      });
+    }
+
+    function renderQuestion() {
+      const q = questionsList[currentQuestionIndex];
+      if (!q) return;
+
+      const bg = document.getElementById('ambient-bg');
+      if (bg && q.ambient) {
+        bg.style.background = `radial-gradient(ellipse at top, ${q.ambient} 0%, transparent 70%)`;
+      }
+
+      document.getElementById('badge-question-category').textContent = q.category[currentLang] || q.category.ru;
+      document.getElementById('quiz-question-text').textContent = `${currentQuestionIndex + 1}. ${q.text[currentLang] || q.text.ru}`;
+      document.getElementById('txt-progress-counter').textContent = `${currentQuestionIndex + 1} / ${questionsList.length}`;
+
+      const optionsBox = document.getElementById('quiz-options-container');
+      optionsBox.innerHTML = '';
+
+      q.options.forEach((opt, oIdx) => {
+        const isChosen = userAnswers[q.id] === opt.profile;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.onclick = () => chooseAnswer(q.id, opt.profile);
+
+        btn.className = `p-4 sm:p-5 rounded-2xl text-left transition duration-200 border flex items-start gap-3.5 text-xs sm:text-sm ${
+          isChosen 
+            ? 'bg-brand-gold/20 border-brand-gold text-brand-goldLight shadow-lg shadow-brand-gold/10' 
+            : 'bg-white/[0.03] border-white/10 hover:border-brand-gold/50 text-slate-200 hover:bg-white/[0.06]'
+        }`;
+
+        const letter = String.fromCharCode(65 + oIdx);
+        btn.innerHTML = `
+          <span class="w-6 h-6 rounded-md flex items-center justify-center font-bold text-xs shrink-0 ${isChosen ? 'bg-brand-gold text-black' : 'bg-white/10 text-slate-400'}">
+            ${letter}
+          </span>
+          <span class="leading-relaxed font-medium">${opt.text[currentLang] || opt.text.ru}</span>
+        `;
+        optionsBox.appendChild(btn);
+      });
+
+      const prevBtn = document.getElementById('btn-prev-q');
+      if (currentQuestionIndex === 0) {
+        prevBtn.classList.add('opacity-40', 'pointer-events-none');
+      } else {
+        prevBtn.classList.remove('opacity-40', 'pointer-events-none');
+      }
+
+      renderPills();
+      lucide.createIcons();
+    }
+
+    function chooseAnswer(questionId, profile) {
+      userAnswers[questionId] = profile;
+      renderPills();
+      setTimeout(() => {
+        nextQuestion();
+      }, 250);
+    }
+
+    function nextQuestion() {
+      if (currentQuestionIndex < questionsList.length - 1) {
+        currentQuestionIndex++;
+        renderQuestion();
+      } else {
+        checkCompletion();
+      }
+    }
+
+    function prevQuestion() {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        renderQuestion();
+      }
+    }
+
+    function skipQuestion() {
+      nextQuestion();
+    }
+
+    function jumpToQuestion(idx) {
+      currentQuestionIndex = idx;
+      renderQuestion();
+    }
+
+    function checkCompletion() {
+      const answeredCount = Object.keys(userAnswers).length;
+      if (answeredCount < questionsList.length) {
+        const remaining = questionsList.length - answeredCount;
+        const confirmMsg = currentLang === 'ru' 
+          ? `У вас осталось ${remaining} вопросов без ответа. Завершить тестирование и показать результат?` 
+          : currentLang === 'kz' 
+          ? `Сізде жауап берілмеген ${remaining} сұрақ қалды. Тестілеуді аяқтап, нәтижені көресіз бе?` 
+          : `You have ${remaining} unanswered questions. Finish assessment now?`;
+        
+        if (!confirm(confirmMsg)) {
+          const firstUnanswered = questionsList.findIndex(q => !userAnswers[q.id]);
+          if (firstUnanswered !== -1) {
+            currentQuestionIndex = firstUnanswered;
+            renderQuestion();
+            return;
+          }
+        }
+      }
+      showFinalResult();
+    }
+
+    function showFinalResult() {
+      const scores = { stem: 0, art: 0, leader: 0, nature: 0 };
+      Object.values(userAnswers).forEach(p => {
+        if (scores[p] !== undefined) scores[p]++;
+      });
+
+      let maxScore = -1;
+      let winner = 'stem';
+      Object.keys(scores).forEach(key => {
+        if (scores[key] > maxScore) {
+          maxScore = scores[key];
+          winner = key;
+        }
+      });
+
+      const profData = profiles[winner];
+
+      document.getElementById('screen-quiz').classList.add('hidden');
+      document.getElementById('screen-result').classList.remove('hidden');
+
+      document.getElementById('res-title-profile').textContent = profData.title[currentLang] || profData.title.ru;
+      document.getElementById('res-desc-profile').textContent = profData.desc[currentLang] || profData.desc.ru;
+
+      const clubsBox = document.getElementById('res-clubs-list');
+      clubsBox.innerHTML = '';
+      const clubsList = profData.clubs[currentLang] || profData.clubs.ru;
+      clubsList.forEach(club => {
+        const li = document.createElement('li');
+        li.className = "flex items-center gap-2";
+        li.innerHTML = `<i data-lucide="check" class="w-4 h-4 text-brand-gold shrink-0"></i> <span>${club}</span>`;
+        clubsBox.appendChild(li);
+      });
+
+      const phone = "77076457828";
+      const message = encodeURIComponent(
+        `Здравствуйте! Я прошел диагностику способностей на сайте ЧИШ «ЮНОНА». ` +
+        `Ученик: ${userData.name}, Класс: ${userData.gradeNum} «${userData.gradeLetter}». ` +
+        `Профиль: ${profData.title.ru}. Хочу записаться на пробный урок в рекомендованные кружки!`
+      );
+      document.getElementById('btn-whatsapp-lead').href = `https://wa.me/${phone}?text=${message}`;
+
+      preparePDFTemplate(profData);
+      lucide.createIcons();
+    }
+
+    function preparePDFTemplate(profData) {
+      document.getElementById('pdf-user-name').textContent = userData.name;
+      document.getElementById('pdf-user-details').textContent = 
+        `Класс: ${userData.gradeNum} «${userData.gradeLetter}» • Возраст: ${userData.age} лет • ${userData.isStudent ? 'Ученик ЧИШ ЮНОНА' : 'Абитуриент ЧИШ ЮНОНА'}`;
+      document.getElementById('pdf-profile-title').textContent = profData.title.ru;
+      document.getElementById('pdf-profile-summary').textContent = profData.desc.ru;
+
+      const today = new Date();
+      document.getElementById('pdf-date').textContent = today.toLocaleDateString('ru-RU');
+      document.getElementById('pdf-doc-id').textContent = `YN-${today.getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+
+      const breakdownBox = document.getElementById('pdf-clubs-breakdown');
+      breakdownBox.innerHTML = '';
+      profData.clubs.ru.forEach(c => {
+        const div = document.createElement('div');
+        div.style.cssText = "padding:6px 10px; background:rgba(212,175,55,0.06); border-radius:6px; border-left:2px solid #D4AF37;";
+        div.textContent = `• ${c}`;
+        breakdownBox.appendChild(div);
+      });
+    }
+
+    function downloadOfficialPDF() {
+      const element = document.getElementById('pdf-content');
+      const opt = {
+        margin:       0,
+        filename:     `Паспорт_Талантов_ЮНОНА_${userData.name.replace(/\s+/g, '_')}.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#080d16' },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
+    }
+
+    function restartAll() {
+      document.getElementById('screen-result').classList.add('hidden');
+      document.getElementById('screen-quiz').classList.add('hidden');
+      document.getElementById('screen-hub').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
